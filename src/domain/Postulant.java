@@ -3,6 +3,7 @@
 
 package domain;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ public class Postulant extends People{
     private String email;
     private String linkedin;
     private char jobModality;
-    private Map<Topic, Integer> skills;
+    private HashMap<Topic, Integer> skills;
     private List<Interview> interviews;
 
     public String getContact() {
@@ -50,10 +51,16 @@ public class Postulant extends People{
         return skills;
     }
 
-    public void setSkills(Map<Topic, Integer> skills) {
+    public void setSkills(HashMap<Topic, Integer> skills) {
         this.skills = skills;
     }
-        public List<Interview> getIntervies() {
+
+    public void setInterviews(List<Interview> interviews) {
+        this.interviews = interviews;
+    }
+
+   
+    public List<Interview> getIntervies() {
         return interviews;
     }
 
