@@ -51,12 +51,12 @@ public class Postulant extends People{
         return skills;
     }
 
-    public void setSkills(HashMap<Topic, Integer> skills) {
-        this.skills = skills;
+    public void addSkills(Topic topic, int level) {
+        this.getSkills().put(topic, level);
     }
 
-    public void setInterviews(List<Interview> interviews) {
-        this.interviews = interviews;
+    public void addInterviews(Interview interviews) {
+        this.getIntervies().add(interviews);
     }
 
    

@@ -30,7 +30,7 @@ public class Position {
         return topics;
     }
 
-    public void setTopics(ArrayList<Topic> topics) {
-        this.topics = topics;
+    public void addTopics(Topic topics) {
+        this.getTopics().add(topics);
     }
 }
