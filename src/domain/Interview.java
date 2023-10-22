@@ -2,6 +2,7 @@
 package domain;
 
 public class Interview {
+    private static int autoid;
     private int id;
     private int puntuation;
     private Interviewer interviewer;
