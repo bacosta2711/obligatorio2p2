@@ -1,12 +1,12 @@
 //Mateo Seijo 309095
 //Bruno Acosta 313080
-
 package domain;
 
 import java.util.List;
-
+import java.util.Objects;
 
 abstract class People {
+
     private String name;
     private String document;
     private String address;
@@ -35,5 +35,29 @@ abstract class People {
         this.address = address;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final People other = (People) obj;
+        return Objects.equals(this.document, other.document);
+    }
+
+    public boolean isDocumentUnique(String document, system system) {
+        boolean unique = true;
+
+        if (system.getInterviewers().contains(document) || system.getPostulants().contains(document)) {
+            unique = false;
+        }
+
+        return unique;
+    }
 
 }

@@ -6,6 +6,10 @@ package domain;
 public class Interviewer extends People{
     private int joinedYear;
 
+    public Interviewer(int joinedYear) {
+        this.joinedYear = joinedYear;
+    }
+
     public int getJoinedYear() {
         return joinedYear;
     }
