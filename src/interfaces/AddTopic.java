@@ -5,7 +5,10 @@
 package interfaces;
 
 import domain.SystemClass;
+import java.awt.Component;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -55,7 +58,7 @@ public class AddTopic extends javax.swing.JFrame {
 
         jLabel2.setText("Nombre");
         panel.add(jLabel2);
-        jLabel2.setBounds(6, 90, 46, 17);
+        jLabel2.setBounds(6, 90, 80, 17);
 
         jLabel3.setText("Descripción");
         panel.add(jLabel3);
@@ -106,7 +109,10 @@ public class AddTopic extends javax.swing.JFrame {
     }//GEN-LAST:event_nameActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-        // TODO add your handling code here:
+            // TODO add your handling code here:
+            JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor((Component) evt.getSource());
+            ventanaActual.dispose();
+            system.getMenuReference().setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
     private void goActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goActionPerformed
@@ -119,6 +125,10 @@ public class AddTopic extends javax.swing.JFrame {
             }else{
                 JOptionPane.showMessageDialog(null, "Ya existe este tema.", "Error", JOptionPane.ERROR_MESSAGE);
             }
+        }
+        
+         for (int i = 0; i < system.getTopics().size(); i++) {
+            System.out.println(system.getTopics().get(i));
         }
     }//GEN-LAST:event_goActionPerformed
 
