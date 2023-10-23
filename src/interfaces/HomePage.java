@@ -4,7 +4,7 @@
  */
 package interfaces;
 
-import domain.System;
+import domain.SystemClass;
 
 /**
  *
@@ -16,7 +16,6 @@ public class HomePage extends javax.swing.JFrame {
      * Creates new form HomePage
      */
     public HomePage() {
-        System system = new System();
         initComponents();
     }
 
@@ -120,8 +119,14 @@ public class HomePage extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new HomePage().setVisible(true);
+                
+                
             }
         });
+        
+        
+        SystemClass system = new SystemClass();
+                
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
