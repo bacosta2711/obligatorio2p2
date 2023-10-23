@@ -4,18 +4,18 @@
  */
 package interfaces;
 
-import domain.SystemClass;
+import domain.System;
 
 /**
  *
  * @author bacosta
  */
 public class AddPostulantSkills extends javax.swing.JFrame {
-    private SystemClass system;
+    private System system;
     /**
      * Creates new form AddPostulantSkills
      */
-    public AddPostulantSkills(SystemClass sys) {
+    public AddPostulantSkills(System sys) {
         system=sys;
         initComponents();
     }

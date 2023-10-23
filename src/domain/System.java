@@ -7,7 +7,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
-public class SystemClass {
+public class System {
     private ArrayList<Interview> interviews;
     private ArrayList<Topic> topics;
     private ArrayList<Position> positions;
@@ -16,7 +16,7 @@ public class SystemClass {
 
     private PropertyChangeSupport handler;
 
-    public SystemClass() {
+    public System() {
         this.handler = new PropertyChangeSupport(this);
         this.interviewers = new ArrayList<Interviewer>();
         this.interviews = new ArrayList<Interview>();
