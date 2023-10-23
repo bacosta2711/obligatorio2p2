@@ -34,6 +34,16 @@ abstract class People {
     public void setAddress(String address) {
         this.address = address;
     }
+/*
+    @Override
+    public boolean equals(Object obj) {
+        boolean result = false;
+        People otherPeople = (People) obj;
+        if (this.getDocument().trim().equalsIgnoreCase(otherPeople.getDocument().trim())){
+            result = true; 
+        }
+        return result;*/
+
 
     @Override
     public boolean equals(Object obj) {
@@ -58,6 +68,7 @@ abstract class People {
         }
 
         return unique;
+
     }
 
 }
