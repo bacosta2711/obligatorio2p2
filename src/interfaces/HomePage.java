@@ -4,7 +4,7 @@
  */
 package interfaces;
 
-import domain.SystemClass;
+import domain.System;
 
 /**
  *
@@ -16,7 +16,7 @@ public class HomePage extends javax.swing.JFrame {
      * Creates new form HomePage
      */
     public HomePage() {
-        SystemClass system = new SystemClass();
+        System system = new System();
         initComponents();
     }
 

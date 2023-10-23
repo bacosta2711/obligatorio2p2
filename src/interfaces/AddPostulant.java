@@ -4,7 +4,7 @@
  */
 package interfaces;
 
-import domain.SystemClass;
+import domain.System;
 
 /**
  *
@@ -12,11 +12,11 @@ import domain.SystemClass;
  */
 public class AddPostulant extends javax.swing.JFrame {
 
-    private SystemClass system;
+    private System system;
     /**
      * Creates new form AddPostulant
      */
-    public AddPostulant(SystemClass sys ) {
+    public AddPostulant(System sys ) {
         system = sys;
         initComponents();
     }
