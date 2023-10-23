@@ -5,6 +5,9 @@
 package interfaces;
 
 import domain.SystemClass;
+import java.awt.Component;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -15,7 +18,9 @@ public class HomePage extends javax.swing.JFrame {
     /**
      * Creates new form HomePage
      */
-    public HomePage() {
+    private SystemClass system;
+    public HomePage(SystemClass systemAux) {
+        system = systemAux;
         initComponents();
     }
 
@@ -35,12 +40,10 @@ public class HomePage extends javax.swing.JFrame {
         addPostulant = new javax.swing.JMenuItem();
         removePostulant = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        addInterviewer = new javax.swing.JMenu();
+
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+
 
         jMenu3.setText("jMenu3");
 
@@ -73,6 +76,15 @@ public class HomePage extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Temas");
+
+        jMenuItem1.setText("Agregar tema");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
         jMenuBar1.add(jMenu2);
 
         addInterviewer.setText("Evaluador");
@@ -127,6 +139,17 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_removePostulantActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+
+        this.setVisible(false);
+        AddTopic window = new AddTopic(this.getSystem());
+        window.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    
+
+    public SystemClass getSystem() {
+        return system;
+
         AddInterviewer interviewer = new AddInterviewer();
         interviewer.setVisible(true);
         
@@ -181,8 +204,9 @@ public class HomePage extends javax.swing.JFrame {
         
         
         SystemClass system = new SystemClass();
-                
+
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu addInterviewer;
@@ -197,6 +221,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+
     private javax.swing.JMenuItem removePostulant;
     // End of variables declaration//GEN-END:variables
 }

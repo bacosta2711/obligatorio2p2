@@ -36,4 +36,9 @@ public class Topic {
         }
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Topic{" + "name=" + name + ", description=" + description + '}';
+    }
 }
