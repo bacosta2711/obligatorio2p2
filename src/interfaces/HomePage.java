@@ -35,7 +35,12 @@ public class HomePage extends javax.swing.JFrame {
         addPostulant = new javax.swing.JMenuItem();
         removePostulant = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
+        addInterviewer = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -45,7 +50,7 @@ public class HomePage extends javax.swing.JFrame {
 
         jLabel1.setText("Bienvenido a Entrevistas!");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(120, 110, 170, 17);
+        jLabel1.setBounds(120, 110, 170, 16);
 
         jMenu1.setText("Postulantes");
 
@@ -70,8 +75,41 @@ public class HomePage extends javax.swing.JFrame {
         jMenu2.setText("Temas");
         jMenuBar1.add(jMenu2);
 
-        jMenu4.setText("Evaluador");
-        jMenuBar1.add(jMenu4);
+        addInterviewer.setText("Evaluador");
+
+        jMenuItem1.setText("Agregar evaluador");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        addInterviewer.add(jMenuItem1);
+
+        jMenuBar1.add(addInterviewer);
+
+        jMenu5.setText("Entrevista");
+
+        jMenuItem3.setText("Agregar entrevista");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu5);
+
+        jMenu6.setText("Posición");
+
+        jMenuItem2.setText("Agregar posición");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
 
@@ -87,6 +125,23 @@ public class HomePage extends javax.swing.JFrame {
     private void removePostulantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePostulantActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_removePostulantActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        AddInterviewer interviewer = new AddInterviewer();
+        interviewer.setVisible(true);
+        
+// TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        AddInterview interview = new AddInterview();
+        interview.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        AddPosition position = new AddPosition();
+        position.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,13 +185,18 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu addInterviewer;
     private javax.swing.JMenuItem addPostulant;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem removePostulant;
     // End of variables declaration//GEN-END:variables
 }
