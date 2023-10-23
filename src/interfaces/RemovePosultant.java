@@ -4,18 +4,18 @@
  */
 package interfaces;
 
-import domain.System;
+import domain.SystemClass;
 
 /**
  *
  * @author bacosta
  */
 public class RemovePosultant extends javax.swing.JFrame {
-    private System system;
+    private SystemClass system;
     /**
      * Creates new form RemovePosultant
      */
-    public RemovePosultant(System sys) {
+    public RemovePosultant(SystemClass sys) {
         system = sys;
         initComponents();
     }
