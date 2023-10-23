@@ -50,7 +50,12 @@ public class SystemClass {
         this.getInterviews().add(interview);
         this.handler.firePropertyChange("interviews",previousData,this.getInterviews());
     }
-    
+    public Interview createInterview(){
+        
+    }
+    public Interviewer createInterviewer (){
+        
+    }
     public void addInterviewer(Interviewer interviewer){
         //ToDo Implementrs unique control
         ArrayList<Interviewer> previousData = this.getInterviewers();
