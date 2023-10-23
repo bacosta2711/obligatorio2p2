@@ -6,8 +6,10 @@ package domain;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 
 public class SystemClass {
+    private JFrame menuReference;
     private ArrayList<Interview> interviews;
     private ArrayList<Topic> topics;
     private ArrayList<Position> positions;
@@ -23,6 +25,14 @@ public class SystemClass {
         this.positions = new ArrayList<Position>();
         this.postulants = new ArrayList<Postulant>();
         this.topics = new ArrayList<Topic>();
+    }
+
+    public JFrame getMenuReference() {
+        return menuReference;
+    }
+
+    public void setMenuReference(JFrame menuReference) {
+        this.menuReference = menuReference;
     }
     
     public ArrayList<Interview> getInterviews() {
