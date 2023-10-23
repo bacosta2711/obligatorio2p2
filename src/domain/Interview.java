@@ -2,19 +2,21 @@
 package domain;
 
 public class Interview {
+    private static int autoid = 1;
     private int id;
     private int puntuation;
     private Interviewer interviewer;
     private Postulant postulant;
     private String observation;
 
-    public Interview(int puntuation, Interviewer interviewer, Postulant postulant, String observation) {
+    public Interview(Interviewer interviewer,Postulant postulant,int puntuation, String observation) {
         //TODO VALIDAR TEMA AUTONUMBER
         this.puntuation = puntuation;
         this.interviewer = interviewer;
         this.postulant = postulant;
         this.observation = observation;
-        
+        this.id = autoid;
+        autoid++;
     }
 
     public int getId() {
