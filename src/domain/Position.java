@@ -1,21 +1,27 @@
 //Mateo Seijo 309095
 //Bruno Acosta 313080
-
 package domain;
 
 import java.util.ArrayList;
 
 public class Position {
-    private String postionName;
+
+    private String positionName;
     private char positionModality;
     private ArrayList<Topic> topics;
 
+    public Position(String postionName, char positionModality, ArrayList<Topic> topics) {
+        this.positionName = postionName;
+        this.positionModality = positionModality;
+        this.topics = topics;
+    }
+
     public String getPostionName() {
-        return postionName;
+        return positionName;
     }
 
     public void setPostionName(String postionName) {
-        this.postionName = postionName;
+        this.positionName = postionName;
     }
 
     public char getPositionModality() {
