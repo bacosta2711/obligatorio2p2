@@ -60,7 +60,7 @@ abstract class People {
         return Objects.equals(this.document, other.document);
     }
 
-    public boolean isDocumentUnique(String document, system system) {
+    public boolean isDocumentUnique(String document, System system) {
         boolean unique = true;
 
         if (system.getInterviewers().contains(document) || system.getPostulants().contains(document)) {

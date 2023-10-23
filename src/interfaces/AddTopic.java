@@ -4,7 +4,7 @@
  */
 package interfaces;
 
-import domain.SystemClass;
+import domain.System;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,11 +13,11 @@ import javax.swing.JOptionPane;
  */
 public class AddTopic extends javax.swing.JFrame {
     
-    private SystemClass system;
+    private System system;
     /**
      * Creates new form AddPostulant
      */
-    public AddTopic(SystemClass sys) {
+    public AddTopic(System sys) {
         system=sys;
         initComponents();
     }
