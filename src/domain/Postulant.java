@@ -67,4 +67,7 @@ public class Postulant extends People{
     public void setIntervies(List<Interview> intervies) {
         this.interviews = intervies;
     }
+    
+   
+
 }

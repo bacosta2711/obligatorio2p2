@@ -7,7 +7,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
-public class system {
+public class SystemClass {
     private ArrayList<Interview> interviews;
     private ArrayList<Topic> topics;
     private ArrayList<Position> positions;
@@ -16,8 +16,13 @@ public class system {
 
     private PropertyChangeSupport handler;
 
-    public system() {
+    public SystemClass() {
         this.handler = new PropertyChangeSupport(this);
+        this.interviewers = new ArrayList<Interviewer>();
+        this.interviews = new ArrayList<Interview>();
+        this.positions = new ArrayList<Position>();
+        this.postulants = new ArrayList<Postulant>();
+        this.topics = new ArrayList<Topic>();
     }
     
     public ArrayList<Interview> getInterviews() {
@@ -53,12 +58,27 @@ public class system {
         this.handler.firePropertyChange("interviewers",previousData,this.getInterviewers());
     }
     
-    public void addPostulant(Postulant postulant){
+    public boolean addPostulant(Postulant postulant){
         //ToDo Implementrs unique control
-        
-        ArrayList<Postulant> previousData = this.getPostulants();
-        this.getPostulants().add(postulant);
-        this.handler.firePropertyChange("postulants",previousData,this.getPostulants());
+        boolean result=false;
+        if(!this.getPostulants().contains(postulant)){
+            ArrayList<Postulant> previousData = this.getPostulants();
+            this.getPostulants().add(postulant);
+            this.handler.firePropertyChange("postulants",previousData,this.getPostulants());
+            
+            result = true;
+        }
+        return result;
+    }
+    
+    public boolean createTopic(String name, String description){
+        Topic topic = new Topic(name,description);
+        return addTopic(topic); 
+    }
+    
+    public void removePostulant(Postulant postulant){
+        this.getPostulants().remove(postulant);
+        //Remove de las interviews
     }
     
     public void addPosition(Position position){
@@ -68,11 +88,18 @@ public class system {
         this.handler.firePropertyChange("positions",previousData,this.getPositions());
     }
     
-    public void addTopic(Topic topic){
+    public boolean addTopic(Topic topic){
         //ToDo Implementrs unique control
-        ArrayList<Topic> previousData = this.getTopics();
-        this.getTopics().add(topic);
-        this.handler.firePropertyChange("topics",previousData,this.getTopics());
+        boolean result = false;
+        if(!this.getTopics().contains(topic)){
+            ArrayList<Topic> previousData = this.getTopics();
+            this.getTopics().add(topic);
+            this.handler.firePropertyChange("topics",previousData,this.getTopics());
+            
+            result = true;
+        }
+        
+        return result;
     }
     
     public void addPropertyChangeLisener(PropertyChangeListener listener){
@@ -81,5 +108,15 @@ public class system {
     
     public void removePropertyChangeLisener(PropertyChangeListener listener){
         this.handler.removePropertyChangeListener(listener);
+    }
+    
+     public Postulant getPostulantByDocument(String document){
+         Postulant result = new Postulant();
+         for (Postulant p : this.getPostulants()) {
+             if(p.getDocument()==document){
+                 result=p;
+             }
+         }
+        return result;
     }
 }

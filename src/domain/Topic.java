@@ -27,5 +27,13 @@ public class Topic {
     public void setDescription(String description) {
         this.description = description;
     }
-  
+   @Override
+    public boolean equals(Object obj) {
+        boolean result = false;
+        Topic otherTopic = (Topic) obj;
+        if (this.getName().trim().equalsIgnoreCase(otherTopic.getName().trim())){
+            result = true; 
+        }
+        return result;
+    }
 }
