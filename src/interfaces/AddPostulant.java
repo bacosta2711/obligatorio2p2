@@ -4,7 +4,12 @@
  */
 package interfaces;
 
+import domain.Postulant;
 import domain.SystemClass;
+import java.awt.Component;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -16,9 +21,11 @@ public class AddPostulant extends javax.swing.JFrame {
     /**
      * Creates new form AddPostulant
      */
-    public AddPostulant(SystemClass sys ) {
+    public AddPostulant(SystemClass sys) {
         system = sys;
         initComponents();
+        jobModalityR.setSelected(true);
+        this.getSystem().setPostulantMemory(new Postulant());
     }
 
     /**
@@ -66,37 +73,37 @@ public class AddPostulant extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel2.setText("Teléfono:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(20, 220, 70, 17);
+        jLabel2.setBounds(20, 220, 80, 17);
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel3.setText("Nombre:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 70, 60, 17);
+        jLabel3.setBounds(20, 70, 80, 17);
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel4.setText("Cédula:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(20, 120, 47, 17);
+        jLabel4.setBounds(20, 120, 80, 17);
 
         jLabel5.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel5.setText("Formato:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(20, 370, 70, 17);
+        jLabel5.setBounds(20, 370, 120, 17);
 
         jLabel6.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel6.setText("Dirección:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(20, 170, 70, 17);
+        jLabel6.setBounds(20, 170, 90, 17);
 
         jLabel7.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel7.setText("Mail:");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(20, 270, 50, 17);
+        jLabel7.setBounds(20, 270, 80, 17);
 
         jLabel8.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel8.setText("Linkedin:");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(20, 320, 70, 17);
+        jLabel8.setBounds(20, 320, 80, 17);
 
         jobModalityGroup.add(jobModalityH);
         jobModalityH.setText("Hybrido");
@@ -106,17 +113,18 @@ public class AddPostulant extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jobModalityH);
-        jobModalityH.setBounds(310, 370, 90, 21);
+        jobModalityH.setBounds(310, 370, 110, 21);
 
         jobModalityGroup.add(jobModalityR);
         jobModalityR.setText("Remoto");
+        jobModalityR.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jobModalityR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jobModalityRActionPerformed(evt);
             }
         });
         jPanel1.add(jobModalityR);
-        jobModalityR.setBounds(100, 370, 70, 21);
+        jobModalityR.setBounds(100, 370, 100, 21);
 
         jobModalityGroup.add(jobModalityP);
         jobModalityP.setText("Presencial");
@@ -126,15 +134,25 @@ public class AddPostulant extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jobModalityP);
-        jobModalityP.setBounds(200, 370, 90, 21);
+        jobModalityP.setBounds(200, 370, 110, 21);
 
         go.setText("Siguiente");
+        go.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                goActionPerformed(evt);
+            }
+        });
         jPanel1.add(go);
-        go.setBounds(308, 440, 90, 23);
+        go.setBounds(278, 440, 120, 23);
 
         back.setText("Cancelar");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
         jPanel1.add(back);
-        back.setBounds(20, 440, 90, 23);
+        back.setBounds(20, 440, 120, 23);
         jPanel1.add(name);
         name.setBounds(100, 70, 280, 23);
         jPanel1.add(linkedin);
@@ -166,6 +184,83 @@ public class AddPostulant extends javax.swing.JFrame {
     private void jobModalityPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobModalityPActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jobModalityPActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+         JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor((Component) evt.getSource());
+         ventanaActual.dispose();
+        // system.getMenuReference().setVisible(true);
+    }//GEN-LAST:event_backActionPerformed
+
+    private void goActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goActionPerformed
+        if(name.getText().isBlank() || document.getText().isBlank() || address.getText().isBlank() ||
+           mail.getText().isBlank() || phone.getText().isBlank()    || linkedin.getText().isBlank()){
+                     JOptionPane.showMessageDialog(null, "Debe indicar todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+
+        }else{
+            
+            
+            
+   
+            this.getSystem().getPostulantMemory().setAddress(address.getText());
+            this.getSystem().getPostulantMemory().setContact(phone.getText());
+            this.getSystem().getPostulantMemory().setDocument(document.getText());
+            this.getSystem().getPostulantMemory().setEmail(mail.getText());
+            if (jobModalityR.isSelected()){
+                this.getSystem().getPostulantMemory().setJobModality('R');
+            }
+            if (jobModalityP.isSelected()){
+                this.getSystem().getPostulantMemory().setJobModality('P');
+            }
+            if (jobModalityH.isSelected()){
+                this.getSystem().getPostulantMemory().setJobModality('H');
+            }
+            this.getSystem().getPostulantMemory().setLinkedin(linkedin.getText());
+            this.getSystem().getPostulantMemory().setName(name.getText());
+            
+            
+            JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor((Component) evt.getSource());
+            
+            
+            AddPostulantSkills window = new AddPostulantSkills(this.getSystem(), ventanaActual);
+            window.setVisible(true);
+            this.setVisible(false);
+            
+        }
+        
+        
+    }//GEN-LAST:event_goActionPerformed
+    
+    private void setFieldsFromMemory(){
+        if(!this.getSystem().getPostulantMemory().getName().isBlank()){
+        name.setText(this.getSystem().getPostulantMemory().getName());
+        document.setText(this.getSystem().getPostulantMemory().getDocument());
+        address.setText(this.getSystem().getPostulantMemory().getAddress());
+        phone.setText(this.getSystem().getPostulantMemory().getContact());
+        mail.setText(this.getSystem().getPostulantMemory().getEmail());
+        linkedin.setText(this.getSystem().getPostulantMemory().getLinkedin());
+        if(this.getSystem().getPostulantMemory().getJobModality()=='P'){
+            jobModalityP.setSelected(true);
+            jobModalityR.setSelected(false);
+            jobModalityH.setSelected(false);
+        }
+        if(this.getSystem().getPostulantMemory().getJobModality()=='R'){
+            jobModalityP.setSelected(false);
+            jobModalityR.setSelected(true);
+            jobModalityH.setSelected(false);
+        }
+        if(this.getSystem().getPostulantMemory().getJobModality()=='H'){
+            jobModalityP.setSelected(false);
+            jobModalityR.setSelected(false);
+            jobModalityH.setSelected(true);
+        }
+        }
+    
+    
+    }
+    
+    public SystemClass getSystem() {
+        return system;
+    }
 
    
 
