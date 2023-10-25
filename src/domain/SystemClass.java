@@ -7,19 +7,20 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import java.util.Observable;
 
-public class SystemClass {
-    private JFrame menuReference;
+public class SystemClass extends Observable{
+    private Postulant postulantMemory;
     private ArrayList<Interview> interviews;
     private ArrayList<Topic> topics;
     private ArrayList<Position> positions;
     private ArrayList<Postulant> postulants;
     private ArrayList<Interviewer> interviewers;
 
-    private PropertyChangeSupport handler;
+    //private PropertyChangeSupport handler;
 
     public SystemClass() {
-        this.handler = new PropertyChangeSupport(this);
+      //  this.handler = new PropertyChangeSupport(this);
         this.interviewers = new ArrayList<Interviewer>();
         this.interviews = new ArrayList<Interview>();
         this.positions = new ArrayList<Position>();
@@ -27,13 +28,6 @@ public class SystemClass {
         this.topics = new ArrayList<Topic>();
     }
 
-    public JFrame getMenuReference() {
-        return menuReference;
-    }
-
-    public void setMenuReference(JFrame menuReference) {
-        this.menuReference = menuReference;
-    }
     
     public ArrayList<Interview> getInterviews() {
         return interviews;
@@ -58,7 +52,8 @@ public class SystemClass {
     public void addInterview(Interview interview){
         ArrayList<Interview> previousData = this.getInterviews();
         this.getInterviews().add(interview);
-        this.handler.firePropertyChange("interviews",previousData,this.getInterviews());
+       setChanged();
+       notifyObservers();
     }
    /* public Interview createInterview(){
         
@@ -70,8 +65,13 @@ public class SystemClass {
         //ToDo Implementrs unique control
         ArrayList<Interviewer> previousData = this.getInterviewers();
         this.interviewers.add(interviewer);
-        this.handler.firePropertyChange("interviewers",previousData,this.getInterviewers());
+        setChanged();
+        notifyObservers();
     }
+     public boolean createPostulant(String name,String addres,String document, String mail, String linkedin, String contact){
+         Postulant postulant = new Postulant();
+         return false;
+     }
     
     public boolean addPostulant(Postulant postulant){
         //ToDo Implementrs unique control
@@ -79,8 +79,9 @@ public class SystemClass {
         if(!this.getPostulants().contains(postulant)){
             ArrayList<Postulant> previousData = this.getPostulants();
             this.getPostulants().add(postulant);
-            this.handler.firePropertyChange("postulants",previousData,this.getPostulants());
-            
+          //  this.handler.firePropertyChange("postulant", previousData,this.getPostulants());
+          setChanged();
+          notifyObservers();
             result = true;
         }
         return result;
@@ -92,15 +93,21 @@ public class SystemClass {
     }
     
     public void removePostulant(Postulant postulant){
-        this.getPostulants().remove(postulant);
+        
         //Remove de las interviews
+        ArrayList<Postulant> previousData = this.getPostulants();
+        this.getPostulants().remove(postulant);
+        setChanged();
+        notifyObservers();
+        
     }
     
     public void addPosition(Position position){
         //ToDo Implementrs unique control
         ArrayList<Position> previousData = this.getPositions();
         this.getPositions().add(position);
-        this.handler.firePropertyChange("positions",previousData,this.getPositions());
+     setChanged();
+          notifyObservers();
     }
     
     public boolean addTopic(Topic topic){
@@ -109,22 +116,16 @@ public class SystemClass {
         if(!this.getTopics().contains(topic)){
             ArrayList<Topic> previousData = this.getTopics();
             this.getTopics().add(topic);
-            this.handler.firePropertyChange("topics",previousData,this.getTopics());
+         //   this.handler.firePropertyChange("topics",previousData,this.getTopics());
             
             result = true;
         }
-        
+        setChanged();
+          notifyObservers();
         return result;
     }
     
-    public void addPropertyChangeLisener(PropertyChangeListener listener){
-        this.handler.addPropertyChangeListener(listener);
-    }
-    
-    public void removePropertyChangeLisener(PropertyChangeListener listener){
-        this.handler.removePropertyChangeListener(listener);
-    }
-    
+
      public Postulant getPostulantByDocument(String document){
          Postulant result = new Postulant();
          for (Postulant p : this.getPostulants()) {
@@ -133,5 +134,40 @@ public class SystemClass {
              }
          }
         return result;
+    }
+    public void resetPostulantMemory(){
+       this.setPostulantMemory(new Postulant());
+    }
+    
+    public ArrayList<Topic> getTopicsNotInMemory(){
+        ArrayList<Topic> result = new ArrayList<Topic>();
+        
+        for (Topic t : this.getTopics()) {
+            if(!this.getPostulantMemory().getSkills().containsKey(t)){
+                result.add(t);
+            }
+        }
+        
+        return result;
+    } 
+    
+    public Topic getTopicByName(String topicName){
+        Topic topic = new Topic();
+        for (Topic t : this.getTopics()) {
+            if(t.getName().equalsIgnoreCase(topicName)){
+                topic.setName(t.getName());
+                topic.setDescription(t.getDescription());
+            }
+        }
+
+        return topic;        
+    }
+    
+    public Postulant getPostulantMemory() {
+        return postulantMemory;
+    }
+
+    public void setPostulantMemory(Postulant postulantMemory) {
+        this.postulantMemory = postulantMemory;
     }
 }

@@ -5,7 +5,7 @@ package domain;
 import java.util.List;
 import java.util.Objects;
 
-abstract class People {
+public class People {
 
     private String name;
     private String document;

@@ -11,6 +11,9 @@ public class Topic {
         this.name = name;
         this.description = description;
     }
+    public Topic() {
+        
+    }
 
     public String getName() {
         return name;
@@ -30,15 +33,23 @@ public class Topic {
    @Override
     public boolean equals(Object obj) {
         boolean result = false;
+        
+        
+       
+        if (obj != null) {
+          
+        
+        
         Topic otherTopic = (Topic) obj;
         if (this.getName().trim().equalsIgnoreCase(otherTopic.getName().trim())){
             result = true; 
+        }
         }
         return result;
     }
 
     @Override
     public String toString() {
-        return "Topic{" + "name=" + name + ", description=" + description + '}';
+        return  name;
     }
 }

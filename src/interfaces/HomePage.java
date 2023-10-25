@@ -116,16 +116,22 @@ public class HomePage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addPostulantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPostulantActionPerformed
+        //this.setVisible(false);
+        AddPostulant window = new AddPostulant(this.getSystem());
+        window.setVisible(true);
         
         
     }//GEN-LAST:event_addPostulantActionPerformed
 
     private void removePostulantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePostulantActionPerformed
         // TODO add your handling code here:
+        //this.setVisible(false);
+        RemovePostulant window = new RemovePostulant(this.getSystem());
+        window.setVisible(true);
     }//GEN-LAST:event_removePostulantActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        this.setVisible(false);
+        //this.setVisible(false);
         AddTopic window = new AddTopic(this.getSystem());
         window.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed

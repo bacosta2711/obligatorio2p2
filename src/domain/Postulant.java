@@ -15,6 +15,16 @@ public class Postulant extends People{
     private HashMap<Topic, Integer> skills;
     private List<Interview> interviews;
 
+    public Postulant(){
+        skills = new HashMap<Topic, Integer>();
+    }
+    
+    public Postulant(String name){
+        this.setName(name);
+        skills = new HashMap<Topic, Integer>();
+    }
+    
+    
     public String getContact() {
         return contact;
     }
@@ -54,7 +64,13 @@ public class Postulant extends People{
     public void addSkills(Topic topic, int level) {
         this.getSkills().put(topic, level);
     }
-
+     
+    public void removeSkills(Topic topic) {
+        
+        System.out.println("PEDILO "+topic);
+        this.getSkills().remove(topic);
+    }
+    
     public void addInterviews(Interview interviews) {
         this.getIntervies().add(interviews);
     }
@@ -66,6 +82,14 @@ public class Postulant extends People{
 
     public void setIntervies(List<Interview> intervies) {
         this.interviews = intervies;
+    }
+
+    @Override
+    public String toString() {
+        String ret = "";
+        if(this.getDocument()==null){
+        ret = this.getName();}else{ret = this.getName()+ "-"+this.getDocument();}
+        return ret;
     }
     
    
