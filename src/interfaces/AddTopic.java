@@ -54,7 +54,7 @@ public class AddTopic extends javax.swing.JFrame {
         jLabel1.setText("Registro de temática");
         jLabel1.setToolTipText("");
         panel.add(jLabel1);
-        jLabel1.setBounds(135, 32, 142, 18);
+        jLabel1.setBounds(135, 32, 220, 18);
 
         jLabel2.setText("Nombre");
         panel.add(jLabel2);
@@ -62,7 +62,7 @@ public class AddTopic extends javax.swing.JFrame {
 
         jLabel3.setText("Descripción");
         panel.add(jLabel3);
-        jLabel3.setBounds(7, 128, 69, 17);
+        jLabel3.setBounds(7, 128, 90, 17);
 
         description.setColumns(20);
         description.setRows(5);
@@ -86,7 +86,7 @@ public class AddTopic extends javax.swing.JFrame {
             }
         });
         panel.add(back);
-        back.setBounds(6, 258, 81, 23);
+        back.setBounds(6, 258, 110, 23);
 
         go.setText("Registrar");
         go.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +95,7 @@ public class AddTopic extends javax.swing.JFrame {
             }
         });
         panel.add(go);
-        go.setBounds(304, 258, 82, 23);
+        go.setBounds(276, 258, 110, 23);
 
         getContentPane().add(panel);
         panel.setBounds(6, 0, 402, 303);
@@ -112,7 +112,7 @@ public class AddTopic extends javax.swing.JFrame {
             // TODO add your handling code here:
             JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor((Component) evt.getSource());
             ventanaActual.dispose();
-            system.getMenuReference().setVisible(true);
+            //system.getMenuReference().setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
     private void goActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goActionPerformed
@@ -122,6 +122,8 @@ public class AddTopic extends javax.swing.JFrame {
         }else{
             if (this.system.createTopic(name.getText(), description.getText())){
                 JOptionPane.showMessageDialog(null, "El tema se creo de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                name.setText("");
+                description.setText("");
             }else{
                 JOptionPane.showMessageDialog(null, "Ya existe este tema.", "Error", JOptionPane.ERROR_MESSAGE);
             }
