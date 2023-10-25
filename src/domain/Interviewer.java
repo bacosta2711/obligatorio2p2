@@ -4,20 +4,20 @@
 package domain;
 
 public class Interviewer extends People{
-    private int joinedYear;
+    private String joinedYear;
 
-    public Interviewer(String name, String document, String adress, int joinedYear) {
+    public Interviewer(String name, String document, String adress, String joinedYear) {
         this.joinedYear = joinedYear;
         this.setName(name);
         this.setAddress(adress);
         this.setDocument(document);
     }
 
-    public int getJoinedYear() {
+    public String getJoinedYear() {
         return joinedYear;
     }
 
-    public void setJoinedYear(int joinedYear) {
+    public void setJoinedYear(String joinedYear) {
         this.joinedYear = joinedYear;
     }
 }
