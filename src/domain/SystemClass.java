@@ -159,8 +159,8 @@ import java.util.Observable;
              }
          }
 
-            result = true;
-        }
+            
+        
 
         return result;
     }
@@ -169,16 +169,7 @@ import java.util.Observable;
     public void removeInterviewsFromPostulant (Postulant postulant){
         postulant.setInterviews(null);
     }
-    public Postulant getPostulantByDocument(String document) {
-        Postulant result = new Postulant();
-        for (Postulant p : this.getPostulants()) {
-            if (p.getDocument() == document) {
-                result = p;
-            }
-        }
-
-        return result;
-    }
+   
     public void resetPostulantMemory(){
        this.setPostulantMemory(new Postulant());
     }
