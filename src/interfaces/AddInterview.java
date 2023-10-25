@@ -4,7 +4,12 @@
  */
 package interfaces;
 
+import domain.Interviewer;
+import domain.Postulant;
+import domain.SystemClass;
+import java.util.ArrayList;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -13,12 +18,15 @@ import javax.swing.JTextField;
  * @author PC
  */
 public class AddInterview extends javax.swing.JFrame {
-
+    private SystemClass system;
     /**
      * Creates new form newInterview
      */
-    public AddInterview() {
+    public AddInterview(SystemClass sys) {
+        system = sys;
         initComponents();
+        setInterviewerBox();
+        setPostulantCombo();
     }
 
     /**
@@ -37,13 +45,13 @@ public class AddInterview extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        postulantCombo = new javax.swing.JComboBox<>();
-        interviewerBox = new javax.swing.JComboBox<>();
+        postulant = new javax.swing.JComboBox<>();
+        name = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        commentText = new javax.swing.JTextArea();
+        comments = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        pointField = new javax.swing.JTextField();
+        point = new javax.swing.JTextField();
 
         jLabel3.setText("jLabel2");
 
@@ -63,53 +71,67 @@ public class AddInterview extends javax.swing.JFrame {
 
         jLabel6.setText("Comentarios :");
 
-        postulantCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        postulantCombo.addActionListener(new java.awt.event.ActionListener() {
+        postulant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postulantComboActionPerformed(evt);
+                postulantActionPerformed(evt);
             }
         });
 
-        interviewerBox.addActionListener(new java.awt.event.ActionListener() {
+        name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                interviewerBoxActionPerformed(evt);
+                nameActionPerformed(evt);
             }
         });
 
-        commentText.setColumns(20);
-        commentText.setRows(5);
-        jScrollPane1.setViewportView(commentText);
+        comments.setColumns(20);
+        comments.setRows(5);
+        jScrollPane1.setViewportView(comments);
 
         jButton1.setText("Ingresar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Atrás");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(15, 15, 15))
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(interviewerBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(pointField, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(postulantCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(point, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(postulant, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap(47, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addGap(22, 22, 22))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,37 +141,55 @@ public class AddInterview extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(interviewerBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(postulantCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(postulant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(pointField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(point, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addGap(16, 16, 16))
+                .addGap(17, 17, 17))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void interviewerBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interviewerBoxActionPerformed
+    private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_interviewerBoxActionPerformed
+    }//GEN-LAST:event_nameActionPerformed
 
-    private void postulantComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postulantComboActionPerformed
+    private void postulantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postulantActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_postulantComboActionPerformed
+    }//GEN-LAST:event_postulantActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if (point.getText().isBlank() || comments.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Debe indicar todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if(this.system.createInterview((Interviewer)name.getSelectedItem(), (Postulant)postulant.getSelectedItem(), Integer.parseInt(point.getText()), comments.getText())) {
+                JOptionPane.showMessageDialog(null, "La entrevista se agregó de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                point.setText("");
+                comments.setText("");
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,40 +197,47 @@ public class AddInterview extends javax.swing.JFrame {
  
 
     public JTextArea getCommentText() {
-        return commentText;
+        return comments;
     }
 
     public void setCommentText(JTextArea commentText) {
-        this.commentText = commentText;
+        this.comments = commentText;
     }
 
-    public JComboBox<String> getInterviewerBox() {
-        return interviewerBox;
+    public JComboBox<Interviewer> getInterviewerBox() {
+        return name;
     }
 
-    public void setInterviewerBox(JComboBox<String> interviewerBox) {
-        this.interviewerBox = interviewerBox;
+    public void setInterviewerBox() {
+        name.removeAllItems();
+        ArrayList <Interviewer> interviewerList = this.system.getInterviewers();
+        for (Interviewer i : interviewerList){
+            name.addItem(i);
+        }
     }
 
-    public JComboBox<String> getPostulantCombo() {
-        return postulantCombo;
+    public JComboBox<Postulant> getPostulantCombo() {
+        return postulant;
     }
 
-    public void setPostulantCombo(JComboBox<String> postulantCombo) {
-        this.postulantCombo = postulantCombo;
+    public void setPostulantCombo() {
+        postulant.removeAllItems();
+        ArrayList <Postulant> postulantList = this.system.getPostulants();
+        for (Postulant i : postulantList){
+            postulant.addItem(i);
+        }
     }
 
     public JTextField getPointField() {
-        return pointField;
+        return point;
     }
 
     public void setPointField(JTextField pointField) {
-        this.pointField = pointField;
+        this.point = pointField;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea commentText;
-    private javax.swing.JComboBox<String> interviewerBox;
+    private javax.swing.JTextArea comments;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -201,7 +248,8 @@ public class AddInterview extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField pointField;
-    private javax.swing.JComboBox<String> postulantCombo;
+    private javax.swing.JComboBox<Interviewer> name;
+    private javax.swing.JTextField point;
+    private javax.swing.JComboBox<Postulant> postulant;
     // End of variables declaration//GEN-END:variables
 }

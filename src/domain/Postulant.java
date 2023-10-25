@@ -72,16 +72,16 @@ public class Postulant extends People{
     }
     
     public void addInterviews(Interview interviews) {
-        this.getIntervies().add(interviews);
+        this.getInterviews().add(interviews);
     }
 
    
-    public List<Interview> getIntervies() {
+    public List<Interview> getInterviews() {
         return interviews;
     }
 
-    public void setIntervies(List<Interview> intervies) {
-        this.interviews = intervies;
+    public void setInterviews(List<Interview> interviews) {
+        this.interviews = interviews;
     }
 
     @Override

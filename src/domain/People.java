@@ -62,11 +62,9 @@ public class People {
 
     public boolean isDocumentUnique(String document, SystemClass system) {
         boolean unique = true;
-
         if (system.getInterviewers().contains(document) || system.getPostulants().contains(document)) {
             unique = false;
         }
-
         return unique;
 
     }
