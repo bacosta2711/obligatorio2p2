@@ -43,6 +43,7 @@ public class HomePage extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
@@ -58,7 +59,7 @@ public class HomePage extends javax.swing.JFrame {
 
         jLabel1.setText("Bienvenido a Entrevistas!");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(120, 110, 170, 17);
+        jLabel1.setBounds(120, 110, 170, 16);
 
         jMenu1.setText("Postulantes");
 
@@ -93,11 +94,25 @@ public class HomePage extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu4.setText("Evaluador");
+
+        jMenuItem5.setText("Agregar evaluador");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem5);
+
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Entrevista");
 
         jMenuItem4.setText("Agregar entrevista");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem4);
 
         jMenuBar1.add(jMenu5);
@@ -105,6 +120,11 @@ public class HomePage extends javax.swing.JFrame {
         jMenu6.setText("Posición");
 
         jMenuItem3.setText("Agregar posición");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem3);
 
         jMenuBar1.add(jMenu6);
@@ -130,6 +150,24 @@ public class HomePage extends javax.swing.JFrame {
         window.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        AddInterviewer window = new AddInterviewer(system);
+        window.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        AddInterview window = new AddInterview(system);
+        window.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        AddPosition window = new AddPosition(system);
+        window.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     
 
     public SystemClass getSystem() {
@@ -151,6 +189,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem removePostulant;
     // End of variables declaration//GEN-END:variables
 }
