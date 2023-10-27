@@ -4,12 +4,20 @@ package domain;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import java.util.Observable;
 
-  public class SystemClass extends Observable{
+  public class SystemClass extends Observable implements Serializable{
     private Postulant postulantMemory;
     private ArrayList<Interview> interviews;
     private ArrayList<Topic> topics;
@@ -164,7 +172,6 @@ import java.util.Observable;
 
         return result;
     }
-
    
     public void removeInterviewsFromPostulant (Postulant postulant){
         postulant.setInterviews(null);
@@ -197,6 +204,48 @@ import java.util.Observable;
 
         return topic;        
     }
+    
+    public int getPostulantRiseSkill(Topic t){
+    int count = 0;
+        for (Postulant p : this.getPostulants()) {
+            if(p.getSkills().containsKey(t) && p.getSkills().get(t) > 5 ){
+            count++;
+            }
+        }
+    
+    return count;
+   }
+    
+    public int getPositionWithSkill(Topic t){
+    int count = 0;
+    
+        for (Position p : this.getPositions()) {
+            for (Topic to : p.getTopics()) {
+                if (to.equals(t)){
+                count++;
+                }
+            }
+            
+            
+        }
+    return count;
+   }
+    
+    public void readFile(){
+   /* try{
+        FileOutputStream ff = new FileOutputStream("archivo.ser");
+        BufferedOutputStream b = new BufferedOutputStream(ff);
+        ObjectOutputStream so =  new ObjectOutputStream(b);  
+    }catch(FileNotFoundException ex){
+       
+            }
+    catch(IOException ex){}*/
+    }
+    
+    public void writeFile(){
+    
+    }
+    
     
     public Postulant getPostulantMemory() {
         return postulantMemory;
