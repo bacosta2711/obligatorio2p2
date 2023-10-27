@@ -3,11 +3,12 @@
 
 package domain;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Postulant extends People{
+public class Postulant extends People implements Serializable{
     private String contact;
     private String email;
     private String linkedin;

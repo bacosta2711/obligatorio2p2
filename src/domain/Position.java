@@ -2,9 +2,10 @@
 //Bruno Acosta 313080
 package domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Position {
+public class Position implements Serializable{
 
     private String positionName;
     private char positionModality;
