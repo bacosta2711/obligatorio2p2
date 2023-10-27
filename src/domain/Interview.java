@@ -1,7 +1,9 @@
 
 package domain;
 
-public class Interview {
+import java.io.Serializable;
+
+public class Interview implements Serializable{
     private static int autoid = 1;
     private int id;
     private int puntuation;

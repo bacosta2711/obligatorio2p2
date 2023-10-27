@@ -200,7 +200,7 @@ public void update(Observable o,Object ob){
         // TODO add your handling code here:
          
         this.getSystem().getPostulantMemory().removeSkills(this.getSystem().getTopicByName(listSkills.getSelectedValue().substring(0, listSkills.getSelectedValue().indexOf("("))));
-        System.out.println(this.getSystem().getPostulantMemory().toString());
+        //System.out.println(this.getSystem().getPostulantMemory().toString());
            
             
         

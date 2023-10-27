@@ -36,6 +36,9 @@ public class HomePage extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
+        label = new javax.swing.JLabel();
+        empty = new javax.swing.JToggleButton();
+        file = new javax.swing.JToggleButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         addPostulant = new javax.swing.JMenuItem();
@@ -48,6 +51,9 @@ public class HomePage extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -55,11 +61,38 @@ public class HomePage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Entrevistas");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jLabel1.setText("Bienvenido a Entrevistas!");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(120, 110, 170, 16);
+        jLabel1.setBounds(180, 100, 170, 17);
+
+        label.setText("Seleccione una opcion!");
+        getContentPane().add(label);
+        label.setBounds(190, 120, 160, 17);
+
+        empty.setText("Vacio");
+        empty.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emptyActionPerformed(evt);
+            }
+        });
+        getContentPane().add(empty);
+        empty.setBounds(330, 190, 140, 23);
+
+        file.setText("Archivo c/datos");
+        file.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileActionPerformed(evt);
+            }
+        });
+        getContentPane().add(file);
+        file.setBounds(30, 190, 140, 23);
 
         jMenu1.setText("Postulantes");
 
@@ -129,9 +162,24 @@ public class HomePage extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu6);
 
+        jMenu7.setText("Consultas");
+
+        jMenuItem6.setText("Tema");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem6);
+
+        jMenuItem7.setText("Postulante");
+        jMenu7.add(jMenuItem7);
+
+        jMenuBar1.add(jMenu7);
+
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(400, 328));
+        setSize(new java.awt.Dimension(505, 347));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -174,6 +222,40 @@ public class HomePage extends javax.swing.JFrame {
         window.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void emptyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emptyActionPerformed
+        // TODO add your handling code here:
+        empty.setVisible(false);
+        file.setVisible(false);
+        label.setVisible(false);
+        jMenuBar1.setVisible(true);
+        
+        
+    }//GEN-LAST:event_emptyActionPerformed
+
+    private void fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileActionPerformed
+        // TODO add your handling code here:
+        empty.setVisible(false);
+        file.setVisible(false);
+        label.setVisible(false);
+        jMenuBar1.setVisible(true);
+    }//GEN-LAST:event_fileActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        TopicQuerry window = new TopicQuerry(system);
+        window.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        jMenuBar1.setVisible(false);
+    }//GEN-LAST:event_formWindowOpened
+    public static void main(String[] args) {
+       SystemClass system= new SystemClass();
+       HomePage window = new HomePage(system);
+       //system.setMenuReference(window);
+       window.setVisible(true);
+    }
     
 
     public SystemClass getSystem() {
@@ -183,6 +265,8 @@ public class HomePage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem addPostulant;
+    private javax.swing.JToggleButton empty;
+    private javax.swing.JToggleButton file;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -190,12 +274,16 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JLabel label;
     private javax.swing.JMenuItem removePostulant;
     // End of variables declaration//GEN-END:variables
 }

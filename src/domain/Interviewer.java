@@ -3,7 +3,9 @@
 
 package domain;
 
-public class Interviewer extends People{
+import java.io.Serializable;
+
+public class Interviewer extends People implements Serializable{
     private String joinedYear;
 
     public Interviewer(String name, String document, String adress, String joinedYear) {
