@@ -75,7 +75,7 @@ public class RemovePostulant extends javax.swing.JFrame implements Observer{
         document_info = new javax.swing.JLabel();
         number_info = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -215,7 +215,7 @@ public class RemovePostulant extends javax.swing.JFrame implements Observer{
     
         if (model.isEmpty()){
             go.setEnabled(false);
-            model.addElement(new Postulant("No hay temas registrados."));
+            model.addElement(new Postulant("No hay postulantes."));
         }else{
             go.setEnabled(true);
         }

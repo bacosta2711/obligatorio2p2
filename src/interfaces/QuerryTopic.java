@@ -17,7 +17,7 @@ import javax.swing.SwingUtilities;
  *
  * @author bacosta
  */
-public class TopicQuerry extends javax.swing.JFrame implements Observer{
+public class QuerryTopic extends javax.swing.JFrame implements Observer{
 
     /**
      * Creates new form TopicQuerry
@@ -25,7 +25,7 @@ public class TopicQuerry extends javax.swing.JFrame implements Observer{
     DefaultListModel model = new DefaultListModel();
     private SystemClass system;
     
-    public TopicQuerry(SystemClass sys) {
+    public QuerryTopic(SystemClass sys) {
         system = sys;
         system.addObserver(this);
         initComponents();
@@ -61,7 +61,7 @@ public class TopicQuerry extends javax.swing.JFrame implements Observer{
         countPostulant = new javax.swing.JLabel();
         warning = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(null);
 

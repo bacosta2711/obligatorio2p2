@@ -72,7 +72,7 @@ public void update(Observable o,Object ob){
         back = new javax.swing.JButton();
         go = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Entrevistas");
         getContentPane().setLayout(null);
 
@@ -96,6 +96,7 @@ public void update(Observable o,Object ob){
         topic.setBounds(140, 70, 260, 23);
 
         level.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
+        level.setOpaque(true);
         jPanel1.add(level);
         level.setBounds(140, 100, 120, 23);
 

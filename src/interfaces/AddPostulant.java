@@ -59,7 +59,7 @@ public class AddPostulant extends javax.swing.JFrame {
         address = new javax.swing.JTextField();
         document = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Entrevistas");
         getContentPane().setLayout(null);
 
