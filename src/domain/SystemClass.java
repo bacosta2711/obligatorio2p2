@@ -5,9 +5,11 @@ package domain;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.lang.System.Logger;
@@ -231,18 +233,34 @@ import java.util.Observable;
     return count;
    }
     
-    public void readFile(){
-   /* try{
-        FileOutputStream ff = new FileOutputStream("archivo.ser");
-        BufferedOutputStream b = new BufferedOutputStream(ff);
-        ObjectOutputStream so =  new ObjectOutputStream(b);  
-    }catch(FileNotFoundException ex){
-       
+    public void writeFile(SystemClass s){
+   
+        try {
+            FileOutputStream ff = new FileOutputStream("archivo.ser");
+            BufferedOutputStream b = new BufferedOutputStream(ff);
+            ObjectOutputStream so =  new ObjectOutputStream(b);
+            so.writeObject(s);
+            so.close();
+            } catch (FileNotFoundException ex) {
+                java.util.logging.Logger.getLogger(SystemClass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            } catch (IOException e){
+               java.util.logging.Logger.getLogger(SystemClass.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
             }
-    catch(IOException ex){}*/
+         
     }
     
-    public void writeFile(){
+    public static SystemClass readFile() {
+            
+        SystemClass s = new SystemClass();
+            try {
+                ObjectInputStream in =  new ObjectInputStream(new FileInputStream("archivo.ser"));
+                 s = (SystemClass) in.readObject();
+                in.close();
+            } catch (IOException | ClassNotFoundException e) {
+                System.out.println("Error de recuperacion");
+            }
+            
+            return s;
     
     }
     

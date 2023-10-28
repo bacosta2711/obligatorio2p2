@@ -19,8 +19,7 @@ public class HomePage extends javax.swing.JFrame {
      * Creates new form HomePage
      */
     private SystemClass system;
-    public HomePage(SystemClass systemAux) {
-        system = systemAux;
+    public HomePage() {
         initComponents();
     }
 
@@ -54,14 +53,18 @@ public class HomePage extends javax.swing.JFrame {
         jMenu7 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
         jMenuItem2.setText("jMenuItem2");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Entrevistas");
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -175,6 +178,14 @@ public class HomePage extends javax.swing.JFrame {
         jMenuItem7.setText("Postulante");
         jMenu7.add(jMenuItem7);
 
+        jMenuItem8.setText("Posicion");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem8);
+
         jMenuBar1.add(jMenu7);
 
         setJMenuBar(jMenuBar1);
@@ -224,16 +235,26 @@ public class HomePage extends javax.swing.JFrame {
 
     private void emptyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emptyActionPerformed
         // TODO add your handling code here:
+        
+        SystemClass sys= new SystemClass();
+        this.system = sys; 
+        
         empty.setVisible(false);
         file.setVisible(false);
         label.setVisible(false);
         jMenuBar1.setVisible(true);
         
         
+        
+        
     }//GEN-LAST:event_emptyActionPerformed
 
     private void fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileActionPerformed
         // TODO add your handling code here:
+        SystemClass sys= SystemClass.readFile();
+        
+        this.system = sys; 
+        
         empty.setVisible(false);
         file.setVisible(false);
         label.setVisible(false);
@@ -242,7 +263,7 @@ public class HomePage extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-        TopicQuerry window = new TopicQuerry(system);
+        QuerryTopic window = new QuerryTopic(system);
         window.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
@@ -250,9 +271,18 @@ public class HomePage extends javax.swing.JFrame {
         // TODO add your handling code here:
         jMenuBar1.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        this.system.writeFile(this.system);
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
     public static void main(String[] args) {
-       SystemClass system= new SystemClass();
-       HomePage window = new HomePage(system);
+       
+       HomePage window = new HomePage();
        //system.setMenuReference(window);
        window.setVisible(true);
     }
@@ -283,6 +313,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JLabel label;
     private javax.swing.JMenuItem removePostulant;
     // End of variables declaration//GEN-END:variables
