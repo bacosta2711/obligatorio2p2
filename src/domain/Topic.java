@@ -3,7 +3,9 @@
 
 package domain;
 
-public class Topic {
+import java.io.Serializable;
+
+public class Topic implements Serializable{
     private String name;
     private String description;
 
