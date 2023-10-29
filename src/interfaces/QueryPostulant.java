@@ -10,17 +10,27 @@ import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-public class PostulantHistory extends javax.swing.JFrame {
+public class QueryPostulant extends javax.swing.JFrame {
 
     private SystemClass system;
     DefaultListModel model = new DefaultListModel();
     DefaultListModel modelTwo = new DefaultListModel();
     DefaultTableModel modelThree = new DefaultTableModel();
 
-    public PostulantHistory(SystemClass sys) {
+    public QueryPostulant(SystemClass sys) {
         system = sys;
         initComponents();
         postulants.setModel(model);
+        
+        String[] titles = new String [] {"Nro","Evaluador","Puntaje","Comentarios"};
+        
+        
+        
+        //modelThree.addRow(new Object [] {"1","2","3","4"}); 
+        modelThree.setColumnIdentifiers(titles);
+        filterInterviews.setModel(modelThree);
+        
+        
         setPostulants();
         postulantAdress.setText("");
         formatPostulant.setText("");
@@ -73,61 +83,90 @@ public class PostulantHistory extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Entrevistas");
+        getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Historial postulante");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(411, 22, 184, 22);
 
         name.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         name.setText("Nombre:");
         name.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(name);
+        name.setBounds(603, 62, 52, 15);
 
         phone.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         phone.setText("Teléfono:");
         phone.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(phone);
+        phone.setBounds(603, 164, 58, 15);
 
         mail.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         mail.setText("Mail:");
         mail.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(mail);
+        mail.setBounds(603, 197, 29, 15);
 
         linkedin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         linkedin.setText("LinkedIn:");
         linkedin.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(linkedin);
+        linkedin.setBounds(603, 230, 57, 15);
 
         document.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         document.setText("Cédula:");
         document.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(document);
+        document.setBounds(603, 97, 46, 16);
 
         adress.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         adress.setText("Dirección:");
         adress.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(adress);
+        adress.setBounds(603, 131, 61, 15);
 
         experience.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         experience.setText("Experiencia:");
         experience.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(experience);
+        experience.setBounds(604, 290, 73, 15);
 
         format.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         format.setText("Formato:");
         format.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(format);
+        format.setBounds(604, 263, 55, 15);
 
         postulantName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         postulantName.setText("Nombre Postulante");
         postulantName.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(postulantName);
+        postulantName.setBounds(677, 62, 119, 15);
 
         postulantDocument.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         postulantDocument.setText("CédulaPostulante");
         postulantDocument.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(postulantDocument);
+        postulantDocument.setBounds(677, 98, 109, 15);
 
         postulantAdress.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         postulantAdress.setText("CédulaPostulante");
         postulantAdress.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(postulantAdress);
+        postulantAdress.setBounds(677, 131, 109, 15);
 
         formatPostulant.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         formatPostulant.setText("CédulaPostulante");
         formatPostulant.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(formatPostulant);
+        formatPostulant.setBounds(677, 263, 109, 15);
 
         postulantMail.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         postulantMail.setText("CédulaPostulante");
         postulantMail.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(postulantMail);
+        postulantMail.setBounds(677, 197, 109, 15);
 
         postulantLinkedin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         postulantLinkedin.setText("CédulaPostulante");
@@ -137,14 +176,20 @@ public class PostulantHistory extends javax.swing.JFrame {
                 postulantLinkedinMouseClicked(evt);
             }
         });
+        getContentPane().add(postulantLinkedin);
+        postulantLinkedin.setBounds(677, 230, 109, 15);
 
         postulantPhone.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         postulantPhone.setText("CédulaPostulante");
         postulantPhone.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(postulantPhone);
+        postulantPhone.setBounds(677, 164, 109, 15);
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel17.setText("Postulantes:");
         jLabel17.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(jLabel17);
+        jLabel17.setBounds(29, 62, 94, 15);
 
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -152,16 +197,24 @@ public class PostulantHistory extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(29, 754, 72, 23);
+        getContentPane().add(jSeparator1);
+        jSeparator1.setBounds(29, 399, 50, 24);
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel18.setText("Buscar:");
         jLabel18.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        getContentPane().add(jLabel18);
+        jLabel18.setBounds(29, 433, 94, 15);
 
         seeker.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 seekerActionPerformed(evt);
             }
         });
+        getContentPane().add(seeker);
+        seeker.setBounds(168, 429, 210, 23);
 
         seekerButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         seekerButton.setText("Buscar");
@@ -170,6 +223,8 @@ public class PostulantHistory extends javax.swing.JFrame {
                 seekerButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(seekerButton);
+        seekerButton.setBounds(412, 430, 100, 21);
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton3.setText("Resetear");
@@ -178,8 +233,9 @@ public class PostulantHistory extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(530, 430, 100, 21);
 
-        filterInterviews.setAutoCreateColumnsFromModel(false);
         filterInterviews.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -206,10 +262,13 @@ public class PostulantHistory extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        filterInterviews.setToolTipText("");
         filterInterviews.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         filterInterviews.setRowSelectionAllowed(false);
-        filterInterviews.setRowSorter(null);
         jScrollPane3.setViewportView(filterInterviews);
+
+        getContentPane().add(jScrollPane3);
+        jScrollPane3.setBounds(29, 470, 882, 243);
 
         postulants.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         postulants.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -219,124 +278,15 @@ public class PostulantHistory extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(postulants);
 
+        getContentPane().add(jScrollPane4);
+        jScrollPane4.setBounds(29, 86, 349, 278);
+
         jScrollPane2.setViewportView(postulantExperience);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(343, 343, 343))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(45, 45, 45)
-                                .addComponent(seeker, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(mail)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(format)
-                                            .addComponent(experience))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(linkedin)
-                                            .addGap(17, 17, 17)))
-                                    .addComponent(phone)
-                                    .addComponent(adress)
-                                    .addComponent(document)
-                                    .addComponent(name)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(seekerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 29, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(postulantName)
-                            .addComponent(postulantAdress)
-                            .addComponent(postulantDocument)
-                            .addComponent(formatPostulant)
-                            .addComponent(postulantLinkedin)
-                            .addComponent(postulantMail)
-                            .addComponent(postulantPhone)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15)))
-                .addGap(27, 27, 27))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addGap(9, 9, 9)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel18)
-                            .addComponent(seeker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(seekerButton)
-                            .addComponent(jButton3)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(name)
-                            .addComponent(postulantName))
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(document, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(postulantDocument))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(adress)
-                            .addComponent(postulantAdress))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(phone)
-                            .addComponent(postulantPhone))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(mail)
-                            .addComponent(postulantMail))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(linkedin)
-                            .addComponent(postulantLinkedin))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(format)
-                            .addComponent(formatPostulant))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(experience)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(16, 16, 16))
-        );
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(677, 290, 219, 130);
 
-        pack();
+        setSize(new java.awt.Dimension(938, 821));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -350,6 +300,8 @@ public class PostulantHistory extends javax.swing.JFrame {
         setPostulantLinkedin(selected);
         setPostulantPhone(selected);
         setPostulantMail(selected);
+        generateTable();
+        
         
 
     }//GEN-LAST:event_postulantsValueChanged
@@ -398,7 +350,7 @@ public class PostulantHistory extends javax.swing.JFrame {
             modelThree.addRow(new Object[]{number, interviewer, puntuation, comments});
         }
 
-        filterInterviews.setModel((TableModel) modelThree);
+     
         System.out.println(filterInterviews.toString());
     }
 
@@ -455,8 +407,19 @@ public class PostulantHistory extends javax.swing.JFrame {
             model.addElement(T);
         }
     }
-
-
+    
+    public void generateTable(){
+        if (!postulants.isSelectionEmpty()){
+    modelThree.setRowCount(0);
+        for (Interview t : postulants.getSelectedValue().getInterviews()) {
+            modelThree.addRow(new Object[]{t.getId(), t.getInterviewer().toString(), t.getPuntuation(), t.getObservation()});
+        }
+        }
+     
+        System.out.println(modelThree.toString());
+    }
+            
+       
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adress;
     private javax.swing.JLabel document;

@@ -268,7 +268,7 @@ public class HomePage extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-        QuerryTopic window = new QuerryTopic(system);
+        QueryTopic window = new QueryTopic(system);
         window.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
@@ -288,7 +288,7 @@ public class HomePage extends javax.swing.JFrame {
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
-        PostulantHistory window = new PostulantHistory(system);
+        QueryPostulant window = new QueryPostulant(system);
         window.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
     public static void main(String[] args) {
