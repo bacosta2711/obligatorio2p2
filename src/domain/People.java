@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class People implements Serializable{
+public class People implements Serializable {
 
     private String name;
     private String document;
@@ -35,7 +35,8 @@ public class People implements Serializable{
     public void setAddress(String address) {
         this.address = address;
     }
-/*
+
+    /*
     @Override
     public boolean equals(Object obj) {
         boolean result = false;
@@ -44,7 +45,6 @@ public class People implements Serializable{
             result = true; 
         }
         return result;*/
-
 
     @Override
     public boolean equals(Object obj) {
@@ -61,13 +61,14 @@ public class People implements Serializable{
         return Objects.equals(this.document, other.document);
     }
 
-    public boolean isDocumentUnique(String document, SystemClass system) {
-        boolean unique = true;
-        if (system.getInterviewers().contains(document) || system.getPostulants().contains(document)) {
-            unique = false;
+    @Override
+    public String toString() {
+        String ret = "";
+        if (this.getDocument() == null) {
+            ret = this.getName();
+        } else {
+            ret = this.getName() + "-" + this.getDocument();
         }
-        return unique;
-
+        return ret;
     }
-
 }

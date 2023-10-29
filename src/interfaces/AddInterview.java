@@ -101,6 +101,13 @@ public class AddInterview extends javax.swing.JFrame {
             }
         });
 
+        point.setText("0");
+        point.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pointActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -180,7 +187,7 @@ public class AddInterview extends javax.swing.JFrame {
         } else {
             if(this.system.createInterview((Interviewer)name.getSelectedItem(), (Postulant)postulant.getSelectedItem(), Integer.parseInt(point.getText()), comments.getText())) {
                 JOptionPane.showMessageDialog(null, "La entrevista se agregó de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                point.setText("");
+                point.setText("0");
                 comments.setText("");
             }
         }
@@ -190,6 +197,10 @@ public class AddInterview extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void pointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pointActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pointActionPerformed
 
     /**
      * @param args the command line arguments

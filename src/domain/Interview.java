@@ -2,6 +2,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Interview implements Serializable{
     private static int autoid = 1;
@@ -19,6 +20,13 @@ public class Interview implements Serializable{
         this.observation = observation;
         this.id = autoid;
         autoid++;
+    }
+     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Interview interview = (Interview) o;
+        return Objects.equals(observation, interview.observation);
     }
 
     public int getId() {
