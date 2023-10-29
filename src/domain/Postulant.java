@@ -85,13 +85,13 @@ public class Postulant extends People implements Serializable{
         this.interviews = interviews;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         String ret = "";
         if(this.getDocument()==null){
         ret = this.getName();}else{ret = this.getName()+ "-"+this.getDocument();}
         return ret;
-    }
+    }*/
     
    
 

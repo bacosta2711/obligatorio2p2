@@ -21,29 +21,33 @@ import javax.swing.SwingUtilities;
  *
  * @author bacosta
  */
-public class AddPostulantSkills extends javax.swing.JFrame implements Observer{
+public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
+
     private SystemClass system;
     private JFrame predecesor;
-    
+
     DefaultListModel model = new DefaultListModel();
+
     /**
      * Creates new form AddPostulantSkills
      */
     public AddPostulantSkills(SystemClass sys, JFrame pre) {
         predecesor = pre;
-        system=sys;
+        system = sys;
         sys.addObserver(this);
         initComponents();
         listSkills.setModel(model);
         setTopicCombo();
         setListItem();
-        
+
     }
-public void update(Observable o,Object ob){
-        
-       setTopicCombo();
+
+    public void update(Observable o, Object ob) {
+
+        setTopicCombo();
         setListItem();
     }
+
     public JFrame getPredecesor() {
         return predecesor;
     }
@@ -157,62 +161,57 @@ public void update(Observable o,Object ob){
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
-         JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor((Component) evt.getSource());
-         ventanaActual.dispose();
-         this.getPredecesor().setVisible(true);
-         
+        JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor((Component) evt.getSource());
+        ventanaActual.dispose();
+        this.getPredecesor().setVisible(true);
+
     }//GEN-LAST:event_backActionPerformed
 
     private void goActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goActionPerformed
         // TODO add your handling code here:
-        if(!this.system.addPostulant(this.getSystem().getPostulantMemory())){
+        if (!this.system.addPostulant(this.getSystem().getPostulantMemory())) {
             JOptionPane.showMessageDialog(null, "No se pudo crear al postulante, ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
-            
-        }else{
+
+        } else {
             this.getSystem().resetPostulantMemory();
             JOptionPane.showMessageDialog(null, "El postulante se creo de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor((Component) evt.getSource());
             ventanaActual.dispose();
             this.getPredecesor().dispose();
-            
+
             AddPostulant newWindow = new AddPostulant(this.getSystem());
             newWindow.setVisible(true);
-            
-            
+
         }
-    
+
     }//GEN-LAST:event_goActionPerformed
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         // TODO add your handling code here:
-        if(Integer.parseInt(level.getValue().toString())>=1 && Integer.parseInt(level.getValue().toString())<=10){
-            this.getSystem().getPostulantMemory().addSkills((Topic) topic.getSelectedItem() , Integer.parseInt(level.getValue().toString()));
-       
+        if (Integer.parseInt(level.getValue().toString()) >= 1 && Integer.parseInt(level.getValue().toString()) <= 10) {
+            this.getSystem().getPostulantMemory().addSkills((Topic) topic.getSelectedItem(), Integer.parseInt(level.getValue().toString()));
+
             this.setListItem();
             this.setTopicCombo();
-        }else{
-         JOptionPane.showMessageDialog(null, "El nivel del tema debe estar entre 1 y 10.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "El nivel del tema debe estar entre 1 y 10.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-        
+
+
     }//GEN-LAST:event_addActionPerformed
 
     private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed
         // TODO add your handling code here:
-         
+
         this.getSystem().getPostulantMemory().removeSkills(this.getSystem().getTopicByName(listSkills.getSelectedValue().substring(0, listSkills.getSelectedValue().indexOf("("))));
         //System.out.println(this.getSystem().getPostulantMemory().toString());
-           
-            
-        
-        
-        
+
+
     }//GEN-LAST:event_removeActionPerformed
 
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
@@ -231,51 +230,48 @@ public void update(Observable o,Object ob){
     private javax.swing.JComboBox<Topic> topic;
     // End of variables declaration//GEN-END:variables
 
-
-private void setTopicCombo(){
-        topic.removeAllItems();  
+    private void setTopicCombo() {
+        topic.removeAllItems();
         ArrayList<Topic> topicList = this.getSystem().getTopicsNotInMemory();
         for (Topic t : topicList) {
             topic.addItem(t);
-        }     
-        int count =0;
-       for (int i = 0; i < topic.getComponentCount(); i++) {
-           if(topic.getItemAt(i)!=null){
-           count++;
-           }
-    }
+        }
+        int count = 0;
+        for (int i = 0; i < topic.getComponentCount(); i++) {
+            if (topic.getItemAt(i) != null) {
+                count++;
+            }
+        }
         //System.out.println("TCount:"+topic.getComponentCount());
-        if (count==0){
+        if (count == 0) {
             topic.setEnabled(false);
             level.setEnabled(false);
-        add.setEnabled(false);
-            topic.addItem(new Topic("No hay temas registrados.",""));
-        }else{
+            add.setEnabled(false);
+            topic.addItem(new Topic("No hay temas registrados.", ""));
+        } else {
             level.setEnabled(true);
             topic.setEnabled(true);
-add.setEnabled(true);
+            add.setEnabled(true);
         }
-}
-
-private void setListItem(){
-    model.removeAllElements();
-     for (Map.Entry<Topic, Integer> entry : this.getSystem().getPostulantMemory().getSkills().entrySet()) {
-            model.addElement(entry.getKey()+"("+entry.getValue()+")");
-     }
-    if(model.isEmpty()){
-        remove.setEnabled(false);
-        listSkills.setEnabled(false);
-        model.addElement("No hay experiencia.");
-    }else{
-        remove.setEnabled(true);
-        listSkills.setEnabled(true);
     }
-}
+
+    private void setListItem() {
+        model.removeAllElements();
+        for (Map.Entry<Topic, Integer> entry : this.getSystem().getPostulantMemory().getSkills().entrySet()) {
+            model.addElement(entry.getKey() + "(" + entry.getValue() + ")");
+        }
+        if (model.isEmpty()) {
+            remove.setEnabled(false);
+            listSkills.setEnabled(false);
+            model.addElement("No hay experiencia.");
+        } else {
+            remove.setEnabled(true);
+            listSkills.setEnabled(true);
+        }
+    }
 
     public SystemClass getSystem() {
         return system;
     }
-
-
 
 }

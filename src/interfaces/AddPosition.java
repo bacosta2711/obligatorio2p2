@@ -28,6 +28,7 @@ public class AddPosition extends javax.swing.JFrame {
         system = sys;
         initComponents();
         topics.setModel(model);
+        setTopics();
         
     }
 

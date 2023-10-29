@@ -73,11 +73,11 @@ public class HomePage extends javax.swing.JFrame {
 
         jLabel1.setText("Bienvenido a Entrevistas!");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(180, 100, 170, 17);
+        jLabel1.setBounds(180, 100, 170, 16);
 
         label.setText("Seleccione una opcion!");
         getContentPane().add(label);
-        label.setBounds(190, 120, 160, 17);
+        label.setBounds(190, 120, 160, 16);
 
         empty.setText("Vacio");
         empty.addActionListener(new java.awt.event.ActionListener() {
@@ -176,6 +176,11 @@ public class HomePage extends javax.swing.JFrame {
         jMenu7.add(jMenuItem6);
 
         jMenuItem7.setText("Postulante");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu7.add(jMenuItem7);
 
         jMenuItem8.setText("Posicion");
@@ -280,6 +285,12 @@ public class HomePage extends javax.swing.JFrame {
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        PostulantHistory window = new PostulantHistory(system);
+        window.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
     public static void main(String[] args) {
        
        HomePage window = new HomePage();
