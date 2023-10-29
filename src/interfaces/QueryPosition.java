@@ -7,6 +7,7 @@ package interfaces;
 import domain.Position;
 import domain.Postulant;
 import domain.SystemClass;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.DefaultListModel;
@@ -110,6 +111,7 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(30, 280, 90, 17);
 
+        postulants.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(postulants);
 
         jPanel1.add(jScrollPane2);
@@ -125,6 +127,11 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
         jButton2.setBounds(258, 240, 120, 23);
 
         jButton3.setText("Exportar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3);
         jButton3.setBounds(260, 460, 120, 23);
 
@@ -152,6 +159,22 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
         // TODO add your handling code here:
     }//GEN-LAST:event_positionsValueChanged
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        if (!positions.isSelectionEmpty()){
+        ArrayList<Postulant> arrayList = new ArrayList<Postulant>();
+        int size = modelPostulant.getSize();
+        for (int i = 0; i < size; i++) {
+            Postulant item = (Postulant) modelPostulant.getElementAt(i);
+            arrayList.add(item);
+        }
+        
+        this.system.exportPositionQuery(positions.getSelectedValue(), arrayList);
+        }else{
+              JOptionPane.showMessageDialog(null, "Debe de seleccionar la posicion para poder exportar.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -171,6 +194,13 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
             for (Postulant e : this.system.getPostulantsRiseAllTopicLevel(positions.getSelectedValue(), (Integer)level.getValue())) {
                 modelPostulant.addElement(e);
             }
+            if(modelPostulant.isEmpty()){
+                jButton3.setEnabled(false);
+                modelPostulant.addElement(new Postulant("No hay resultados para su busqueda"));
+            }else{
+                jButton3.setEnabled(true);
+            }
+            
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -187,6 +217,6 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner level;
     private javax.swing.JList<Position> positions;
-    private javax.swing.JList<String> postulants;
+    private javax.swing.JList<Postulant> postulants;
     // End of variables declaration//GEN-END:variables
 }
