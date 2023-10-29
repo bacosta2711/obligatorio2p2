@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 
 import java.util.Observable;
@@ -59,25 +60,39 @@ public class SystemClass extends Observable implements Serializable {
     }
 
     public void addInterview(Interview interview) {
-        ArrayList<Interview> previousData = this.getInterviews();
         this.getInterviews().add(interview);
-
         setChanged();
         notifyObservers();
     }
 
     public Boolean createInterview(Interviewer interviewer, Postulant postulant, int point, String comments) {
+
         Interview i = new Interview(interviewer, postulant, point, comments);
         addInterview(i);
         postulant.addInterviews(i);
+        Interview I = new Interview(interviewer, postulant, point, comments);
+        addInterview(I);
+        postulant.addInterviews(I);
         return true;
 
     }
 
     public boolean isDocumentUnique(String document) {
         boolean unique = true;
-        if (this.getInterviewers().contains(document) || this.getPostulants().contains(document)) {
-            unique = false;
+        ArrayList<Interviewer> I = new ArrayList<>();
+        ArrayList<Postulant> J = new ArrayList<>();
+        I = this.getInterviewers();
+        J = this.getPostulants();
+
+        for (Interviewer r : I) {
+            if (r.getDocument().equals(document)) {
+                unique = false;
+            }
+        }
+        for (Postulant r : J) {
+            if (r.getDocument().equals(document)) {
+                unique = false;
+            }
         }
         return unique;
     }
@@ -97,6 +112,7 @@ public class SystemClass extends Observable implements Serializable {
         //ToDo Implementrs unique control
         ArrayList<Interviewer> previousData = this.getInterviewers();
         this.interviewers.add(interviewer);
+        
 
         setChanged();
         notifyObservers();

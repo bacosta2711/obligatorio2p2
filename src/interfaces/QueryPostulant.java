@@ -32,6 +32,7 @@ public class QueryPostulant extends javax.swing.JFrame {
         
         
         setPostulants();
+        modelThree.setRowCount(0);
         postulantAdress.setText("");
         formatPostulant.setText("");
         postulantLinkedin.setText("");
@@ -39,6 +40,7 @@ public class QueryPostulant extends javax.swing.JFrame {
         postulantName.setText("");
         postulantDocument.setText("");
         postulantPhone.setText("");
+        filterInterviews.setModel((TableModel) modelThree);
 
     }
 
@@ -301,9 +303,6 @@ public class QueryPostulant extends javax.swing.JFrame {
         setPostulantPhone(selected);
         setPostulantMail(selected);
         generateTable();
-        
-        
-
     }//GEN-LAST:event_postulantsValueChanged
 
     private void postulantLinkedinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postulantLinkedinMouseClicked
@@ -349,8 +348,6 @@ public class QueryPostulant extends javax.swing.JFrame {
             String comments = t.getObservation();
             modelThree.addRow(new Object[]{number, interviewer, puntuation, comments});
         }
-
-     
         System.out.println(filterInterviews.toString());
     }
 
