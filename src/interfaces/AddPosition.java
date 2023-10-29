@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -29,7 +31,16 @@ public class AddPosition extends javax.swing.JFrame {
         initComponents();
         topics.setModel(model);
         setTopics();
-        
+        /*topics.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                // Manejar la selección de elementos aquí
+                if (!e.getValueIsAdjusting()) {
+                    // Tu código para manejar la selección de elementos
+                }
+            }
+        });*/
+
     }
 
     /**
@@ -118,6 +129,7 @@ public class AddPosition extends javax.swing.JFrame {
             }
         });
 
+        topics.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane2.setViewportView(topics);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -178,16 +190,16 @@ public class AddPosition extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (name.getText().isBlank()) {
+        if (name.getText().isBlank() || topics.isSelectionEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe indicar todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            if(this.system.createPosition(name.getText(),type.getSelectedItem().toString().charAt(0), (ArrayList<Topic>) topics.getSelectedValuesList())) {
-                JOptionPane.showMessageDialog(null, "La posición se agregó de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            if (this.system.createPosition(name.getText(), type.getSelectedItem().toString().charAt(0), (ArrayList<Topic>) topics.getSelectedValuesList())) {
+                JOptionPane.showMessageDialog(null, "El puesto se agregó de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 name.setText("");
             }
         }
@@ -231,8 +243,8 @@ public class AddPosition extends javax.swing.JFrame {
 
     public void setTopics() {
         model.clear();
-        ArrayList <Topic> topicsList = this.system.getTopics();
-        for (Topic T : topicsList){
+        ArrayList<Topic> topicsList = this.system.getTopics();
+        for (Topic T : topicsList) {
             model.addElement(T);
         }
     }

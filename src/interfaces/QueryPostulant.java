@@ -4,11 +4,14 @@ import domain.Interview;
 import domain.Postulant;
 import domain.SystemClass;
 import domain.Topic;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.DefaultListModel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.text.DefaultHighlighter;
 
 public class QueryPostulant extends javax.swing.JFrame {
 
@@ -21,17 +24,15 @@ public class QueryPostulant extends javax.swing.JFrame {
         system = sys;
         initComponents();
         postulants.setModel(model);
-        
-        String[] titles = new String [] {"Nro","Evaluador","Puntaje","Comentarios"};
-        
-        
-        
+
+        String[] titles = new String[]{"Nro", "Evaluador", "Puntaje", "Comentarios"};
+
         //modelThree.addRow(new Object [] {"1","2","3","4"}); 
         modelThree.setColumnIdentifiers(titles);
         filterInterviews.setModel(modelThree);
-        
-        
+
         setPostulants();
+        modelThree.setRowCount(0);
         postulantAdress.setText("");
         formatPostulant.setText("");
         postulantLinkedin.setText("");
@@ -39,6 +40,7 @@ public class QueryPostulant extends javax.swing.JFrame {
         postulantName.setText("");
         postulantDocument.setText("");
         postulantPhone.setText("");
+        filterInterviews.setModel((TableModel) modelThree);
 
     }
 
@@ -301,9 +303,6 @@ public class QueryPostulant extends javax.swing.JFrame {
         setPostulantPhone(selected);
         setPostulantMail(selected);
         generateTable();
-        
-        
-
     }//GEN-LAST:event_postulantsValueChanged
 
     private void postulantLinkedinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postulantLinkedinMouseClicked
@@ -320,14 +319,43 @@ public class QueryPostulant extends javax.swing.JFrame {
         ArrayList<Interview> l = this.system.getInterviews();
         ArrayList<Interview> r = new ArrayList();
         for (Interview s : l) {
-            if (s.getObservation().toUpperCase().contains(seek)) {
+            if (s.getObservation().toUpperCase().contains(seek) && !"".equals(seek) && !" ".equals(seek)) {
                 r.add(s);
             }
         }
         System.out.println(r.size());
         setInterviews(r);
-        
+        highlightMatchesInTable(filterInterviews, seek);
     }//GEN-LAST:event_seekerButtonActionPerformed
+    private void highlightMatchesInTable(JTable table, String searchString) {
+        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+
+        for (int row = 0; row < tableModel.getRowCount(); row++) {
+            String cellText = (String) tableModel.getValueAt(row, 3);
+            if (cellText != null && cellText.toLowerCase().contains(searchString.toLowerCase())) {
+                String cellTextLowerCase = cellText.toLowerCase();
+                searchString = searchString.toLowerCase();
+                String highlightedText = cellText;
+                int startIndex = 0;
+                
+                while (startIndex < cellTextLowerCase.length()) {
+                    int foundIndex = cellTextLowerCase.indexOf(searchString, startIndex);
+                    if (foundIndex == -1) {
+                        break; 
+                    }
+                    highlightedText = highlightedText.substring(0, foundIndex)
+                            + "<span style='color:red;'>" + cellText.substring(foundIndex, foundIndex + searchString.length()) + "</span>"
+                            + highlightedText.substring(foundIndex + searchString.length());
+
+                    startIndex = foundIndex + searchString.length();
+                }
+                tableModel.setValueAt("<html>" + highlightedText + "</html>", row, 3); // Columna 3 es el campo de "observation"
+            }
+        }
+
+        table.setModel(tableModel);
+    }
+
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -349,8 +377,6 @@ public class QueryPostulant extends javax.swing.JFrame {
             String comments = t.getObservation();
             modelThree.addRow(new Object[]{number, interviewer, puntuation, comments});
         }
-
-     
         System.out.println(filterInterviews.toString());
     }
 
@@ -407,19 +433,19 @@ public class QueryPostulant extends javax.swing.JFrame {
             model.addElement(T);
         }
     }
-    
-    public void generateTable(){
-        if (!postulants.isSelectionEmpty()){
-    modelThree.setRowCount(0);
-        for (Interview t : postulants.getSelectedValue().getInterviews()) {
-            modelThree.addRow(new Object[]{t.getId(), t.getInterviewer().toString(), t.getPuntuation(), t.getObservation()});
+
+    public void generateTable() {
+        if (!postulants.isSelectionEmpty()) {
+            modelThree.setRowCount(0);
+            for (Interview t : postulants.getSelectedValue().getInterviews()) {
+                modelThree.addRow(new Object[]{t.getId(), t.getInterviewer().toString(), t.getPuntuation(), t.getObservation()});
+            }
         }
-        }
-     
+
         System.out.println(modelThree.toString());
     }
-            
-       
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adress;
     private javax.swing.JLabel document;

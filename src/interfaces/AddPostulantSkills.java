@@ -85,24 +85,24 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel1.setText("Alta postulante");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(160, 40, 103, 18);
+        jLabel1.setBounds(160, 40, 105, 19);
 
         jLabel2.setText("Tema:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(30, 70, 110, 17);
+        jLabel2.setBounds(30, 70, 110, 16);
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel3.setText("Experiencia:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(30, 160, 74, 20);
+        jLabel3.setBounds(30, 160, 80, 20);
 
         jPanel1.add(topic);
-        topic.setBounds(140, 70, 260, 23);
+        topic.setBounds(140, 70, 260, 22);
 
         level.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
         level.setOpaque(true);
         jPanel1.add(level);
-        level.setBounds(140, 100, 120, 23);
+        level.setBounds(140, 100, 120, 22);
 
         remove.setText("Eliminar");
         remove.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +141,7 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
             }
         });
         jPanel1.add(back);
-        back.setBounds(30, 290, 110, 23);
+        back.setBounds(290, 300, 110, 23);
 
         go.setText("Registrar");
         go.addActionListener(new java.awt.event.ActionListener() {
@@ -150,7 +150,7 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
             }
         });
         jPanel1.add(go);
-        go.setBounds(290, 290, 110, 23);
+        go.setBounds(20, 300, 110, 23);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 430, 330);

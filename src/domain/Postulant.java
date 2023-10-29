@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
+
 import java.util.Map;
 
 public class Postulant extends People implements Serializable{
@@ -16,16 +16,17 @@ public class Postulant extends People implements Serializable{
     private String linkedin;
     private char jobModality;
     private HashMap<Topic, Integer> skills;
-    private List<Interview> interviews;
+    private ArrayList<Interview> interviews;
 
     public Postulant(){
         skills = new HashMap<Topic, Integer>();
-        interviews = new ArrayList<>();
+        this.interviews = new ArrayList<>();
     }
     
     public Postulant(String name){
         this.setName(name);
         skills = new HashMap<Topic, Integer>();
+        this.interviews = new ArrayList<>();
     }
     
     
@@ -80,21 +81,14 @@ public class Postulant extends People implements Serializable{
     }
 
    
-    public List<Interview> getInterviews() {
+    public ArrayList<Interview> getInterviews() {
         return interviews;
     }
 
-    public void setInterviews(List<Interview> interviews) {
+    public void setInterviews(ArrayList<Interview> interviews) {
         this.interviews = interviews;
     }
 
-    /*@Override
-    public String toString() {
-        String ret = "";
-        if(this.getDocument()==null){
-        ret = this.getName();}else{ret = this.getName()+ "-"+this.getDocument();}
-        return ret;
-    }*/
     
    
 

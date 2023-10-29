@@ -1,10 +1,11 @@
-
 package domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class Interview implements Serializable{
+public class Interview implements Serializable {
+
     private static int autoid = 1;
     private int id;
     private int puntuation;
@@ -12,7 +13,7 @@ public class Interview implements Serializable{
     private Postulant postulant;
     private String observation;
 
-    public Interview(Interviewer interviewer,Postulant postulant,int puntuation, String observation) {
+    public Interview(Interviewer interviewer, Postulant postulant, int puntuation, String observation) {
         //TODO VALIDAR TEMA AUTONUMBER
         this.puntuation = puntuation;
         this.interviewer = interviewer;
@@ -21,14 +22,19 @@ public class Interview implements Serializable{
         this.id = autoid;
         autoid++;
     }
-     @Override
+
+    @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Interview interview = (Interview) o;
         return Objects.equals(observation, interview.observation);
     }
-
+    
     public int getId() {
         return id;
     }

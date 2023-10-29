@@ -71,7 +71,7 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel1.setText("Consulta por posicion");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(120, 40, 170, 18);
+        jLabel1.setBounds(120, 40, 170, 19);
 
         jLabel2.setText("Nivel:");
         jPanel1.add(jLabel2);
@@ -89,14 +89,14 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
 
         jLabel3.setText("Puestos:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(30, 70, 90, 17);
+        jLabel3.setBounds(30, 70, 90, 16);
         jPanel1.add(jSeparator1);
         jSeparator1.setBounds(30, 270, 350, 10);
 
         level.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
         level.setOpaque(true);
         jPanel1.add(level);
-        level.setBounds(110, 240, 110, 23);
+        level.setBounds(110, 240, 110, 22);
 
         jButton1.setText("Cancelar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -105,11 +105,11 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(30, 460, 120, 23);
+        jButton1.setBounds(260, 460, 120, 23);
 
         jLabel4.setText("Postulantes:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(30, 280, 90, 17);
+        jLabel4.setBounds(30, 280, 90, 16);
 
         postulants.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(postulants);
@@ -133,7 +133,7 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(260, 460, 120, 23);
+        jButton3.setBounds(30, 460, 120, 23);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 410, 510);

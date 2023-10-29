@@ -54,22 +54,22 @@ public class AddTopic extends javax.swing.JFrame {
         jLabel1.setText("Registro de temática");
         jLabel1.setToolTipText("");
         panel.add(jLabel1);
-        jLabel1.setBounds(135, 32, 220, 18);
+        jLabel1.setBounds(135, 32, 220, 19);
 
         jLabel2.setText("Nombre");
         panel.add(jLabel2);
-        jLabel2.setBounds(6, 90, 80, 17);
+        jLabel2.setBounds(6, 90, 80, 16);
 
         jLabel3.setText("Descripción");
         panel.add(jLabel3);
-        jLabel3.setBounds(7, 128, 90, 17);
+        jLabel3.setBounds(7, 128, 90, 16);
 
         description.setColumns(20);
         description.setRows(5);
         jScrollPane1.setViewportView(description);
 
         panel.add(jScrollPane1);
-        jScrollPane1.setBounds(99, 128, 287, 91);
+        jScrollPane1.setBounds(99, 128, 287, 86);
 
         name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,7 +77,7 @@ public class AddTopic extends javax.swing.JFrame {
             }
         });
         panel.add(name);
-        name.setBounds(99, 87, 287, 23);
+        name.setBounds(99, 87, 287, 22);
 
         back.setText("Cancelar");
         back.addActionListener(new java.awt.event.ActionListener() {
@@ -86,7 +86,7 @@ public class AddTopic extends javax.swing.JFrame {
             }
         });
         panel.add(back);
-        back.setBounds(6, 258, 110, 23);
+        back.setBounds(270, 270, 110, 23);
 
         go.setText("Registrar");
         go.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +95,7 @@ public class AddTopic extends javax.swing.JFrame {
             }
         });
         panel.add(go);
-        go.setBounds(276, 258, 110, 23);
+        go.setBounds(10, 270, 110, 23);
 
         getContentPane().add(panel);
         panel.setBounds(6, 0, 402, 303);
@@ -121,7 +121,7 @@ public class AddTopic extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null, "Debe indicar todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
         }else{
             if (this.system.createTopic(name.getText(), description.getText())){
-                JOptionPane.showMessageDialog(null, "El tema se creo de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El tema se creó de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 name.setText("");
                 description.setText("");
             }else{
