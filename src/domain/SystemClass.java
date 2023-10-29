@@ -238,7 +238,17 @@ public class SystemClass extends Observable implements Serializable {
         }
         return res;
     }
+    public void exportPositionQuery(Position p,  ArrayList<Postulant> postulants){
+        FileWriting filewriting = new FileWriting("Consulta.txt");
+        filewriting.grabarLinea(p.getPostionName());
+        
+            for (int i = 0; i < postulants.size(); i++) {
+                String toPrint = postulants.get(i).getName() + " - " + postulants.get(i).getDocument() + " - " +postulants.get(i).getEmail();
+                filewriting.grabarLinea(toPrint);
+            }
+            filewriting.cerrar();
 
+    }
     public int getPositionWithSkill(Topic t) {
         int count = 0;
 
