@@ -236,6 +236,7 @@ public class SystemClass extends Observable implements Serializable {
             res.add(p);
             }
         }
+        return res;
     }
 
     public int getPositionWithSkill(Topic t) {
