@@ -4,6 +4,8 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +20,7 @@ public class Postulant extends People implements Serializable{
 
     public Postulant(){
         skills = new HashMap<Topic, Integer>();
+        interviews = new ArrayList<>();
     }
     
     public Postulant(String name){
