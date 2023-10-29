@@ -67,8 +67,9 @@ public class SystemClass extends Observable implements Serializable {
     }
 
     public Boolean createInterview(Interviewer interviewer, Postulant postulant, int point, String comments) {
-        Interview I = new Interview(interviewer, postulant, point, comments);
-        addInterview(I);
+        Interview i = new Interview(interviewer, postulant, point, comments);
+        addInterview(i);
+        postulant.addInterviews(i);
         return true;
 
     }
@@ -219,6 +220,22 @@ public class SystemClass extends Observable implements Serializable {
         }
 
         return count;
+    }
+    
+    public ArrayList<Postulant> getPostulantsRiseAllTopicLevel(Position position,Integer level){
+        ArrayList<Postulant>  res = new ArrayList<Postulant>();
+        
+        for (Postulant p : this.getPostulants()) {
+            boolean completeAllConditions = true;
+            for (Topic t : position.getTopics()) {
+                if(p.getSkills().get(t)<level){
+                completeAllConditions=false;
+                }
+            }
+            if(completeAllConditions){
+            res.add(p);
+            }
+        }
     }
 
     public int getPositionWithSkill(Topic t) {

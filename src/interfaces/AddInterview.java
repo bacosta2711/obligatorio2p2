@@ -8,6 +8,7 @@ import domain.Interviewer;
 import domain.Postulant;
 import domain.SystemClass;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -189,6 +190,8 @@ public class AddInterview extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "La entrevista se agregó de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 point.setText("0");
                 comments.setText("");
+                
+                
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed

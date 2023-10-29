@@ -4,6 +4,8 @@
  */
 package interfaces;
 
+import domain.Position;
+import domain.Postulant;
 import domain.SystemClass;
 import java.util.Observable;
 import java.util.Observer;
@@ -14,7 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author bacosta
  */
-public class QuerryPosition extends javax.swing.JFrame implements Observer {
+public class QueryPosition extends javax.swing.JFrame implements Observer {
   DefaultListModel modelPosition = new DefaultListModel();
   DefaultListModel modelPostulant = new DefaultListModel();
   private SystemClass system;
@@ -22,7 +24,7 @@ public class QuerryPosition extends javax.swing.JFrame implements Observer {
   /**
      * Creates new form QuerryPosition
      */
-    public QuerryPosition(SystemClass sys) {
+    public QueryPosition(SystemClass sys) {
         system = sys;
         initComponents();
         system.addObserver(this);
@@ -74,6 +76,11 @@ public class QuerryPosition extends javax.swing.JFrame implements Observer {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(30, 240, 90, 20);
 
+        positions.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                positionsValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(positions);
 
         jPanel1.add(jScrollPane1);
@@ -141,12 +148,31 @@ public class QuerryPosition extends javax.swing.JFrame implements Observer {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void positionsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_positionsValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_positionsValueChanged
+
     /**
      * @param args the command line arguments
      */
     
-    private void setPositionList(){}
-    private void setPostulantList(){}
+    private void setPositionList(){
+        modelPosition.clear();
+        for (Position p : this.system.getPositions()) {
+            modelPosition.addElement(p);
+        }
+    }
+    private void setPostulantList(){
+        
+        if(positions.isSelectionEmpty()){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar la posicion a consultar", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            modelPostulant.clear();
+            for (Postulant e : this.system.getPostulantsRiseAllTopicLevel(positions.getSelectedValue(), (Integer)level.getValue())) {
+                modelPostulant.addElement(e);
+            }
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -160,7 +186,7 @@ public class QuerryPosition extends javax.swing.JFrame implements Observer {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner level;
-    private javax.swing.JList<String> positions;
+    private javax.swing.JList<Position> positions;
     private javax.swing.JList<String> postulants;
     // End of variables declaration//GEN-END:variables
 }

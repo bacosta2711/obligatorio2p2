@@ -17,7 +17,7 @@ import javax.swing.SwingUtilities;
  *
  * @author bacosta
  */
-public class QuerryTopic extends javax.swing.JFrame implements Observer{
+public class QueryTopic extends javax.swing.JFrame implements Observer{
 
     /**
      * Creates new form TopicQuerry
@@ -25,7 +25,7 @@ public class QuerryTopic extends javax.swing.JFrame implements Observer{
     DefaultListModel model = new DefaultListModel();
     private SystemClass system;
     
-    public QuerryTopic(SystemClass sys) {
+    public QueryTopic(SystemClass sys) {
         system = sys;
         system.addObserver(this);
         initComponents();
