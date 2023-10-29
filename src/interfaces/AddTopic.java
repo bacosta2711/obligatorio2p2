@@ -121,7 +121,7 @@ public class AddTopic extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null, "Debe indicar todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
         }else{
             if (this.system.createTopic(name.getText(), description.getText())){
-                JOptionPane.showMessageDialog(null, "El tema se creo de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El tema se creó de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 name.setText("");
                 description.setText("");
             }else{

@@ -67,7 +67,7 @@ public class SystemClass extends Observable implements Serializable {
 
     public Boolean createInterview(Interviewer interviewer, Postulant postulant, int point, String comments) {
         boolean ret = false;
-        if (point >= 0 && point <= 100) {
+        if (point >= 1 && point <= 100) {
             Interview i = new Interview(interviewer, postulant, point, comments);
             addInterview(i);
             postulant.addInterviews(i);
@@ -144,7 +144,16 @@ public class SystemClass extends Observable implements Serializable {
 
     public boolean createTopic(String name, String description) {
         Topic topic = new Topic(name, description);
-        return addTopic(topic);
+        boolean ret = true;
+        for (Topic t : this.getTopics()) {
+            if (t.equals(topic)) {
+                ret = false;
+            }
+        }
+        if (ret) {
+            addTopic(topic);
+        }
+        return ret;
     }
 
     public void removePostulant(Postulant postulant) {

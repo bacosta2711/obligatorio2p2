@@ -104,7 +104,7 @@ public class AddInterview extends javax.swing.JFrame {
             }
         });
 
-        point.setText("0");
+        point.setText("1");
         point.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pointActionPerformed(evt);
@@ -189,10 +189,10 @@ public class AddInterview extends javax.swing.JFrame {
         } else {
             if (this.system.createInterview((Interviewer) name.getSelectedItem(), (Postulant) postulant.getSelectedItem(), Integer.parseInt(point.getText()), comments.getText())) {
                 JOptionPane.showMessageDialog(null, "La entrevista se agregó de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                point.setText("0");
+                point.setText("1");
                 comments.setText("");
             } else {
-                JOptionPane.showMessageDialog(null, "El puntaje debe estar entre 0 y 100", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El puntaje debe estar entre 1 y 100", "Error", JOptionPane.ERROR_MESSAGE);
                     
             }
         }
