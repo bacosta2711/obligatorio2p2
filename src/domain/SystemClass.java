@@ -19,7 +19,8 @@ import javax.swing.JFrame;
 
 import java.util.Observable;
 
-  public class SystemClass extends Observable implements Serializable{
+public class SystemClass extends Observable implements Serializable {
+
     private Postulant postulantMemory;
     private ArrayList<Interview> interviews;
     private ArrayList<Topic> topics;
@@ -28,16 +29,14 @@ import java.util.Observable;
     private ArrayList<Interviewer> interviewers;
 
     //private PropertyChangeSupport handler;
-
     public SystemClass() {
-      //  this.handler = new PropertyChangeSupport(this);
+        //  this.handler = new PropertyChangeSupport(this);
         this.interviewers = new ArrayList<Interviewer>();
         this.interviews = new ArrayList<Interview>();
         this.positions = new ArrayList<Position>();
         this.postulants = new ArrayList<Postulant>();
         this.topics = new ArrayList<Topic>();
     }
-
 
     public ArrayList<Interview> getInterviews() {
         return interviews;
@@ -63,27 +62,34 @@ import java.util.Observable;
         ArrayList<Interview> previousData = this.getInterviews();
         this.getInterviews().add(interview);
 
-       setChanged();
-       notifyObservers();
+        setChanged();
+        notifyObservers();
     }
 
     public Boolean createInterview(Interviewer interviewer, Postulant postulant, int point, String comments) {
-        boolean r = true;
         Interview I = new Interview(interviewer, postulant, point, comments);
+        addInterview(I);
         return true;
 
     }
 
-    public boolean createInterviewer(String name, String direction, String document, String year) {
-        boolean c = false;
-        boolean result = false;
+    public boolean isDocumentUnique(String document) {
+        boolean unique = true;
+        if (this.getInterviewers().contains(document) || this.getPostulants().contains(document)) {
+            unique = false;
+        }
+        return unique;
+    }
 
+    public boolean createInterviewer(String name, String direction, String document, String year) {
+        boolean ret = true;
         Interviewer I = new Interviewer(name, document, direction, year);
-        addInterviewer(I);
-        /*}else {
-            JOptionPane.showMessageDialog(null, "Documento no disponible", "Error", JOptionPane.ERROR_MESSAGE);
-        }*/
-        return true;
+        if (isDocumentUnique(I.getDocument())) {
+            addInterviewer(I);
+        } else {
+            ret = false;
+        }
+        return ret;
     }
 
     public void addInterviewer(Interviewer interviewer) {
@@ -94,11 +100,11 @@ import java.util.Observable;
         setChanged();
         notifyObservers();
     }
-     public boolean createPostulant(String name,String addres,String document, String mail, String linkedin, String contact){
-         Postulant postulant = new Postulant();
-         return false;
-     }
-    
+
+    public boolean createPostulant(String name, String addres, String document, String mail, String linkedin, String contact) {
+        Postulant postulant = new Postulant();
+        return false;
+    }
 
     public boolean addPostulant(Postulant postulant) {
 
@@ -108,9 +114,9 @@ import java.util.Observable;
             ArrayList<Postulant> previousData = this.getPostulants();
             this.getPostulants().add(postulant);
 
-          //  this.handler.firePropertyChange("postulant", previousData,this.getPostulants());
-          setChanged();
-          notifyObservers();
+            //  this.handler.firePropertyChange("postulant", previousData,this.getPostulants());
+            setChanged();
+            notifyObservers();
             result = true;
         }
         return result;
@@ -121,15 +127,14 @@ import java.util.Observable;
         return addTopic(topic);
     }
 
-    public void removePostulant(Postulant postulant){
-        
+    public void removePostulant(Postulant postulant) {
 
         //Remove de las interviews
         ArrayList<Postulant> previousData = this.getPostulants();
         this.getPostulants().remove(postulant);
         setChanged();
         notifyObservers();
-        
+
     }
 
     public boolean addPosition(Position position) {
@@ -137,15 +142,17 @@ import java.util.Observable;
         ArrayList<Position> previousData = this.getPositions();
         this.getPositions().add(position);
 
-     setChanged();
-          notifyObservers();
+        setChanged();
+        notifyObservers();
         return true;
     }
-    public boolean createPosition(String name, char type, ArrayList<Topic> topics ){
-        Position pos = new Position (name,type,topics);
+
+    public boolean createPosition(String name, char type, ArrayList<Topic> topics) {
+        Position pos = new Position(name, type, topics);
         return addPosition(pos);
 
     }
+
     public boolean addTopic(Topic topic) {
         //ToDo Implementrs unique control
         boolean result = false;
@@ -156,115 +163,109 @@ import java.util.Observable;
             result = true;
         }
         setChanged();
-          notifyObservers();
+        notifyObservers();
         return result;
     }
-    
 
-     public Postulant getPostulantByDocument(String document){
-         Postulant result = new Postulant();
-         for (Postulant p : this.getPostulants()) {
-             if(p.getDocument()==document){
-                 result=p;
-             }
-         }
-
-            
-        
+    public Postulant getPostulantByDocument(String document) {
+        Postulant result = new Postulant();
+        for (Postulant p : this.getPostulants()) {
+            if (p.getDocument() == document) {
+                result = p;
+            }
+        }
 
         return result;
     }
-   
-    public void removeInterviewsFromPostulant (Postulant postulant){
+
+    public void removeInterviewsFromPostulant(Postulant postulant) {
         postulant.setInterviews(null);
     }
-   
-    public void resetPostulantMemory(){
-       this.setPostulantMemory(new Postulant());
+
+    public void resetPostulantMemory() {
+        this.setPostulantMemory(new Postulant());
     }
-    
-    public ArrayList<Topic> getTopicsNotInMemory(){
+
+    public ArrayList<Topic> getTopicsNotInMemory() {
         ArrayList<Topic> result = new ArrayList<Topic>();
-        
+
         for (Topic t : this.getTopics()) {
-            if(!this.getPostulantMemory().getSkills().containsKey(t)){
+            if (!this.getPostulantMemory().getSkills().containsKey(t)) {
                 result.add(t);
             }
         }
-        
+
         return result;
-    } 
-    
-    public Topic getTopicByName(String topicName){
+    }
+
+    public Topic getTopicByName(String topicName) {
         Topic topic = new Topic();
         for (Topic t : this.getTopics()) {
-            if(t.getName().equalsIgnoreCase(topicName)){
+            if (t.getName().equalsIgnoreCase(topicName)) {
                 topic.setName(t.getName());
                 topic.setDescription(t.getDescription());
             }
         }
 
-        return topic;        
+        return topic;
     }
-    
-    public int getPostulantRiseSkill(Topic t){
-    int count = 0;
+
+    public int getPostulantRiseSkill(Topic t) {
+        int count = 0;
         for (Postulant p : this.getPostulants()) {
-            if(p.getSkills().containsKey(t) && p.getSkills().get(t) > 5 ){
-            count++;
+            if (p.getSkills().containsKey(t) && p.getSkills().get(t) > 5) {
+                count++;
             }
         }
-    
-    return count;
-   }
-    
-    public int getPositionWithSkill(Topic t){
-    int count = 0;
-    
+
+        return count;
+    }
+
+    public int getPositionWithSkill(Topic t) {
+        int count = 0;
+
         for (Position p : this.getPositions()) {
             for (Topic to : p.getTopics()) {
-                if (to.equals(t)){
-                count++;
+                if (to.equals(t)) {
+                    count++;
                 }
             }
-            
-            
+
         }
-    return count;
-   }
-    
-    public void writeFile(SystemClass s){
-   
+        return count;
+    }
+
+    public void writeFile(SystemClass s) {
+
         try {
             FileOutputStream ff = new FileOutputStream("archivo.ser");
             BufferedOutputStream b = new BufferedOutputStream(ff);
-            ObjectOutputStream so =  new ObjectOutputStream(b);
+            ObjectOutputStream so = new ObjectOutputStream(b);
             so.writeObject(s);
             so.close();
-            } catch (FileNotFoundException ex) {
-                java.util.logging.Logger.getLogger(SystemClass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-            } catch (IOException e){
-               java.util.logging.Logger.getLogger(SystemClass.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
-            }
-         
+        } catch (FileNotFoundException ex) {
+            java.util.logging.Logger.getLogger(SystemClass.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IOException e) {
+            java.util.logging.Logger.getLogger(SystemClass.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
+        }
+
     }
-    
+
     public static SystemClass readFile() {
-            
+
         SystemClass s = new SystemClass();
-            try {
-                ObjectInputStream in =  new ObjectInputStream(new FileInputStream("archivo.ser"));
-                 s = (SystemClass) in.readObject();
-                in.close();
-            } catch (IOException | ClassNotFoundException e) {
-                System.out.println("Error de recuperacion");
-            }
-            
-            return s;
-    
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("archivo.ser"));
+            s = (SystemClass) in.readObject();
+            in.close();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error de recuperacion");
+        }
+
+        return s;
+
     }
-    
-    
+
     public Postulant getPostulantMemory() {
         return postulantMemory;
     }
