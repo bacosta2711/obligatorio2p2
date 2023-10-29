@@ -19,7 +19,9 @@ import javax.swing.JTextField;
  * @author PC
  */
 public class AddInterview extends javax.swing.JFrame {
+
     private SystemClass system;
+
     /**
      * Creates new form newInterview
      */
@@ -182,16 +184,16 @@ public class AddInterview extends javax.swing.JFrame {
     }//GEN-LAST:event_postulantActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         if (point.getText().isBlank() || comments.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Debe indicar todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            if(this.system.createInterview((Interviewer)name.getSelectedItem(), (Postulant)postulant.getSelectedItem(), Integer.parseInt(point.getText()), comments.getText())) {
+            if (this.system.createInterview((Interviewer) name.getSelectedItem(), (Postulant) postulant.getSelectedItem(), Integer.parseInt(point.getText()), comments.getText())) {
                 JOptionPane.showMessageDialog(null, "La entrevista se agregó de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 point.setText("0");
                 comments.setText("");
-                
-                
+            } else {
+                JOptionPane.showMessageDialog(null, "El puntaje debe estar entre 0 y 100", "Error", JOptionPane.ERROR_MESSAGE);
+                    
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -208,8 +210,6 @@ public class AddInterview extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
- 
-
     public JTextArea getCommentText() {
         return comments;
     }
@@ -224,8 +224,8 @@ public class AddInterview extends javax.swing.JFrame {
 
     public void setInterviewerBox() {
         name.removeAllItems();
-        ArrayList <Interviewer> interviewerList = this.system.getInterviewers();
-        for (Interviewer i : interviewerList){
+        ArrayList<Interviewer> interviewerList = this.system.getInterviewers();
+        for (Interviewer i : interviewerList) {
             name.addItem(i);
         }
     }
@@ -236,8 +236,8 @@ public class AddInterview extends javax.swing.JFrame {
 
     public void setPostulantCombo() {
         postulant.removeAllItems();
-        ArrayList <Postulant> postulantList = this.system.getPostulants();
-        for (Postulant i : postulantList){
+        ArrayList<Postulant> postulantList = this.system.getPostulants();
+        for (Postulant i : postulantList) {
             postulant.addItem(i);
         }
     }

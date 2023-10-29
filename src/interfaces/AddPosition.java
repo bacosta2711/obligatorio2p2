@@ -183,11 +183,11 @@ public class AddPosition extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if (name.getText().isBlank()) {
+        if (name.getText().isBlank() || topics.isSelectionEmpty()) {
             JOptionPane.showMessageDialog(null, "Debe indicar todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             if(this.system.createPosition(name.getText(),type.getSelectedItem().toString().charAt(0), (ArrayList<Topic>) topics.getSelectedValuesList())) {
-                JOptionPane.showMessageDialog(null, "La posición se agregó de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El puesto se agregó de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 name.setText("");
             }
         }

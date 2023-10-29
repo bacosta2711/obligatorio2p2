@@ -66,14 +66,18 @@ public class SystemClass extends Observable implements Serializable {
     }
 
     public Boolean createInterview(Interviewer interviewer, Postulant postulant, int point, String comments) {
+        boolean ret = false;
+        if (point >= 0 && point <= 100) {
+            Interview i = new Interview(interviewer, postulant, point, comments);
+            addInterview(i);
+            postulant.addInterviews(i);
+            Interview I = new Interview(interviewer, postulant, point, comments);
+            addInterview(I);
+            postulant.addInterviews(I);
+            ret = true;
+        }
 
-        Interview i = new Interview(interviewer, postulant, point, comments);
-        addInterview(i);
-        postulant.addInterviews(i);
-        Interview I = new Interview(interviewer, postulant, point, comments);
-        addInterview(I);
-        postulant.addInterviews(I);
-        return true;
+        return ret;
 
     }
 
@@ -112,7 +116,6 @@ public class SystemClass extends Observable implements Serializable {
         //ToDo Implementrs unique control
         ArrayList<Interviewer> previousData = this.getInterviewers();
         this.interviewers.add(interviewer);
-        
 
         setChanged();
         notifyObservers();
@@ -237,34 +240,36 @@ public class SystemClass extends Observable implements Serializable {
 
         return count;
     }
-    
-    public ArrayList<Postulant> getPostulantsRiseAllTopicLevel(Position position,Integer level){
-        ArrayList<Postulant>  res = new ArrayList<Postulant>();
-        
+
+    public ArrayList<Postulant> getPostulantsRiseAllTopicLevel(Position position, Integer level) {
+        ArrayList<Postulant> res = new ArrayList<Postulant>();
+
         for (Postulant p : this.getPostulants()) {
             boolean completeAllConditions = true;
             for (Topic t : position.getTopics()) {
-                if(p.getSkills().get(t)<level){
-                completeAllConditions=false;
+                if (p.getSkills().get(t) < level) {
+                    completeAllConditions = false;
                 }
             }
-            if(completeAllConditions){
-            res.add(p);
+            if (completeAllConditions) {
+                res.add(p);
             }
         }
         return res;
     }
-    public void exportPositionQuery(Position p,  ArrayList<Postulant> postulants){
+
+    public void exportPositionQuery(Position p, ArrayList<Postulant> postulants) {
         FileWriting filewriting = new FileWriting("Consulta.txt");
         filewriting.grabarLinea(p.getPostionName());
-        
-            for (int i = 0; i < postulants.size(); i++) {
-                String toPrint = postulants.get(i).getName() + " - " + postulants.get(i).getDocument() + " - " +postulants.get(i).getEmail();
-                filewriting.grabarLinea(toPrint);
-            }
-            filewriting.cerrar();
+
+        for (int i = 0; i < postulants.size(); i++) {
+            String toPrint = postulants.get(i).getName() + " - " + postulants.get(i).getDocument() + " - " + postulants.get(i).getEmail();
+            filewriting.grabarLinea(toPrint);
+        }
+        filewriting.cerrar();
 
     }
+
     public int getPositionWithSkill(Topic t) {
         int count = 0;
 
