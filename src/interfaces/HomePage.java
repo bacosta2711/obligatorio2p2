@@ -153,7 +153,7 @@ public class HomePage extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
-        jMenu6.setText("Posición");
+        jMenu6.setText("Puesto");
 
         jMenuItem3.setText("Agregar posición");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -183,7 +183,7 @@ public class HomePage extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem7);
 
-        jMenuItem8.setText("Posicion");
+        jMenuItem8.setText("Puesto");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem8ActionPerformed(evt);

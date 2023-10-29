@@ -35,13 +35,7 @@ public class Topic implements Serializable{
    @Override
     public boolean equals(Object obj) {
         boolean result = false;
-        
-        
-       
         if (obj != null) {
-          
-        
-        
         Topic otherTopic = (Topic) obj;
         if (this.getName().trim().equalsIgnoreCase(otherTopic.getName().trim())){
             result = true; 

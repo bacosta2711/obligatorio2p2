@@ -170,7 +170,7 @@ public class AddInterviewer extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -186,8 +186,13 @@ public class AddInterviewer extends javax.swing.JFrame {
                 year.setText("");
                 document.setText("");
             } else {
-                JOptionPane.showMessageDialog(null, "Documento en uso", "Error", JOptionPane.ERROR_MESSAGE);
+                if (Integer.parseInt(year.getText()) > 2023) {
+                    JOptionPane.showMessageDialog(null, "El año debe ser menor al año actual.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Documento en uso", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

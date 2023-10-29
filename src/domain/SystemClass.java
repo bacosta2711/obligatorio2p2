@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 
 import java.util.Observable;
@@ -59,25 +60,43 @@ public class SystemClass extends Observable implements Serializable {
     }
 
     public void addInterview(Interview interview) {
-        ArrayList<Interview> previousData = this.getInterviews();
         this.getInterviews().add(interview);
-
         setChanged();
         notifyObservers();
     }
 
     public Boolean createInterview(Interviewer interviewer, Postulant postulant, int point, String comments) {
-        Interview i = new Interview(interviewer, postulant, point, comments);
-        addInterview(i);
-        postulant.addInterviews(i);
-        return true;
+        boolean ret = false;
+        if (point >= 1 && point <= 100) {
+            Interview i = new Interview(interviewer, postulant, point, comments);
+            addInterview(i);
+            postulant.addInterviews(i);
+            Interview I = new Interview(interviewer, postulant, point, comments);
+            addInterview(I);
+            postulant.addInterviews(I);
+            ret = true;
+        }
+
+        return ret;
 
     }
 
     public boolean isDocumentUnique(String document) {
         boolean unique = true;
-        if (this.getInterviewers().contains(document) || this.getPostulants().contains(document)) {
-            unique = false;
+        ArrayList<Interviewer> I = new ArrayList<>();
+        ArrayList<Postulant> J = new ArrayList<>();
+        I = this.getInterviewers();
+        J = this.getPostulants();
+
+        for (Interviewer r : I) {
+            if (r.getDocument().equals(document)) {
+                unique = false;
+            }
+        }
+        for (Postulant r : J) {
+            if (r.getDocument().equals(document)) {
+                unique = false;
+            }
         }
         return unique;
     }
@@ -125,7 +144,16 @@ public class SystemClass extends Observable implements Serializable {
 
     public boolean createTopic(String name, String description) {
         Topic topic = new Topic(name, description);
-        return addTopic(topic);
+        boolean ret = true;
+        for (Topic t : this.getTopics()) {
+            if (t.equals(topic)) {
+                ret = false;
+            }
+        }
+        if (ret) {
+            addTopic(topic);
+        }
+        return ret;
     }
 
     public void removePostulant(Postulant postulant) {
@@ -221,34 +249,36 @@ public class SystemClass extends Observable implements Serializable {
 
         return count;
     }
-    
-    public ArrayList<Postulant> getPostulantsRiseAllTopicLevel(Position position,Integer level){
-        ArrayList<Postulant>  res = new ArrayList<Postulant>();
-        
+
+    public ArrayList<Postulant> getPostulantsRiseAllTopicLevel(Position position, Integer level) {
+        ArrayList<Postulant> res = new ArrayList<Postulant>();
+
         for (Postulant p : this.getPostulants()) {
             boolean completeAllConditions = true;
             for (Topic t : position.getTopics()) {
-                if(p.getSkills().get(t)<level){
-                completeAllConditions=false;
+                if (p.getSkills().get(t) < level) {
+                    completeAllConditions = false;
                 }
             }
-            if(completeAllConditions){
-            res.add(p);
+            if (completeAllConditions) {
+                res.add(p);
             }
         }
         return res;
     }
-    public void exportPositionQuery(Position p,  ArrayList<Postulant> postulants){
+
+    public void exportPositionQuery(Position p, ArrayList<Postulant> postulants) {
         FileWriting filewriting = new FileWriting("Consulta.txt");
         filewriting.grabarLinea(p.getPostionName());
-        
-            for (int i = 0; i < postulants.size(); i++) {
-                String toPrint = postulants.get(i).getName() + " - " + postulants.get(i).getDocument() + " - " +postulants.get(i).getEmail();
-                filewriting.grabarLinea(toPrint);
-            }
-            filewriting.cerrar();
+
+        for (int i = 0; i < postulants.size(); i++) {
+            String toPrint = postulants.get(i).getName() + " - " + postulants.get(i).getDocument() + " - " + postulants.get(i).getEmail();
+            filewriting.grabarLinea(toPrint);
+        }
+        filewriting.cerrar();
 
     }
+
     public int getPositionWithSkill(Topic t) {
         int count = 0;
 

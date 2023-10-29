@@ -68,42 +68,42 @@ public class AddPostulant extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel1.setText("Alta postulante");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(150, 10, 103, 30);
+        jLabel1.setBounds(150, 10, 105, 30);
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel2.setText("Teléfono:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(20, 220, 80, 17);
+        jLabel2.setBounds(20, 220, 80, 18);
 
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel3.setText("Nombre:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 70, 80, 17);
+        jLabel3.setBounds(20, 70, 80, 18);
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel4.setText("Cédula:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(20, 120, 80, 17);
+        jLabel4.setBounds(20, 120, 80, 18);
 
         jLabel5.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel5.setText("Formato:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(20, 370, 120, 17);
+        jLabel5.setBounds(20, 370, 120, 18);
 
         jLabel6.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel6.setText("Dirección:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(20, 170, 90, 17);
+        jLabel6.setBounds(20, 170, 90, 18);
 
         jLabel7.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel7.setText("Mail:");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(20, 270, 80, 17);
+        jLabel7.setBounds(20, 270, 80, 18);
 
         jLabel8.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         jLabel8.setText("Linkedin:");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(20, 320, 80, 17);
+        jLabel8.setBounds(20, 320, 80, 18);
 
         jobModalityGroup.add(jobModalityH);
         jobModalityH.setText("Hybrido");
@@ -143,7 +143,7 @@ public class AddPostulant extends javax.swing.JFrame {
             }
         });
         jPanel1.add(go);
-        go.setBounds(278, 440, 120, 23);
+        go.setBounds(20, 450, 120, 23);
 
         back.setText("Cancelar");
         back.addActionListener(new java.awt.event.ActionListener() {
@@ -152,19 +152,19 @@ public class AddPostulant extends javax.swing.JFrame {
             }
         });
         jPanel1.add(back);
-        back.setBounds(20, 440, 120, 23);
+        back.setBounds(270, 450, 120, 23);
         jPanel1.add(name);
-        name.setBounds(100, 70, 280, 23);
+        name.setBounds(100, 70, 280, 22);
         jPanel1.add(linkedin);
-        linkedin.setBounds(100, 320, 280, 23);
+        linkedin.setBounds(100, 320, 280, 22);
         jPanel1.add(mail);
-        mail.setBounds(100, 270, 280, 23);
+        mail.setBounds(100, 270, 280, 22);
         jPanel1.add(phone);
-        phone.setBounds(100, 220, 280, 23);
+        phone.setBounds(100, 220, 280, 22);
         jPanel1.add(address);
-        address.setBounds(100, 170, 280, 23);
+        address.setBounds(100, 170, 280, 22);
         jPanel1.add(document);
-        document.setBounds(100, 120, 280, 23);
+        document.setBounds(100, 120, 280, 22);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(-2, 4, 430, 490);
