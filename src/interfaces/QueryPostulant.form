@@ -22,11 +22,8 @@
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
   </AuxValues>
-
-<<<<<<< Updated upstream:src/interfaces/QueryPostulant.form
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
     <Property name="useNullLayout" type="boolean" value="true"/>
-=======
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
@@ -168,7 +165,6 @@
           </Group>
       </Group>
     </DimensionLayout>
->>>>>>> Stashed changes:src/interfaces/PostulantHistory.form
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
