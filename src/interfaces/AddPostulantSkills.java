@@ -82,36 +82,39 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
 
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Alta postulante");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(160, 40, 105, 19);
+        jLabel1.setBounds(140, 20, 170, 25);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Tema:");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(30, 70, 110, 16);
 
-        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel3.setText("Experiencia:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(30, 160, 80, 20);
+        jLabel3.setBounds(30, 160, 74, 20);
 
         jPanel1.add(topic);
-        topic.setBounds(140, 70, 260, 22);
+        topic.setBounds(140, 70, 250, 22);
 
         level.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
         level.setOpaque(true);
         jPanel1.add(level);
         level.setBounds(140, 100, 120, 22);
 
+        remove.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         remove.setText("Eliminar");
+        remove.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         remove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 removeActionPerformed(evt);
             }
         });
         jPanel1.add(remove);
-        remove.setBounds(30, 210, 90, 23);
+        remove.setBounds(20, 210, 100, 23);
         jPanel1.add(jSeparator1);
         jSeparator1.setBounds(30, 140, 370, 20);
 
@@ -119,43 +122,50 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
         jScrollPane1.setViewportView(listSkills);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(140, 160, 260, 80);
+        jScrollPane1.setBounds(140, 160, 250, 80);
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Nivel:");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(30, 100, 110, 20);
 
+        add.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         add.setText("Agregar");
+        add.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addActionPerformed(evt);
             }
         });
         jPanel1.add(add);
-        add.setBounds(290, 100, 110, 23);
+        add.setBounds(290, 100, 100, 23);
 
-        back.setText("Volver");
+        back.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        back.setText("Atrás");
+        back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);
             }
         });
         jPanel1.add(back);
-        back.setBounds(290, 300, 110, 23);
+        back.setBounds(290, 300, 100, 23);
 
+        go.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         go.setText("Registrar");
+        go.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         go.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goActionPerformed(evt);
             }
         });
         jPanel1.add(go);
-        go.setBounds(20, 300, 110, 23);
+        go.setBounds(20, 300, 100, 23);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 430, 330);
+        jPanel1.setBounds(0, 0, 410, 360);
 
-        setSize(new java.awt.Dimension(431, 362));
+        setSize(new java.awt.Dimension(431, 397));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

@@ -71,31 +71,37 @@ public class HomePage extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        jLabel1.setText("Bienvenido a Entrevistas!");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
+        jLabel1.setText("¡Bienvenido a Entrevistas!");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(180, 100, 170, 16);
+        jLabel1.setBounds(210, 100, 300, 160);
 
-        label.setText("Seleccione una opcion!");
+        label.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
+        label.setText("¡Seleccione una opción!");
         getContentPane().add(label);
-        label.setBounds(190, 120, 160, 16);
+        label.setBounds(270, 240, 190, 40);
 
-        empty.setText("Vacio");
+        empty.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        empty.setText("Archivo vacío");
+        empty.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         empty.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emptyActionPerformed(evt);
             }
         });
         getContentPane().add(empty);
-        empty.setBounds(330, 190, 140, 23);
+        empty.setBounds(580, 430, 150, 23);
 
-        file.setText("Archivo c/datos");
+        file.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        file.setText("Archivo con datos");
+        file.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         file.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fileActionPerformed(evt);
             }
         });
         getContentPane().add(file);
-        file.setBounds(30, 190, 140, 23);
+        file.setBounds(30, 430, 150, 23);
 
         jMenu1.setText("Postulantes");
 
@@ -195,7 +201,7 @@ public class HomePage extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(505, 347));
+        setSize(new java.awt.Dimension(766, 519));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -284,11 +290,13 @@ public class HomePage extends javax.swing.JFrame {
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
+        QueryPosition window = new QueryPosition(system);
+        window.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
-        QueryPostulant window = new QueryPostulant(system);
+        QueryPostulantHistory window = new QueryPostulantHistory(system);
         window.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
     public static void main(String[] args) {

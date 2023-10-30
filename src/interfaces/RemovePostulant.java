@@ -85,48 +85,57 @@ public class RemovePostulant extends javax.swing.JFrame implements Observer{
 
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Baja postulante");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(180, 20, 106, 18);
+        jLabel1.setBounds(210, 10, 150, 25);
 
+        go.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         go.setText("Eliminar");
+        go.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         go.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goActionPerformed(evt);
             }
         });
         jPanel1.add(go);
-        go.setBounds(300, 310, 90, 23);
+        go.setBounds(210, 320, 100, 30);
 
-        back.setText("Cancelar");
+        back.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        back.setText("Atrás");
+        back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);
             }
         });
         jPanel1.add(back);
-        back.setBounds(180, 440, 100, 23);
+        back.setBounds(320, 490, 100, 23);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Direccion:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(210, 220, 90, 17);
+        jLabel2.setBounds(210, 220, 90, 16);
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Correo:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(210, 130, 80, 17);
+        jLabel3.setBounds(210, 130, 80, 16);
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Cédula:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(210, 160, 80, 17);
+        jLabel4.setBounds(210, 160, 80, 16);
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Nombre:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(210, 100, 90, 17);
+        jLabel5.setBounds(210, 100, 90, 16);
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Teléfono:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(210, 190, 90, 17);
+        jLabel6.setBounds(210, 190, 90, 16);
         jPanel1.add(address);
         address.setBounds(230, 220, 140, 0);
         jPanel1.add(name);
@@ -151,23 +160,23 @@ public class RemovePostulant extends javax.swing.JFrame implements Observer{
 
         name_info.setText("Value");
         jPanel1.add(name_info);
-        name_info.setBounds(280, 100, 160, 17);
+        name_info.setBounds(280, 100, 160, 16);
 
         address_info.setText("Value");
         jPanel1.add(address_info);
-        address_info.setBounds(280, 220, 170, 17);
+        address_info.setBounds(280, 220, 170, 16);
 
         mail_info.setText("Value");
         jPanel1.add(mail_info);
-        mail_info.setBounds(280, 130, 170, 17);
+        mail_info.setBounds(280, 130, 170, 16);
 
         document_info.setText("Value");
         jPanel1.add(document_info);
-        document_info.setBounds(280, 160, 170, 17);
+        document_info.setBounds(280, 160, 170, 16);
 
         number_info.setText("Value");
         jPanel1.add(number_info);
-        number_info.setBounds(280, 190, 170, 17);
+        number_info.setBounds(280, 190, 170, 16);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 460, 520);

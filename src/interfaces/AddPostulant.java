@@ -65,17 +65,17 @@ public class AddPostulant extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Alta postulante");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(150, 10, 105, 30);
+        jLabel1.setBounds(120, 10, 170, 30);
 
-        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel2.setText("Teléfono:");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(20, 220, 80, 18);
 
-        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel3.setText("Nombre:");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(20, 70, 80, 18);
@@ -85,22 +85,22 @@ public class AddPostulant extends javax.swing.JFrame {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(20, 120, 80, 18);
 
-        jLabel5.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel5.setText("Formato:");
         jPanel1.add(jLabel5);
         jLabel5.setBounds(20, 370, 120, 18);
 
-        jLabel6.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel6.setText("Dirección:");
         jPanel1.add(jLabel6);
         jLabel6.setBounds(20, 170, 90, 18);
 
-        jLabel7.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel7.setText("Mail:");
         jPanel1.add(jLabel7);
         jLabel7.setBounds(20, 270, 80, 18);
 
-        jLabel8.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel8.setText("Linkedin:");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(20, 320, 80, 18);
@@ -136,23 +136,27 @@ public class AddPostulant extends javax.swing.JFrame {
         jPanel1.add(jobModalityP);
         jobModalityP.setBounds(200, 370, 110, 21);
 
+        go.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         go.setText("Siguiente");
+        go.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         go.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goActionPerformed(evt);
             }
         });
         jPanel1.add(go);
-        go.setBounds(20, 450, 120, 23);
+        go.setBounds(290, 470, 100, 23);
 
-        back.setText("Cancelar");
+        back.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        back.setText("Atrás");
+        back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);
             }
         });
         jPanel1.add(back);
-        back.setBounds(270, 450, 120, 23);
+        back.setBounds(20, 470, 100, 23);
         jPanel1.add(name);
         name.setBounds(100, 70, 280, 22);
         jPanel1.add(linkedin);
@@ -167,9 +171,9 @@ public class AddPostulant extends javax.swing.JFrame {
         document.setBounds(100, 120, 280, 22);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(-2, 4, 430, 490);
+        jPanel1.setBounds(-2, 4, 410, 540);
 
-        setSize(new java.awt.Dimension(431, 521));
+        setSize(new java.awt.Dimension(416, 575));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
