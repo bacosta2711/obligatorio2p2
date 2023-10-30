@@ -182,7 +182,7 @@ public class AddInterviewer extends javax.swing.JFrame {
                 || year.getText().isBlank() || document.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Debe indicar todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            if (this.system.createInterviewer(name.getText(), direction.getText(), document.getText(), year.getText())) {
+            if (this.system.createInterviewer(name.getText(), direction.getText(), document.getText(), Integer.parseInt(year.getText()))) {
                 JOptionPane.showMessageDialog(null, "El evaluador se agregó de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 name.setText("");
                 direction.setText("");

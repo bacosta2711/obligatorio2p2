@@ -74,12 +74,12 @@ public class HomePage extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setText("¡Bienvenido a Entrevistas!");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(210, 100, 300, 160);
+        jLabel1.setBounds(230, 130, 300, 160);
 
         label.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         label.setText("¡Seleccione una opción!");
         getContentPane().add(label);
-        label.setBounds(270, 240, 190, 40);
+        label.setBounds(280, 350, 190, 40);
 
         empty.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         empty.setText("Archivo vacío");

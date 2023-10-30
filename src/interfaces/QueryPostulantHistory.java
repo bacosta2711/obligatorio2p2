@@ -38,6 +38,7 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
         postulantName.setText("");
         postulantDocument.setText("");
         postulantPhone.setText("");
+        /*setInterviews(system.getInterviews());*/
         filterInterviews.setModel((TableModel) modelThree);
         postulantLinkedin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -282,14 +283,14 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
                     .addComponent(postulantMail)
                     .addComponent(postulantLinkedin)
                     .addComponent(formatPostulant)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(135, 135, 135))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 969, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,10 +341,10 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(format)
                             .addComponent(formatPostulant))
-                        .addGap(44, 44, 44)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(experience)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane2))))
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
@@ -406,32 +407,32 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
     }//GEN-LAST:event_seekerButtonActionPerformed
     private void highlightMatchesInTable(JTable table, String searchString) {
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-
         for (int row = 0; row < tableModel.getRowCount(); row++) {
             String cellText = (String) tableModel.getValueAt(row, 3);
             if (cellText != null && cellText.toLowerCase().contains(searchString.toLowerCase())) {
                 String cellTextLowerCase = cellText.toLowerCase();
                 searchString = searchString.toLowerCase();
-                String highlightedText = cellText;
+                StringBuilder highlightedText = new StringBuilder();
                 int startIndex = 0;
-
                 while (startIndex < cellTextLowerCase.length()) {
                     int foundIndex = cellTextLowerCase.indexOf(searchString, startIndex);
                     if (foundIndex == -1) {
                         break;
                     }
-                    highlightedText = highlightedText.substring(0, foundIndex)
-                            + "<span style='color:red;'>" + cellText.substring(foundIndex, foundIndex + searchString.length()) + "</span>"
-                            + highlightedText.substring(foundIndex + searchString.length());
-
+                    highlightedText.append(cellText, startIndex, foundIndex);
+                    highlightedText.append("<font color='red'>");
+                    highlightedText.append(cellText, foundIndex, foundIndex + searchString.length());
+                    highlightedText.append("</font>");
                     startIndex = foundIndex + searchString.length();
                 }
-                tableModel.setValueAt("<html>" + highlightedText + "</html>", row, 3); // Columna 3 es el campo de "observation"
+                highlightedText.append(cellText.substring(startIndex));
+                tableModel.setValueAt("<html>" + highlightedText.toString() + "</html>", row, 3);
             }
         }
 
         table.setModel(tableModel);
     }
+    
 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -440,7 +441,7 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ArrayList<Interview> r = new ArrayList();
+        ArrayList<Interview> r = this.system.getInterviews();
         setInterviews(r);
         seeker.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -487,7 +488,7 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
     }
 
     public void setPostulantLinkedin(Postulant postulant) {
-        postulantLinkedin.setText("<html><u>"+postulant.getLinkedin()+"</u></html>");
+        postulantLinkedin.setText("<html><u>" + postulant.getLinkedin() + "</u></html>");
     }
 
     public void setPostulantMail(Postulant postulant) {
