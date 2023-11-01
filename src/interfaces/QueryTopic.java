@@ -65,37 +65,40 @@ public class QueryTopic extends javax.swing.JFrame implements Observer{
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jPanel1.setBounds(new java.awt.Rectangle(0, 0, 480, 320));
         jPanel1.setPreferredSize(new java.awt.Dimension(480, 320));
         jPanel1.setRequestFocusEnabled(false);
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Estadistias");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(280, 50, 90, 40);
+        jLabel1.setBounds(170, 50, 90, 40);
 
-        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Consulta por tema");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(180, 0, 150, 40);
+        jLabel2.setBounds(170, 0, 200, 40);
 
-        back.setText("Cancelar");
+        back.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        back.setText("Atrás");
+        back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);
             }
         });
         jPanel1.add(back);
-        back.setBounds(280, 270, 81, 23);
+        back.setBounds(380, 290, 100, 23);
 
+        topicPostulant.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         topicPostulant.setText("Puestos que requieren este tematica:");
         jPanel1.add(topicPostulant);
-        topicPostulant.setBounds(170, 170, 240, 17);
+        topicPostulant.setBounds(170, 170, 240, 16);
 
-        labelPostulant.setText("Postulantes que superan valor 5:");
+        labelPostulant.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        labelPostulant.setText("Postulantes que superan valor 5 :");
         jPanel1.add(labelPostulant);
-        labelPostulant.setBounds(170, 140, 220, 17);
+        labelPostulant.setBounds(170, 140, 220, 16);
 
         lista.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lista.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -117,24 +120,23 @@ public class QueryTopic extends javax.swing.JFrame implements Observer{
         countPosition.setForeground(new java.awt.Color(255, 0, 0));
         countPosition.setText("0");
         jPanel1.add(countPosition);
-        countPosition.setBounds(420, 170, 50, 17);
+        countPosition.setBounds(420, 170, 50, 18);
 
         countPostulant.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
         countPostulant.setForeground(new java.awt.Color(255, 0, 0));
         countPostulant.setText("0");
         jPanel1.add(countPostulant);
-        countPostulant.setBounds(390, 140, 70, 17);
+        countPostulant.setBounds(420, 140, 70, 18);
 
-        warning.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
         warning.setForeground(new java.awt.Color(255, 0, 0));
         warning.setText("No hay tema seleccionado para generar estadisticas");
         jPanel1.add(warning);
-        warning.setBounds(180, 80, 350, 17);
+        warning.setBounds(170, 100, 350, 17);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 480, 320);
 
-        setSize(new java.awt.Dimension(477, 340));
+        setSize(new java.awt.Dimension(524, 340));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

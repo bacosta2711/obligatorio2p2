@@ -40,4 +40,22 @@ public class Position implements Serializable{
     public void addTopics(Topic topics) {
         this.getTopics().add(topics);
     }
+    public String writeModality(){
+        String ret = "";
+        if(this.getPositionModality() == 'H'){
+            ret = "Híbrida";
+        }else{
+            if (this.getPositionModality() == 'R'){
+                ret = "Remota";
+            }else{
+                ret = "Presencial";
+            }
+        }
+        return ret;
+    }
+    @Override
+    public String toString() {
+        return positionName + " con modalidad " + writeModality() +".";
+    }
+    
 }

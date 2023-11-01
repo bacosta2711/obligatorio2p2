@@ -68,11 +68,12 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
 
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
-        jLabel1.setText("Consulta por posicion");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("Consulta por posición");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(120, 40, 170, 19);
+        jLabel1.setBounds(100, 20, 210, 25);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Nivel:");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(30, 240, 90, 20);
@@ -87,6 +88,7 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(30, 90, 350, 140);
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Puestos:");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(30, 70, 90, 16);
@@ -98,15 +100,18 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
         jPanel1.add(level);
         level.setBounds(110, 240, 110, 22);
 
-        jButton1.setText("Cancelar");
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setText("Atrás");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(260, 460, 120, 23);
+        jButton1.setBounds(280, 460, 100, 23);
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Postulantes:");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(30, 280, 90, 16);
@@ -117,23 +122,27 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
         jPanel1.add(jScrollPane2);
         jScrollPane2.setBounds(30, 300, 350, 140);
 
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton2.setText("Consultar");
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(258, 240, 120, 23);
+        jButton2.setBounds(280, 240, 100, 23);
 
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton3.setText("Exportar");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(30, 460, 120, 23);
+        jButton3.setBounds(30, 460, 100, 23);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 410, 510);
@@ -144,6 +153,7 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
