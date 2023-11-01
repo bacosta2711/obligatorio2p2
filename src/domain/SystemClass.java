@@ -68,9 +68,6 @@ public class SystemClass extends Observable implements Serializable {
     public Boolean createInterview(Interviewer interviewer, Postulant postulant, int point, String comments) {
         boolean ret = false;
         if (point >= 1 && point <= 100) {
-            Interview i = new Interview(interviewer, postulant, point, comments);
-            addInterview(i);
-            postulant.addInterviews(i);
             Interview I = new Interview(interviewer, postulant, point, comments);
             addInterview(I);
             postulant.addInterviews(I);
@@ -101,10 +98,10 @@ public class SystemClass extends Observable implements Serializable {
         return unique;
     }
 
-    public boolean createInterviewer(String name, String direction, String document, String year) {
+    public boolean createInterviewer(String name, String direction, String document, int year) {
         boolean ret = true;
         Interviewer I = new Interviewer(name, document, direction, year);
-        if (isDocumentUnique(I.getDocument())) {
+        if (isDocumentUnique(I.getDocument()) && year<=2023) {
             addInterviewer(I);
         } else {
             ret = false;

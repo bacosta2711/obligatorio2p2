@@ -50,16 +50,18 @@ public class AddTopic extends javax.swing.JFrame {
 
         panel.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Registro de temática");
         jLabel1.setToolTipText("");
         panel.add(jLabel1);
-        jLabel1.setBounds(135, 32, 220, 19);
+        jLabel1.setBounds(100, 30, 220, 19);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Nombre");
         panel.add(jLabel2);
         jLabel2.setBounds(6, 90, 80, 16);
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Descripción");
         panel.add(jLabel3);
         jLabel3.setBounds(7, 128, 90, 16);
@@ -79,28 +81,32 @@ public class AddTopic extends javax.swing.JFrame {
         panel.add(name);
         name.setBounds(99, 87, 287, 22);
 
-        back.setText("Cancelar");
+        back.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        back.setText("Atrás");
+        back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);
             }
         });
         panel.add(back);
-        back.setBounds(270, 270, 110, 23);
+        back.setBounds(290, 270, 100, 23);
 
+        go.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         go.setText("Registrar");
+        go.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         go.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goActionPerformed(evt);
             }
         });
         panel.add(go);
-        go.setBounds(10, 270, 110, 23);
+        go.setBounds(10, 270, 100, 23);
 
         getContentPane().add(panel);
-        panel.setBounds(6, 0, 402, 303);
+        panel.setBounds(6, 0, 430, 340);
 
-        setSize(new java.awt.Dimension(414, 337));
+        setSize(new java.awt.Dimension(443, 346));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
