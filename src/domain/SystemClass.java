@@ -316,9 +316,13 @@ public class SystemClass extends Observable implements Serializable {
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error de recuperacion");
         }
-
+        
         return s;
 
+    }
+    
+    public  void setAutoId(){
+        Interview.setAutoid(this.getInterviews().size()); 
     }
 
     public Postulant getPostulantMemory() {

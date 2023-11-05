@@ -60,7 +60,7 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         postulants = new javax.swing.JList<>();
-        jButton2 = new javax.swing.JButton();
+        consultarBtn = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -71,7 +71,7 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Consulta por posición");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(100, 20, 210, 25);
+        jLabel1.setBounds(100, 20, 210, 22);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Nivel:");
@@ -91,14 +91,14 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Puestos:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(30, 70, 90, 16);
+        jLabel3.setBounds(30, 70, 90, 15);
         jPanel1.add(jSeparator1);
         jSeparator1.setBounds(30, 270, 350, 10);
 
         level.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
         level.setOpaque(true);
         jPanel1.add(level);
-        level.setBounds(110, 240, 110, 22);
+        level.setBounds(110, 240, 110, 23);
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("Atrás");
@@ -109,12 +109,12 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(280, 460, 100, 23);
+        jButton1.setBounds(280, 460, 100, 21);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Postulantes:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(30, 280, 90, 16);
+        jLabel4.setBounds(30, 280, 90, 15);
 
         postulants.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(postulants);
@@ -122,16 +122,16 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
         jPanel1.add(jScrollPane2);
         jScrollPane2.setBounds(30, 300, 350, 140);
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setText("Consultar");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        consultarBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        consultarBtn.setText("Consultar");
+        consultarBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        consultarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                consultarBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2);
-        jButton2.setBounds(280, 240, 100, 23);
+        jPanel1.add(consultarBtn);
+        consultarBtn.setBounds(280, 240, 100, 21);
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton3.setText("Exportar");
@@ -142,7 +142,7 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(30, 460, 100, 23);
+        jButton3.setBounds(30, 460, 100, 21);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 410, 510);
@@ -156,14 +156,14 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void consultarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarBtnActionPerformed
         // TODO add your handling code here:
          if(Integer.parseInt(level.getValue().toString())>=1 && Integer.parseInt(level.getValue().toString())<=10){
             setPostulantList();
         }else{
          JOptionPane.showMessageDialog(null, "El nivel del tema debe estar entre 1 y 10.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_consultarBtnActionPerformed
 
     private void positionsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_positionsValueChanged
         // TODO add your handling code here:
@@ -194,9 +194,12 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
         for (Position p : this.system.getPositions()) {
             modelPosition.addElement(p);
         }
+        if (modelPosition.isEmpty()){
+            consultarBtn.setEnabled(false);
+        }
     }
     private void setPostulantList(){
-        
+        if (consultarBtn.isEnabled()){
         if(positions.isSelectionEmpty()){
             JOptionPane.showMessageDialog(null, "Debe seleccionar la posicion a consultar", "Error", JOptionPane.ERROR_MESSAGE);
         }else{
@@ -211,11 +214,11 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
                 jButton3.setEnabled(true);
             }
             
-        }
+        }}
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton consultarBtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
