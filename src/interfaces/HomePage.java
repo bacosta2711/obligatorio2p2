@@ -59,7 +59,7 @@ public class HomePage extends javax.swing.JFrame {
 
         jMenuItem2.setText("jMenuItem2");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Entrevistas");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -74,12 +74,12 @@ public class HomePage extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setText("¡Bienvenido a Entrevistas!");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(230, 130, 300, 160);
+        jLabel1.setBounds(230, 130, 510, 160);
 
         label.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         label.setText("¡Seleccione una opción!");
         getContentPane().add(label);
-        label.setBounds(280, 350, 190, 40);
+        label.setBounds(280, 350, 380, 40);
 
         empty.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         empty.setText("Archivo vacío");
@@ -90,7 +90,7 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
         getContentPane().add(empty);
-        empty.setBounds(580, 430, 150, 23);
+        empty.setBounds(580, 430, 150, 21);
 
         file.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         file.setText("Archivo con datos");
@@ -101,7 +101,7 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
         getContentPane().add(file);
-        file.setBounds(30, 430, 150, 23);
+        file.setBounds(30, 430, 150, 21);
 
         jMenu1.setText("Postulantes");
 
@@ -263,8 +263,11 @@ public class HomePage extends javax.swing.JFrame {
     private void fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileActionPerformed
         // TODO add your handling code here:
         SystemClass sys= SystemClass.readFile();
+       
         
         this.system = sys; 
+        
+        system.setAutoId();
         
         empty.setVisible(false);
         file.setVisible(false);
@@ -285,7 +288,9 @@ public class HomePage extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
+        if (!file.isVisible()){
         this.system.writeFile(this.system);
+        }
     }//GEN-LAST:event_formWindowClosing
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed

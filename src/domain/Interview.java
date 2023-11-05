@@ -39,6 +39,10 @@ public class Interview implements Serializable {
         return id;
     }
 
+    public static void setAutoid(int autoid) {
+        Interview.autoid = autoid;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
