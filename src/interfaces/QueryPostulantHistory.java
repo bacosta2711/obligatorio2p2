@@ -5,13 +5,16 @@ import domain.Postulant;
 import domain.SystemClass;
 import domain.Topic;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.DefaultListModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-public class QueryPostulantHistory extends javax.swing.JFrame {
+public class QueryPostulantHistory extends javax.swing.JFrame implements Observer {
 
     private SystemClass system;
     DefaultListModel model = new DefaultListModel();
@@ -22,6 +25,7 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
         system = sys;
         initComponents();
         postulants.setModel(model);
+        sys.addObserver(this);
 
         String[] titles = new String[]{"Nro", "Evaluador", "Puntaje", "Comentarios"};
 
@@ -432,7 +436,6 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
 
         table.setModel(tableModel);
     }
-    
 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -516,6 +519,7 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
     public void setPostulants() {
         model.clear();
         ArrayList<Postulant> postulantList = this.system.getPostulants();
+        Collections.sort(postulantList);
         for (Postulant T : postulantList) {
             model.addElement(T);
         }
@@ -528,7 +532,6 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
                 modelThree.addRow(new Object[]{t.getId(), t.getInterviewer().toString(), t.getPuntuation(), t.getObservation()});
             }
         }
-
         System.out.println(modelThree.toString());
     }
 
@@ -564,4 +567,11 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
     private javax.swing.JTextField seeker;
     private javax.swing.JButton seekerButton;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+
+        setPostulants();
+    }
+
 }
