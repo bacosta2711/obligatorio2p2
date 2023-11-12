@@ -362,15 +362,30 @@ public class QueryPostulantHistory extends javax.swing.JFrame implements Observe
 
     private void postulantsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_postulantsValueChanged
         // TODO add your handling code here:
-        Postulant selected = postulants.getSelectedValue();
-        setPostulantAdress(selected);
-        setPostulantDocument(selected);
-        setPostulantExperience(selected);
-        setPostulantName(selected);
-        setPostulantLinkedin(selected);
-        setPostulantPhone(selected);
-        setPostulantMail(selected);
-        setFormatPostulant(selected);
+        Postulant selected;
+        if (!postulants.isSelectionEmpty()) {
+            selected = postulants.getSelectedValue();
+            setPostulantAdress(selected);
+            setPostulantDocument(selected);
+            setPostulantExperience(selected);
+            setPostulantName(selected);
+            setPostulantLinkedin(selected);
+            setPostulantPhone(selected);
+            setPostulantMail(selected);
+            setFormatPostulant(selected);
+            generateTable();
+        } else {
+            postulantAdress.setText("");
+            postulantDocument.setText("");
+            modelTwo.clear();
+            postulantName.setText("");
+            postulantLinkedin.setText("");
+            postulantPhone.setText("");
+            postulantMail.setText("");
+            formatPostulant.setText("");
+            modelThree.setRowCount(0);
+            
+        }
         generateTable();
     }//GEN-LAST:event_postulantsValueChanged
 
@@ -444,21 +459,23 @@ public class QueryPostulantHistory extends javax.swing.JFrame implements Observe
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ArrayList<Interview> r = this.system.getInterviews();
+        ArrayList<Interview> r = new ArrayList<>();
         setInterviews(r);
         seeker.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
     public void setInterviews(ArrayList<Interview> interviews) {
+
         modelThree.setRowCount(0);
         ArrayList<Interview> interviewList = interviews;
-        for (Interview t : interviewList) {
-            int number = t.getId();
-            String interviewer = t.getInterviewer().toString();
-            int puntuation = t.getPuntuation();
-            String comments = t.getObservation();
-            modelThree.addRow(new Object[]{number, interviewer, puntuation, comments});
+        if (!postulants.isSelectionEmpty()) {
+            for (Interview t : interviewList) {
+                int number = t.getId();
+                String interviewer = t.getInterviewer().toString();
+                int puntuation = t.getPuntuation();
+                String comments = t.getObservation();
+                modelThree.addRow(new Object[]{number, interviewer, puntuation, comments});
+            }
         }
-        System.out.println(filterInterviews.toString());
     }
 
     public void setPostulantAdress(Postulant postulant) {
@@ -532,7 +549,6 @@ public class QueryPostulantHistory extends javax.swing.JFrame implements Observe
                 modelThree.addRow(new Object[]{t.getId(), t.getInterviewer().toString(), t.getPuntuation(), t.getObservation()});
             }
         }
-        System.out.println(modelThree.toString());
     }
 
 
@@ -572,6 +588,7 @@ public class QueryPostulantHistory extends javax.swing.JFrame implements Observe
     public void update(Observable o, Object arg) {
 
         setPostulants();
+        generateTable();
     }
 
 }

@@ -94,7 +94,7 @@ public class SystemClass extends Observable implements Serializable {
     public boolean createInterviewer(String name, String direction, String document, int year) {
         boolean ret = true;
         Interviewer I = new Interviewer(name, document, direction, year);
-        if (isDocumentUnique(I.getDocument()) && year<=2023) {
+        if (isDocumentUnique(I.getDocument()) && year<=2023 && year>0) {
             addInterviewer(I);
         } else {
             ret = false;
