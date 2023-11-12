@@ -44,11 +44,6 @@ public class QueryPostulantHistory extends javax.swing.JFrame implements Observe
         postulantPhone.setText("");
         /*setInterviews(system.getInterviews());*/
         filterInterviews.setModel((TableModel) modelThree);
-        postulantLinkedin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                postulantLinkedinMouseClicked(evt);
-            }
-        });
 
     }
 
@@ -384,18 +379,23 @@ public class QueryPostulantHistory extends javax.swing.JFrame implements Observe
             postulantMail.setText("");
             formatPostulant.setText("");
             modelThree.setRowCount(0);
-            
+
         }
         generateTable();
     }//GEN-LAST:event_postulantsValueChanged
 
     private void postulantLinkedinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postulantLinkedinMouseClicked
-        // TODO add your handling code here:
+       
         Postulant selectedPostulant = postulants.getSelectedValue();
         if (selectedPostulant != null) {
             String linkedinURL = selectedPostulant.getLinkedin();
 
             if (linkedinURL != null && !linkedinURL.isEmpty()) {
+                if (!linkedinURL.startsWith("http")) {
+                    
+                    linkedinURL = "http://" + linkedinURL;
+                }
+
                 try {
                     java.awt.Desktop.getDesktop().browse(new java.net.URI(linkedinURL));
                 } catch (java.io.IOException | java.net.URISyntaxException e) {
@@ -420,7 +420,6 @@ public class QueryPostulantHistory extends javax.swing.JFrame implements Observe
                 r.add(s);
             }
         }
-        System.out.println(r.size());
         setInterviews(r);
         highlightMatchesInTable(filterInterviews, seek);
     }//GEN-LAST:event_seekerButtonActionPerformed
