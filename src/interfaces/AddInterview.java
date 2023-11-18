@@ -8,6 +8,8 @@ import domain.Interviewer;
 import domain.Postulant;
 import domain.SystemClass;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -17,7 +19,7 @@ import javax.swing.JTextField;
  *
  * @author PC
  */
-public class AddInterview extends javax.swing.JFrame {
+public class AddInterview extends javax.swing.JFrame implements Observer {
 
     private SystemClass system;
 
@@ -29,6 +31,7 @@ public class AddInterview extends javax.swing.JFrame {
         initComponents();
         setInterviewerBox();
         setPostulantCombo();
+        sys.addObserver(this);
     }
 
     /**
@@ -269,4 +272,10 @@ public class AddInterview extends javax.swing.JFrame {
     private javax.swing.JTextField point;
     private javax.swing.JComboBox<Postulant> postulant;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        setPostulantCombo();
+        setInterviewerBox();
+    }
 }

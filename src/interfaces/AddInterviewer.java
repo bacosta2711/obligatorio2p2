@@ -192,11 +192,16 @@ public class AddInterviewer extends javax.swing.JFrame {
                 if (Integer.parseInt(year.getText()) > 2023) {
                     JOptionPane.showMessageDialog(null, "El año debe ser menor al año actual.", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Documento en uso", "Error", JOptionPane.ERROR_MESSAGE);
+                    if (Integer.parseInt(year.getText()) < 0) {
+                        JOptionPane.showMessageDialog(null, "El año debe ser mayor al año cero.", "Error", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Documento en uso", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
-
         }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed

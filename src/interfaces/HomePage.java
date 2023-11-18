@@ -7,6 +7,7 @@ package interfaces;
 import domain.SystemClass;
 import java.awt.Component;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
@@ -19,6 +20,7 @@ public class HomePage extends javax.swing.JFrame {
      * Creates new form HomePage
      */
     private SystemClass system;
+
     public HomePage() {
         initComponents();
     }
@@ -207,17 +209,26 @@ public class HomePage extends javax.swing.JFrame {
 
     private void addPostulantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPostulantActionPerformed
         //this.setVisible(false);
-        AddPostulant window = new AddPostulant(this.getSystem());
-        window.setVisible(true);
-        
-        
+        if (!system.getTopics().isEmpty()) {
+            AddPostulant window = new AddPostulant(this.getSystem());
+            window.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un tema previamente.", "Error", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+
     }//GEN-LAST:event_addPostulantActionPerformed
 
     private void removePostulantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePostulantActionPerformed
         // TODO add your handling code here:
         //this.setVisible(false);
-        RemovePostulant window = new RemovePostulant(this.getSystem());
-        window.setVisible(true);
+        if (!system.getPostulants().isEmpty()) {
+            RemovePostulant window = new RemovePostulant(this.getSystem());
+            window.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un postulante previamente.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_removePostulantActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -234,41 +245,59 @@ public class HomePage extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-        AddInterview window = new AddInterview(system);
-        window.setVisible(true);
+        if (!system.getInterviewers().isEmpty() && !system.getPostulants().isEmpty()) {
+            AddInterview window = new AddInterview(system);
+            window.setVisible(true);
+        } else {
+            if (system.getInterviewers().isEmpty() && system.getPostulants().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Debe ingresar un evaluador y un postulante previamente.", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                if (system.getInterviewers().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Debe ingresar un evaluador previamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Debe ingresar un postulante previamente.", "Error", JOptionPane.ERROR_MESSAGE);
+
+                }
+            }
+
+        }
+
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        AddPosition window = new AddPosition(system);
-        window.setVisible(true);
+        if (!system.getTopics().isEmpty()) {
+            AddPosition window = new AddPosition(system);
+            window.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un tema previamente.", "Error", JOptionPane.ERROR_MESSAGE);
+
+        }
+
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void emptyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emptyActionPerformed
         // TODO add your handling code here:
-        
-        SystemClass sys= new SystemClass();
-        this.system = sys; 
-        
+
+        SystemClass sys = new SystemClass();
+        this.system = sys;
+
         empty.setVisible(false);
         file.setVisible(false);
         label.setVisible(false);
         jMenuBar1.setVisible(true);
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_emptyActionPerformed
 
     private void fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileActionPerformed
         // TODO add your handling code here:
-        SystemClass sys= SystemClass.readFile();
-       
-        
-        this.system = sys; 
-        
+        SystemClass sys = SystemClass.readFile();
+
+        this.system = sys;
+
         system.setAutoId();
-        
+
         empty.setVisible(false);
         file.setVisible(false);
         label.setVisible(false);
@@ -277,8 +306,14 @@ public class HomePage extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-        QueryTopic window = new QueryTopic(system);
-        window.setVisible(true);
+        if (!system.getTopics().isEmpty()) {
+            QueryTopic window = new QueryTopic(system);
+            window.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un tema previamente.", "Error", JOptionPane.ERROR_MESSAGE);
+
+        }
+
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -288,29 +323,38 @@ public class HomePage extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        if (!file.isVisible()){
-        this.system.writeFile(this.system);
+        if (!file.isVisible()) {
+            this.system.writeFile(this.system);
         }
     }//GEN-LAST:event_formWindowClosing
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
-        QueryPosition window = new QueryPosition(system);
-        window.setVisible(true);
+        if (!system.getPositions().isEmpty()) {
+            QueryPosition window = new QueryPosition(system);
+            window.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un puesto previamente.", "Error", JOptionPane.ERROR_MESSAGE);
+
+        }
+
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        // TODO add your handling code here:
-        QueryPostulantHistory window = new QueryPostulantHistory(system);
-        window.setVisible(true);
+        if (!system.getPostulants().isEmpty()) {
+            QueryPostulantHistory window = new QueryPostulantHistory(system);
+            window.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un postulante previamente.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
     public static void main(String[] args) {
-       
-       HomePage window = new HomePage();
-       //system.setMenuReference(window);
-       window.setVisible(true);
+
+        HomePage window = new HomePage();
+        //system.setMenuReference(window);
+        window.setVisible(true);
     }
-    
 
     public SystemClass getSystem() {
         return system;

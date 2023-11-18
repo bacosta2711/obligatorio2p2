@@ -8,6 +8,8 @@ import domain.Position;
 import domain.SystemClass;
 import domain.Topic;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -18,7 +20,7 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author PC
  */
-public class AddPosition extends javax.swing.JFrame {
+public class AddPosition extends javax.swing.JFrame implements Observer{
 
     private SystemClass system;
     DefaultListModel model = new DefaultListModel();
@@ -31,6 +33,7 @@ public class AddPosition extends javax.swing.JFrame {
         initComponents();
         topics.setModel(model);
         setTopics();
+        sys.addObserver(this);
         /*topics.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -251,5 +254,10 @@ public class AddPosition extends javax.swing.JFrame {
         for (Topic T : topicsList) {
             model.addElement(T);
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        setTopics();
     }
 }

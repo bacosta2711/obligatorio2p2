@@ -5,13 +5,16 @@ import domain.Postulant;
 import domain.SystemClass;
 import domain.Topic;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.DefaultListModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-public class QueryPostulantHistory extends javax.swing.JFrame {
+public class QueryPostulantHistory extends javax.swing.JFrame implements Observer {
 
     private SystemClass system;
     DefaultListModel model = new DefaultListModel();
@@ -22,6 +25,7 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
         system = sys;
         initComponents();
         postulants.setModel(model);
+        sys.addObserver(this);
 
         String[] titles = new String[]{"Nro", "Evaluador", "Puntaje", "Comentarios"};
 
@@ -40,11 +44,6 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
         postulantPhone.setText("");
         /*setInterviews(system.getInterviews());*/
         filterInterviews.setModel((TableModel) modelThree);
-        postulantLinkedin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                postulantLinkedinMouseClicked(evt);
-            }
-        });
 
     }
 
@@ -358,25 +357,45 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
 
     private void postulantsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_postulantsValueChanged
         // TODO add your handling code here:
-        Postulant selected = postulants.getSelectedValue();
-        setPostulantAdress(selected);
-        setPostulantDocument(selected);
-        setPostulantExperience(selected);
-        setPostulantName(selected);
-        setPostulantLinkedin(selected);
-        setPostulantPhone(selected);
-        setPostulantMail(selected);
-        setFormatPostulant(selected);
+        Postulant selected;
+        if (!postulants.isSelectionEmpty()) {
+            selected = postulants.getSelectedValue();
+            setPostulantAdress(selected);
+            setPostulantDocument(selected);
+            setPostulantExperience(selected);
+            setPostulantName(selected);
+            setPostulantLinkedin(selected);
+            setPostulantPhone(selected);
+            setPostulantMail(selected);
+            setFormatPostulant(selected);
+            generateTable();
+        } else {
+            postulantAdress.setText("");
+            postulantDocument.setText("");
+            modelTwo.clear();
+            postulantName.setText("");
+            postulantLinkedin.setText("");
+            postulantPhone.setText("");
+            postulantMail.setText("");
+            formatPostulant.setText("");
+            modelThree.setRowCount(0);
+
+        }
         generateTable();
     }//GEN-LAST:event_postulantsValueChanged
 
     private void postulantLinkedinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postulantLinkedinMouseClicked
-        // TODO add your handling code here:
+       
         Postulant selectedPostulant = postulants.getSelectedValue();
         if (selectedPostulant != null) {
             String linkedinURL = selectedPostulant.getLinkedin();
 
             if (linkedinURL != null && !linkedinURL.isEmpty()) {
+                if (!linkedinURL.startsWith("http")) {
+                    
+                    linkedinURL = "http://" + linkedinURL;
+                }
+
                 try {
                     java.awt.Desktop.getDesktop().browse(new java.net.URI(linkedinURL));
                 } catch (java.io.IOException | java.net.URISyntaxException e) {
@@ -401,7 +420,6 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
                 r.add(s);
             }
         }
-        System.out.println(r.size());
         setInterviews(r);
         highlightMatchesInTable(filterInterviews, seek);
     }//GEN-LAST:event_seekerButtonActionPerformed
@@ -432,7 +450,6 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
 
         table.setModel(tableModel);
     }
-    
 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -441,21 +458,23 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ArrayList<Interview> r = this.system.getInterviews();
+        ArrayList<Interview> r = new ArrayList<>();
         setInterviews(r);
         seeker.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
     public void setInterviews(ArrayList<Interview> interviews) {
+
         modelThree.setRowCount(0);
         ArrayList<Interview> interviewList = interviews;
-        for (Interview t : interviewList) {
-            int number = t.getId();
-            String interviewer = t.getInterviewer().toString();
-            int puntuation = t.getPuntuation();
-            String comments = t.getObservation();
-            modelThree.addRow(new Object[]{number, interviewer, puntuation, comments});
+        if (!postulants.isSelectionEmpty()) {
+            for (Interview t : interviewList) {
+                int number = t.getId();
+                String interviewer = t.getInterviewer().toString();
+                int puntuation = t.getPuntuation();
+                String comments = t.getObservation();
+                modelThree.addRow(new Object[]{number, interviewer, puntuation, comments});
+            }
         }
-        System.out.println(filterInterviews.toString());
     }
 
     public void setPostulantAdress(Postulant postulant) {
@@ -516,6 +535,7 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
     public void setPostulants() {
         model.clear();
         ArrayList<Postulant> postulantList = this.system.getPostulants();
+        Collections.sort(postulantList);
         for (Postulant T : postulantList) {
             model.addElement(T);
         }
@@ -528,8 +548,6 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
                 modelThree.addRow(new Object[]{t.getId(), t.getInterviewer().toString(), t.getPuntuation(), t.getObservation()});
             }
         }
-
-        System.out.println(modelThree.toString());
     }
 
 
@@ -564,4 +582,12 @@ public class QueryPostulantHistory extends javax.swing.JFrame {
     private javax.swing.JTextField seeker;
     private javax.swing.JButton seekerButton;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+
+        setPostulants();
+        generateTable();
+    }
+
 }

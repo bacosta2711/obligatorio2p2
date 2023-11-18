@@ -1,6 +1,5 @@
 //Mateo Seijo 309095
 //Bruno Acosta 313080
-
 package domain;
 
 import java.io.Serializable;
@@ -10,7 +9,8 @@ import java.util.HashMap;
 
 import java.util.Map;
 
-public class Postulant extends People implements Serializable{
+public class Postulant extends People implements Serializable,Comparable<Postulant>   {
+
     private String contact;
     private String email;
     private String linkedin;
@@ -18,18 +18,17 @@ public class Postulant extends People implements Serializable{
     private HashMap<Topic, Integer> skills;
     private ArrayList<Interview> interviews;
 
-    public Postulant(){
+    public Postulant() {
         skills = new HashMap<Topic, Integer>();
         this.interviews = new ArrayList<>();
     }
-    
-    public Postulant(String name){
+
+    public Postulant(String name) {
         this.setName(name);
         skills = new HashMap<Topic, Integer>();
         this.interviews = new ArrayList<>();
     }
-    
-    
+
     public String getContact() {
         return contact;
     }
@@ -69,18 +68,17 @@ public class Postulant extends People implements Serializable{
     public void addSkills(Topic topic, int level) {
         this.getSkills().put(topic, level);
     }
-     
+
     public void removeSkills(Topic topic) {
-        
-        System.out.println("PEDILO "+topic);
+
+        System.out.println("PEDILO " + topic);
         this.getSkills().remove(topic);
     }
-    
+
     public void addInterviews(Interview interviews) {
         this.getInterviews().add(interviews);
     }
 
-   
     public ArrayList<Interview> getInterviews() {
         return interviews;
     }
@@ -89,7 +87,8 @@ public class Postulant extends People implements Serializable{
         this.interviews = interviews;
     }
 
-    
-   
+    public int compareTo(Postulant other) {
+        return other.getDocument().compareTo(this.getDocument());
+    }
 
 }

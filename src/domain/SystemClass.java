@@ -2,8 +2,6 @@
 //Bruno Acosta 313080
 package domain;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,12 +10,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.lang.System.Logger;
-import java.lang.System.Logger.Level;
 import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JFrame;
-
 import java.util.Observable;
 
 public class SystemClass extends Observable implements Serializable {
@@ -101,7 +94,7 @@ public class SystemClass extends Observable implements Serializable {
     public boolean createInterviewer(String name, String direction, String document, int year) {
         boolean ret = true;
         Interviewer I = new Interviewer(name, document, direction, year);
-        if (isDocumentUnique(I.getDocument()) && year<=2023) {
+        if (isDocumentUnique(I.getDocument()) && year<=2023 && year>0) {
             addInterviewer(I);
         } else {
             ret = false;
