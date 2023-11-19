@@ -1,3 +1,5 @@
+//Mateo Seijo 309095
+//Bruno Acosta 313080
 package domain;
 
 import java.io.Serializable;
@@ -34,7 +36,7 @@ public class Interview implements Serializable {
         Interview interview = (Interview) o;
         return Objects.equals(observation, interview.observation);
     }
-    
+
     public int getId() {
         return id;
     }

@@ -1,9 +1,12 @@
+//Mateo Seijo 309095
+//Bruno Acosta 313080
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package interfaces;
 
+import domain.Postulant;
 import domain.SystemClass;
 import domain.Topic;
 import java.awt.Component;
@@ -25,21 +28,23 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
 
     private SystemClass system;
     private JFrame predecesor;
+    private Postulant postulant;
 
     DefaultListModel model = new DefaultListModel();
 
     /**
      * Creates new form AddPostulantSkills
      */
-    public AddPostulantSkills(SystemClass sys, JFrame pre) {
+    public AddPostulantSkills(SystemClass sys, JFrame pre, Postulant postulant) {
         predecesor = pre;
         system = sys;
+        this.postulant = postulant;
         sys.addObserver(this);
         initComponents();
         listSkills.setModel(model);
         setTopicCombo();
         setListItem();
-
+        postulantData.setText(this.postulant.toString());
     }
 
     public void update(Observable o, Object ob) {
@@ -63,7 +68,7 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        postulantData = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         topic = new javax.swing.JComboBox<>();
         level = new javax.swing.JSpinner();
@@ -75,6 +80,8 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
         add = new javax.swing.JButton();
         back = new javax.swing.JButton();
         go = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Entrevistas");
@@ -85,25 +92,25 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Alta postulante");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(140, 20, 170, 25);
+        jLabel1.setBounds(140, 10, 170, 22);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Tema:");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(30, 70, 110, 16);
+        postulantData.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        postulantData.setText("Postulante info");
+        jPanel1.add(postulantData);
+        postulantData.setBounds(140, 40, 110, 15);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel3.setText("Experiencia:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(30, 160, 74, 20);
+        jLabel3.setBounds(30, 160, 82, 20);
 
         jPanel1.add(topic);
-        topic.setBounds(140, 70, 250, 22);
+        topic.setBounds(140, 70, 250, 23);
 
         level.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
         level.setOpaque(true);
         jPanel1.add(level);
-        level.setBounds(140, 100, 120, 22);
+        level.setBounds(140, 100, 120, 23);
 
         remove.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         remove.setText("Eliminar");
@@ -114,7 +121,7 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
             }
         });
         jPanel1.add(remove);
-        remove.setBounds(20, 210, 100, 23);
+        remove.setBounds(20, 210, 100, 21);
         jPanel1.add(jSeparator1);
         jSeparator1.setBounds(30, 140, 370, 20);
 
@@ -138,7 +145,7 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
             }
         });
         jPanel1.add(add);
-        add.setBounds(290, 100, 100, 23);
+        add.setBounds(290, 100, 100, 21);
 
         back.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         back.setText("Atrás");
@@ -149,7 +156,7 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
             }
         });
         jPanel1.add(back);
-        back.setBounds(290, 300, 100, 23);
+        back.setBounds(290, 300, 100, 21);
 
         go.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         go.setText("Registrar");
@@ -160,7 +167,17 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
             }
         });
         jPanel1.add(go);
-        go.setBounds(20, 300, 100, 23);
+        go.setBounds(20, 300, 100, 21);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setText("Tema:");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(30, 70, 110, 15);
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setText("Postulante:");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(30, 40, 110, 15);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 410, 360);
@@ -179,19 +196,26 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
 
     private void goActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goActionPerformed
         // TODO add your handling code here:
-        if (!this.system.addPostulant(this.getSystem().getPostulantMemory())) {
-            JOptionPane.showMessageDialog(null, "No se pudo crear al postulante, ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (model.elementAt(0).toString() != "No hay experiencia.") {
 
+            if (!this.system.addPostulant(this.postulant)) {
+                JOptionPane.showMessageDialog(null, "No se pudo crear al postulante, ya existe.", "Error", JOptionPane.ERROR_MESSAGE);
+
+            } else {
+
+                //this.getSystem().resetPostulantMemory();
+                JOptionPane.showMessageDialog(null, "El postulante se creo de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor((Component) evt.getSource());
+                ventanaActual.dispose();
+                this.getPredecesor().dispose();
+
+                Postulant postulantNew = new Postulant();
+                AddPostulant newWindow = new AddPostulant(this.getSystem(), postulantNew);
+                newWindow.setVisible(true);
+
+            }
         } else {
-            this.getSystem().resetPostulantMemory();
-            JOptionPane.showMessageDialog(null, "El postulante se creo de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor((Component) evt.getSource());
-            ventanaActual.dispose();
-            this.getPredecesor().dispose();
-
-            AddPostulant newWindow = new AddPostulant(this.getSystem());
-            newWindow.setVisible(true);
-
+            JOptionPane.showMessageDialog(null, "No se pudo crear al postulante, no se agrego experiencia.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_goActionPerformed
@@ -199,7 +223,7 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         // TODO add your handling code here:
         if (Integer.parseInt(level.getValue().toString()) >= 1 && Integer.parseInt(level.getValue().toString()) <= 10) {
-            this.getSystem().getPostulantMemory().addSkills((Topic) topic.getSelectedItem(), Integer.parseInt(level.getValue().toString()));
+            this.postulant.addSkills((Topic) topic.getSelectedItem(), Integer.parseInt(level.getValue().toString()));
 
             this.setListItem();
             this.setTopicCombo();
@@ -212,11 +236,17 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
 
     private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed
         // TODO add your handling code here:
+        if (!listSkills.isSelectionEmpty()) {
+            Topic tSelected = this.getSystem().getTopicByName(listSkills.getSelectedValue().substring(0, listSkills.getSelectedValue().indexOf("(")));
+            this.postulant.removeSkills(tSelected);
 
-        this.getSystem().getPostulantMemory().removeSkills(this.getSystem().getTopicByName(listSkills.getSelectedValue().substring(0, listSkills.getSelectedValue().indexOf("("))));
-        //System.out.println(this.getSystem().getPostulantMemory().toString());
+            this.setListItem();
+            this.setTopicCombo();
 
-
+//System.out.println(this.getSystem().getPostulantMemory().toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar experiencia a eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_removeActionPerformed
 
     /**
@@ -228,21 +258,23 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
     private javax.swing.JButton back;
     private javax.swing.JButton go;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSpinner level;
     private javax.swing.JList<String> listSkills;
+    private javax.swing.JLabel postulantData;
     private javax.swing.JButton remove;
     private javax.swing.JComboBox<Topic> topic;
     // End of variables declaration//GEN-END:variables
 
     private void setTopicCombo() {
         topic.removeAllItems();
-        ArrayList<Topic> topicList = this.getSystem().getTopicsNotInMemory();
+        ArrayList<Topic> topicList = getTopicsNotInMemory();
         for (Topic t : topicList) {
             topic.addItem(t);
         }
@@ -267,7 +299,8 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
 
     private void setListItem() {
         model.removeAllElements();
-        for (Map.Entry<Topic, Integer> entry : this.getSystem().getPostulantMemory().getSkills().entrySet()) {
+        for (Map.Entry<Topic, Integer> entry : this.postulant.getSkills().entrySet()) {
+
             model.addElement(entry.getKey() + "(" + entry.getValue() + ")");
         }
         if (model.isEmpty()) {
@@ -282,6 +315,18 @@ public class AddPostulantSkills extends javax.swing.JFrame implements Observer {
 
     public SystemClass getSystem() {
         return system;
+    }
+
+    public ArrayList<Topic> getTopicsNotInMemory() {
+        ArrayList<Topic> result = new ArrayList<Topic>();
+
+        for (Topic t : this.system.getTopics()) {
+            if (!this.postulant.getSkills().containsKey(t)) {
+                result.add(t);
+            }
+        }
+
+        return result;
     }
 
 }

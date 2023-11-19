@@ -45,7 +45,6 @@ public class People implements Serializable {
             result = true; 
         }
         return result;*/
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

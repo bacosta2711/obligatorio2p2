@@ -1,5 +1,7 @@
+//Mateo Seijo 309095
+//Bruno Acosta 313080
 package domain;
-    
+
 import java.io.*;
 import java.util.Formatter;
 
@@ -13,19 +15,19 @@ public class FileWriting {
         } catch (FileNotFoundException e) {
             System.out.println("no se puede crear");
             System.exit(1);
-        } 
+        }
     }
 
     public FileWriting(String unNombre, boolean ext) {
-	// si el parametro viene en true, indica que se extiende
-	// si es false, se sobreescribe
+        // si el parametro viene en true, indica que se extiende
+        // si es false, se sobreescribe
         try {
             FileWriter f = new FileWriter(unNombre, ext);
             out = new Formatter(f);
         } catch (IOException e) {
-            System.out.println("no se puede crear/extender");
+            //System.out.println("no se puede crear/extender");
             System.exit(1);
-        } 
+        }
     }
 
     public void grabarLinea(String linea) {

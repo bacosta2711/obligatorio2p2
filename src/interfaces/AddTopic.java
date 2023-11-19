@@ -1,3 +1,5 @@
+//Mateo Seijo 309095
+//Bruno Acosta 313080
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -15,13 +17,14 @@ import javax.swing.SwingUtilities;
  * @author bacosta
  */
 public class AddTopic extends javax.swing.JFrame {
-    
+
     private SystemClass system;
+
     /**
      * Creates new form AddPostulant
      */
     public AddTopic(SystemClass sys) {
-        system=sys;
+        system = sys;
         initComponents();
     }
 
@@ -115,35 +118,34 @@ public class AddTopic extends javax.swing.JFrame {
     }//GEN-LAST:event_nameActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-            // TODO add your handling code here:
-            JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor((Component) evt.getSource());
-            ventanaActual.dispose();
-            //system.getMenuReference().setVisible(true);
+        // TODO add your handling code here:
+        JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor((Component) evt.getSource());
+        ventanaActual.dispose();
+        //system.getMenuReference().setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
     private void goActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goActionPerformed
         // TODO add your handling code here:
-        if(name.getText().isBlank()||description.getText().isBlank()){
-             JOptionPane.showMessageDialog(null, "Debe indicar todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
-        }else{
-            if (this.system.createTopic(name.getText(), description.getText())){
+        if (name.getText().isBlank() || description.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Debe indicar todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            if (this.system.createTopic(name.getText(), description.getText())) {
                 JOptionPane.showMessageDialog(null, "El tema se creó de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 name.setText("");
                 description.setText("");
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Ya existe este tema.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-        
-         for (int i = 0; i < system.getTopics().size(); i++) {
-            System.out.println(system.getTopics().get(i));
+
+        for (int i = 0; i < system.getTopics().size(); i++) {
+            //System.out.println(system.getTopics().get(i));
         }
     }//GEN-LAST:event_goActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;

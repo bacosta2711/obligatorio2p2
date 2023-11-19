@@ -1,3 +1,5 @@
+//Mateo Seijo 309095
+//Bruno Acosta 313080
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -20,10 +22,10 @@ import javax.swing.SwingUtilities;
  *
  * @author bacosta
  */
-public class RemovePostulant extends javax.swing.JFrame implements Observer{
+public class RemovePostulant extends javax.swing.JFrame implements Observer {
+
     private SystemClass system;
     DefaultListModel model = new DefaultListModel();
-    
 
     /**
      * Creates new form RemovePosultant
@@ -37,13 +39,13 @@ public class RemovePostulant extends javax.swing.JFrame implements Observer{
         setData();
         //system.addPropertyChangeLisener(this);
     }
-    
-    
-    public void update(Observable o,Object ob){
-        
+
+    public void update(Observable o, Object ob) {
+
         setList();
         setData();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -187,23 +189,23 @@ public class RemovePostulant extends javax.swing.JFrame implements Observer{
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         // TODO add your handling code here:
-        
+
         JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor((Component) evt.getSource());
-            ventanaActual.dispose();
-            //system.getMenuReference().setVisible(true);
-            
+        ventanaActual.dispose();
+        //system.getMenuReference().setVisible(true);
+
     }//GEN-LAST:event_backActionPerformed
 
     private void postulantListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_postulantListValueChanged
         // TODO add your handling code here:
         setData();
-       
-        
+
+
     }//GEN-LAST:event_postulantListValueChanged
 
     private void goActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goActionPerformed
         // TODO add your handling code here:
-        
+
         this.getSystem().removePostulant(postulantList.getSelectedValue());
         JOptionPane.showMessageDialog(null, "El postulante y su informacion fueron eliminados.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         //setList();
@@ -212,20 +214,19 @@ public class RemovePostulant extends javax.swing.JFrame implements Observer{
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-       // this.getSystem().removePropertyChangeLisener(this);
+        // this.getSystem().removePropertyChangeLisener(this);
     }//GEN-LAST:event_formWindowClosed
 
-    private void setList(){
+    private void setList() {
         model.clear();
         for (Postulant p : this.getSystem().getPostulants()) {
             model.addElement(p);
         }
-        
-    
-        if (model.isEmpty()){
+
+        if (model.isEmpty()) {
             go.setEnabled(false);
             model.addElement(new Postulant("No hay postulantes."));
-        }else{
+        } else {
             go.setEnabled(true);
         }
     }
@@ -233,14 +234,15 @@ public class RemovePostulant extends javax.swing.JFrame implements Observer{
     public SystemClass getSystem() {
         return system;
     }
-    private void setData(){
-        if(!model.isEmpty() && postulantList.getSelectedValue()!=null){
+
+    private void setData() {
+        if (!model.isEmpty() && postulantList.getSelectedValue() != null) {
             name_info.setText(postulantList.getSelectedValue().getName());
             mail_info.setText(postulantList.getSelectedValue().getEmail());
             document_info.setText(postulantList.getSelectedValue().getDocument());
             number_info.setText(postulantList.getSelectedValue().getContact());
             address_info.setText(postulantList.getSelectedValue().getAddress());
-        }else{
+        } else {
             name_info.setText("");
             mail_info.setText("");
             document_info.setText("");
@@ -248,7 +250,7 @@ public class RemovePostulant extends javax.swing.JFrame implements Observer{
             address_info.setText("");
         }
     }
-  
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel address;

@@ -1,11 +1,18 @@
+//Mateo Seijo 309095
+//Bruno Acosta 313080
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package interfaces;
 
+import domain.Postulant;
 import domain.SystemClass;
 import java.awt.Component;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -23,6 +30,7 @@ public class HomePage extends javax.swing.JFrame {
 
     public HomePage() {
         initComponents();
+        salir.setVisible(false);
     }
 
     /**
@@ -40,6 +48,7 @@ public class HomePage extends javax.swing.JFrame {
         label = new javax.swing.JLabel();
         empty = new javax.swing.JToggleButton();
         file = new javax.swing.JToggleButton();
+        salir = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         addPostulant = new javax.swing.JMenuItem();
@@ -105,6 +114,16 @@ public class HomePage extends javax.swing.JFrame {
         getContentPane().add(file);
         file.setBounds(30, 430, 150, 21);
 
+        salir.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        salir.setText("Salir");
+        salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(salir);
+        salir.setBounds(310, 310, 150, 21);
+
         jMenu1.setText("Postulantes");
 
         addPostulant.setText("Agregar postulante");
@@ -163,7 +182,7 @@ public class HomePage extends javax.swing.JFrame {
 
         jMenu6.setText("Puesto");
 
-        jMenuItem3.setText("Agregar posición");
+        jMenuItem3.setText("Agregar puesto");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -210,7 +229,8 @@ public class HomePage extends javax.swing.JFrame {
     private void addPostulantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPostulantActionPerformed
         //this.setVisible(false);
         if (!system.getTopics().isEmpty()) {
-            AddPostulant window = new AddPostulant(this.getSystem());
+            Postulant postulantAux = new Postulant();
+            AddPostulant window = new AddPostulant(this.getSystem(), postulantAux);
             window.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "Debe ingresar un tema previamente.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -285,6 +305,7 @@ public class HomePage extends javax.swing.JFrame {
         empty.setVisible(false);
         file.setVisible(false);
         label.setVisible(false);
+        salir.setVisible(false);
         jMenuBar1.setVisible(true);
 
 
@@ -292,7 +313,7 @@ public class HomePage extends javax.swing.JFrame {
 
     private void fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileActionPerformed
         // TODO add your handling code here:
-        SystemClass sys = SystemClass.readFile();
+        SystemClass sys = readFile();
 
         this.system = sys;
 
@@ -302,6 +323,7 @@ public class HomePage extends javax.swing.JFrame {
         file.setVisible(false);
         label.setVisible(false);
         jMenuBar1.setVisible(true);
+        salir.setVisible(true);
     }//GEN-LAST:event_fileActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
@@ -349,6 +371,15 @@ public class HomePage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        // TODO add your handling code here:
+        if (!file.isVisible()) {
+            this.system.writeFile(this.system);
+            System.exit(0);
+        }
+
+    }//GEN-LAST:event_salirActionPerformed
+
     public static void main(String[] args) {
 
         HomePage window = new HomePage();
@@ -358,6 +389,21 @@ public class HomePage extends javax.swing.JFrame {
 
     public SystemClass getSystem() {
         return system;
+    }
+
+    public static SystemClass readFile() {
+
+        SystemClass s = new SystemClass();
+        try {
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream("archivo.ser"));
+            s = (SystemClass) in.readObject();
+            in.close();
+        } catch (IOException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "No se pudi recuperar la informacion, clase Sistema Nueva.", "Warning", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return s;
+
     }
 
 
@@ -384,5 +430,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JLabel label;
     private javax.swing.JMenuItem removePostulant;
+    private javax.swing.JButton salir;
     // End of variables declaration//GEN-END:variables
 }

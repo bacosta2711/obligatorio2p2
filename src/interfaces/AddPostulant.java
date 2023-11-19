@@ -1,3 +1,5 @@
+//Mateo Seijo 309095
+//Bruno Acosta 313080
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -18,14 +20,18 @@ import javax.swing.SwingUtilities;
 public class AddPostulant extends javax.swing.JFrame {
 
     private SystemClass system;
+    private Postulant postulant;
+
     /**
      * Creates new form AddPostulant
      */
-    public AddPostulant(SystemClass sys) {
+    public AddPostulant(SystemClass sys, Postulant postulant) {
         system = sys;
         initComponents();
         jobModalityR.setSelected(true);
-        this.getSystem().setPostulantMemory(new Postulant());
+        //this.getSystem().setPostulantMemory();
+
+        this.postulant = postulant;
     }
 
     /**
@@ -190,83 +196,83 @@ public class AddPostulant extends javax.swing.JFrame {
     }//GEN-LAST:event_jobModalityPActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
-         JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor((Component) evt.getSource());
-         ventanaActual.dispose();
+        JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor((Component) evt.getSource());
+        ventanaActual.dispose();
         // system.getMenuReference().setVisible(true);
     }//GEN-LAST:event_backActionPerformed
 
     private void goActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goActionPerformed
-        if(name.getText().isBlank() || document.getText().isBlank() || address.getText().isBlank() ||
-           mail.getText().isBlank() || phone.getText().isBlank()    || linkedin.getText().isBlank()){
-                     JOptionPane.showMessageDialog(null, "Debe indicar todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (name.getText().isBlank() || document.getText().isBlank() || address.getText().isBlank()
+                || mail.getText().isBlank() || phone.getText().isBlank() || linkedin.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Debe indicar todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
 
-        }else{
-            
-            
-            
-   
-            this.getSystem().getPostulantMemory().setAddress(address.getText());
-            this.getSystem().getPostulantMemory().setContact(phone.getText());
-            this.getSystem().getPostulantMemory().setDocument(document.getText());
-            this.getSystem().getPostulantMemory().setEmail(mail.getText());
-            if (jobModalityR.isSelected()){
-                this.getSystem().getPostulantMemory().setJobModality('R');
+        } else {
+            if (this.system.isDocumentUnique(document.getText())) {
+
+                this.postulant.setAddress(address.getText());
+                this.postulant.setContact(phone.getText());
+                this.postulant.setDocument(document.getText());
+                this.postulant.setEmail(mail.getText());
+                if (jobModalityR.isSelected()) {
+                    this.postulant.setJobModality('R');
+                }
+                if (jobModalityP.isSelected()) {
+                    this.postulant.setJobModality('P');
+                }
+                if (jobModalityH.isSelected()) {
+                    this.postulant.setJobModality('H');
+                }
+                this.postulant.setLinkedin(linkedin.getText());
+                this.postulant.setName(name.getText());
+
+                JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor((Component) evt.getSource());
+
+                AddPostulantSkills window = new AddPostulantSkills(this.getSystem(), ventanaActual, postulant);
+                window.setVisible(true);
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(null, "El documento debe ser unico.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            if (jobModalityP.isSelected()){
-                this.getSystem().getPostulantMemory().setJobModality('P');
-            }
-            if (jobModalityH.isSelected()){
-                this.getSystem().getPostulantMemory().setJobModality('H');
-            }
-            this.getSystem().getPostulantMemory().setLinkedin(linkedin.getText());
-            this.getSystem().getPostulantMemory().setName(name.getText());
-            
-            
-            JFrame ventanaActual = (JFrame) SwingUtilities.getWindowAncestor((Component) evt.getSource());
-            
-            
-            AddPostulantSkills window = new AddPostulantSkills(this.getSystem(), ventanaActual);
-            window.setVisible(true);
-            this.setVisible(false);
-            
+
         }
-        
-        
+
+
     }//GEN-LAST:event_goActionPerformed
-    
-    private void setFieldsFromMemory(){
-        if(!this.getSystem().getPostulantMemory().getName().isBlank()){
-        name.setText(this.getSystem().getPostulantMemory().getName());
-        document.setText(this.getSystem().getPostulantMemory().getDocument());
-        address.setText(this.getSystem().getPostulantMemory().getAddress());
-        phone.setText(this.getSystem().getPostulantMemory().getContact());
-        mail.setText(this.getSystem().getPostulantMemory().getEmail());
-        linkedin.setText(this.getSystem().getPostulantMemory().getLinkedin());
-        if(this.getSystem().getPostulantMemory().getJobModality()=='P'){
-            jobModalityP.setSelected(true);
-            jobModalityR.setSelected(false);
-            jobModalityH.setSelected(false);
+
+    private void setFieldsFromMemory() {
+        if (!this.postulant.getName().isBlank()) {
+            name.setText(this.postulant.getName());
+            document.setText(this.postulant.getDocument());
+            address.setText(this.postulant.getAddress());
+            phone.setText(this.postulant.getContact());
+            mail.setText(this.postulant.getEmail());
+            linkedin.setText(this.postulant.getLinkedin());
+            if (this.postulant.getJobModality() == 'P') {
+                jobModalityP.setSelected(true);
+                jobModalityR.setSelected(false);
+                jobModalityH.setSelected(false);
+            }
+            if (this.postulant.getJobModality() == 'R') {
+                jobModalityP.setSelected(false);
+                jobModalityR.setSelected(true);
+                jobModalityH.setSelected(false);
+            }
+            if (this.postulant.getJobModality() == 'H') {
+                jobModalityP.setSelected(false);
+                jobModalityR.setSelected(false);
+                jobModalityH.setSelected(true);
+            }
+
+        } else {
+            //   this.postulant = new Postulant();
         }
-        if(this.getSystem().getPostulantMemory().getJobModality()=='R'){
-            jobModalityP.setSelected(false);
-            jobModalityR.setSelected(true);
-            jobModalityH.setSelected(false);
-        }
-        if(this.getSystem().getPostulantMemory().getJobModality()=='H'){
-            jobModalityP.setSelected(false);
-            jobModalityR.setSelected(false);
-            jobModalityH.setSelected(true);
-        }
-        }
-    
-    
+
     }
-    
+
     public SystemClass getSystem() {
         return system;
     }
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address;
