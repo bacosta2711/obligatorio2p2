@@ -1,3 +1,5 @@
+//Mateo Seijo 309095
+//Bruno Acosta 313080
 package interfaces;
 
 import domain.Interview;
@@ -385,14 +387,14 @@ public class QueryPostulantHistory extends javax.swing.JFrame implements Observe
     }//GEN-LAST:event_postulantsValueChanged
 
     private void postulantLinkedinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postulantLinkedinMouseClicked
-       
+
         Postulant selectedPostulant = postulants.getSelectedValue();
         if (selectedPostulant != null) {
             String linkedinURL = selectedPostulant.getLinkedin();
 
             if (linkedinURL != null && !linkedinURL.isEmpty()) {
                 if (!linkedinURL.startsWith("http")) {
-                    
+
                     linkedinURL = "http://" + linkedinURL;
                 }
 
@@ -412,16 +414,19 @@ public class QueryPostulantHistory extends javax.swing.JFrame implements Observe
 
     private void seekerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seekerButtonActionPerformed
         // TODO add your handling code here:
-        String seek = getSeeker();
-        ArrayList<Interview> l = this.system.getInterviews();
-        ArrayList<Interview> r = new ArrayList();
-        for (Interview s : l) {
-            if (s.getObservation().toUpperCase().contains(seek) && !"".equals(seek) && !" ".equals(seek)) {
-                r.add(s);
+        if (!postulants.isSelectionEmpty()) {
+            String seek = getSeeker();
+            ArrayList<Interview> l = this.system.getInterviews();
+            ArrayList<Interview> r = new ArrayList();
+            for (Interview s : l) {
+                if (!"".equals(seek) && !" ".equals(seek) && s.getPostulant().getDocument() == postulants.getSelectedValue().getDocument()) {
+
+                    r.add(s);
+                }
             }
+            setInterviews(r);
+            highlightMatchesInTable(filterInterviews, seek);
         }
-        setInterviews(r);
-        highlightMatchesInTable(filterInterviews, seek);
     }//GEN-LAST:event_seekerButtonActionPerformed
     private void highlightMatchesInTable(JTable table, String searchString) {
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
@@ -458,8 +463,10 @@ public class QueryPostulantHistory extends javax.swing.JFrame implements Observe
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ArrayList<Interview> r = new ArrayList<>();
-        setInterviews(r);
+        //ArrayList<Interview> r = new ArrayList<>();
+        //setInterviews(r);
+        generateTable();
+
         seeker.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
     public void setInterviews(ArrayList<Interview> interviews) {
@@ -526,12 +533,6 @@ public class QueryPostulantHistory extends javax.swing.JFrame implements Observe
         return seeker.getText().toUpperCase();
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    /**
-     * @param args the command line arguments
-     */
     public void setPostulants() {
         model.clear();
         ArrayList<Postulant> postulantList = this.system.getPostulants();

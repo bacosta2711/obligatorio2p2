@@ -1,3 +1,5 @@
+//Mateo Seijo 309095
+//Bruno Acosta 313080
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -20,7 +22,7 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author PC
  */
-public class AddPosition extends javax.swing.JFrame implements Observer{
+public class AddPosition extends javax.swing.JFrame implements Observer {
 
     private SystemClass system;
     DefaultListModel model = new DefaultListModel();

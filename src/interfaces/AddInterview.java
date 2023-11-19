@@ -1,3 +1,5 @@
+//Mateo Seijo 309095
+//Bruno Acosta 313080
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -199,7 +201,7 @@ public class AddInterview extends javax.swing.JFrame implements Observer {
                 comments.setText("");
             } else {
                 JOptionPane.showMessageDialog(null, "El puntaje debe estar entre 1 y 100", "Error", JOptionPane.ERROR_MESSAGE);
-                    
+
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed

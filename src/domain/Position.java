@@ -5,7 +5,7 @@ package domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Position implements Serializable{
+public class Position implements Serializable {
 
     private String positionName;
     private char positionModality;
@@ -40,22 +40,24 @@ public class Position implements Serializable{
     public void addTopics(Topic topics) {
         this.getTopics().add(topics);
     }
-    public String writeModality(){
+
+    public String writeModality() {
         String ret = "";
-        if(this.getPositionModality() == 'H'){
+        if (this.getPositionModality() == 'H') {
             ret = "Híbrida";
-        }else{
-            if (this.getPositionModality() == 'R'){
+        } else {
+            if (this.getPositionModality() == 'R') {
                 ret = "Remota";
-            }else{
+            } else {
                 ret = "Presencial";
             }
         }
         return ret;
     }
+
     @Override
     public String toString() {
-        return positionName + " con modalidad " + writeModality() +".";
+        return positionName + " con modalidad " + writeModality() + ".";
     }
-    
+
 }

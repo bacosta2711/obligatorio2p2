@@ -11,11 +11,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Map;
 import java.util.Observable;
 
 public class SystemClass extends Observable implements Serializable {
 
-    private Postulant postulantMemory;
     private ArrayList<Interview> interviews;
     private ArrayList<Topic> topics;
     private ArrayList<Position> positions;
@@ -94,7 +96,7 @@ public class SystemClass extends Observable implements Serializable {
     public boolean createInterviewer(String name, String direction, String document, int year) {
         boolean ret = true;
         Interviewer I = new Interviewer(name, document, direction, year);
-        if (isDocumentUnique(I.getDocument()) && year<=2023 && year>0) {
+        if (isDocumentUnique(I.getDocument()) && year <= 2023 && year >= 1970) {
             addInterviewer(I);
         } else {
             ret = false;
@@ -201,22 +203,6 @@ public class SystemClass extends Observable implements Serializable {
         postulant.setInterviews(null);
     }
 
-    public void resetPostulantMemory() {
-        this.setPostulantMemory(new Postulant());
-    }
-
-    public ArrayList<Topic> getTopicsNotInMemory() {
-        ArrayList<Topic> result = new ArrayList<Topic>();
-
-        for (Topic t : this.getTopics()) {
-            if (!this.getPostulantMemory().getSkills().containsKey(t)) {
-                result.add(t);
-            }
-        }
-
-        return result;
-    }
-
     public Topic getTopicByName(String topicName) {
         Topic topic = new Topic();
         for (Topic t : this.getTopics()) {
@@ -242,19 +228,43 @@ public class SystemClass extends Observable implements Serializable {
 
     public ArrayList<Postulant> getPostulantsRiseAllTopicLevel(Position position, Integer level) {
         ArrayList<Postulant> res = new ArrayList<Postulant>();
+        //System.out.println("El position es:"+position.toString());  
+        for (Topic topic : position.getTopics()) {
+            //System.out.println("Topic::"+topic.toString());
 
+        }
         for (Postulant p : this.getPostulants()) {
             boolean completeAllConditions = true;
             for (Topic t : position.getTopics()) {
-                if (p.getSkills().get(t) < level) {
-                    completeAllConditions = false;
+
+                for (Map.Entry<Topic, Integer> entry : p.getSkills().entrySet()) {
+                    if (entry.getKey().equals(t) && entry.getValue() < level) {
+                        completeAllConditions = false;
+                    }
                 }
             }
             if (completeAllConditions) {
                 res.add(p);
             }
         }
+
         return res;
+    }
+
+    public ArrayList<Postulant> orderPostulantByInterview(ArrayList<Postulant> arrayPostulantes) {
+        ArrayList<Postulant> order = new ArrayList<>(arrayPostulantes);
+
+        Collections.sort(order, new Comparator<Postulant>() {
+            @Override
+            public int compare(Postulant one, Postulant two) {
+                Interview lastInterviewOne = one.getInterviews().getLast();
+                Interview lastInterviewTwo = two.getInterviews().getLast();
+
+                return Integer.compare(lastInterviewTwo.getPuntuation(), lastInterviewOne.getPuntuation());
+            }
+        });
+
+        return order;
     }
 
     public void exportPositionQuery(Position p, ArrayList<Postulant> postulants) {
@@ -299,30 +309,8 @@ public class SystemClass extends Observable implements Serializable {
 
     }
 
-    public static SystemClass readFile() {
-
-        SystemClass s = new SystemClass();
-        try {
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream("archivo.ser"));
-            s = (SystemClass) in.readObject();
-            in.close();
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Error de recuperacion");
-        }
-        
-        return s;
-
-    }
-    
-    public  void setAutoId(){
-        Interview.setAutoid(this.getInterviews().size()); 
+    public void setAutoId() {
+        Interview.setAutoid(this.getInterviews().size() + 1);
     }
 
-    public Postulant getPostulantMemory() {
-        return postulantMemory;
-    }
-
-    public void setPostulantMemory(Postulant postulantMemory) {
-        this.postulantMemory = postulantMemory;
-    }
 }

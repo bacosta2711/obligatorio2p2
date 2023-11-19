@@ -1,3 +1,6 @@
+//Mateo Seijo 309095
+//Bruno Acosta 313080
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -17,14 +20,14 @@ import javax.swing.SwingUtilities;
  *
  * @author bacosta
  */
-public class QueryTopic extends javax.swing.JFrame implements Observer{
+public class QueryTopic extends javax.swing.JFrame implements Observer {
 
     /**
      * Creates new form TopicQuerry
      */
     DefaultListModel model = new DefaultListModel();
     private SystemClass system;
-    
+
     public QueryTopic(SystemClass sys) {
         system = sys;
         system.addObserver(this);
@@ -34,12 +37,12 @@ public class QueryTopic extends javax.swing.JFrame implements Observer{
         updateInfo();
     }
 
-    
-    public void update(Observable o,Object ob){
-        
-       setTopicList();
-       updateInfo();
+    public void update(Observable o, Object ob) {
+
+        setTopicList();
+        updateInfo();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -148,61 +151,57 @@ public class QueryTopic extends javax.swing.JFrame implements Observer{
 
     private void listaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_listaPropertyChange
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_listaPropertyChange
 
     private void listaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaValueChanged
         // TODO add your handling code here:
-          updateInfo();
+        updateInfo();
     }//GEN-LAST:event_listaValueChanged
-    
+
     /**
      * @param args the command line arguments
      */
-   
-    
-    private void setTopicList(){
-    
+    private void setTopicList() {
+
         model.clear();
-    for (Topic t : this.system.getTopics()) {
+        for (Topic t : this.system.getTopics()) {
             model.addElement(t);
-            
+
+        }
+        if (model.isEmpty()) {
+
+            lista.setEnabled(false);
+            model.addElement("No hay temas.");
+        } else {
+            lista.setEnabled(true);
+        }
+
     }
-    if(model.isEmpty()){
-        
-        lista.setEnabled(false);
-        model.addElement("No hay temas.");
-    }else{
-        lista.setEnabled(true);
-    }
-    
-    
-    
-    }
-    private void updateInfo(){
-        if (!lista.isSelectionEmpty()){
-        System.out.println("Ejecuto recargaa");
-        countPostulant.setText(this.system.getPostulantRiseSkill( lista.getSelectedValue())+"");
-        countPosition.setText(this.system.getPositionWithSkill(lista.getSelectedValue())+"");
-        
-        labelPostulant.setVisible(true);
+
+    private void updateInfo() {
+        if (!lista.isSelectionEmpty()) {
+            System.out.println("Ejecuto recargaa");
+            countPostulant.setText(this.system.getPostulantRiseSkill(lista.getSelectedValue()) + "");
+            countPosition.setText(this.system.getPositionWithSkill(lista.getSelectedValue()) + "");
+
+            labelPostulant.setVisible(true);
             topicPostulant.setVisible(true);
             countPosition.setVisible(true);
             countPostulant.setVisible(true);
             warning.setVisible(false);
-        
-        
-        }else{
+
+        } else {
             labelPostulant.setVisible(false);
             topicPostulant.setVisible(false);
             countPosition.setVisible(false);
             countPostulant.setVisible(false);
             warning.setVisible(true);
-            
+
         }
     }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton back;
     private javax.swing.JLabel countPosition;
