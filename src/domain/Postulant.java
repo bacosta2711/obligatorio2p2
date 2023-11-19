@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 import java.util.Map;
 
-public class Postulant extends People implements Serializable,Comparable<Postulant>   {
+public class Postulant extends People implements Serializable, Comparable<Postulant> {
 
     private String contact;
     private String email;
@@ -70,9 +70,8 @@ public class Postulant extends People implements Serializable,Comparable<Postula
     }
 
     public void removeSkills(Topic topic) {
-
-        System.out.println("PEDILO " + topic);
         this.getSkills().remove(topic);
+
     }
 
     public void addInterviews(Interview interviews) {
@@ -88,7 +87,7 @@ public class Postulant extends People implements Serializable,Comparable<Postula
     }
 
     public int compareTo(Postulant other) {
-        return other.getDocument().compareTo(this.getDocument());
+        return this.getDocument().compareTo(other.getDocument());
     }
 
 }

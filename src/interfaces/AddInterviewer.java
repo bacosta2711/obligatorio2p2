@@ -1,3 +1,5 @@
+//Mateo Seijo 309095
+//Bruno Acosta 313080
 package interfaces;
 
 import domain.SystemClass;
@@ -177,27 +179,32 @@ public class AddInterviewer extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
         // TODO add your handling code here:
         if (name.getText().isBlank() || direction.getText().isBlank()
                 || year.getText().isBlank() || document.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Debe indicar todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            if (this.system.createInterviewer(name.getText(), direction.getText(), document.getText(), Integer.parseInt(year.getText()))) {
-                JOptionPane.showMessageDialog(null, "El evaluador se agregó de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                name.setText("");
-                direction.setText("");
-                year.setText("");
-                document.setText("");
-            } else {
-                if (Integer.parseInt(year.getText()) > 2023) {
-                    JOptionPane.showMessageDialog(null, "El año debe ser menor al año actual.", "Error", JOptionPane.ERROR_MESSAGE);
+            try {
+                int yearValue = Integer.parseInt(year.getText());
+
+                if (this.system.createInterviewer(name.getText(), direction.getText(), document.getText(), yearValue)) {
+                    JOptionPane.showMessageDialog(null, "El evaluador se agregó de manera exitosa!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    name.setText("");
+                    direction.setText("");
+                    year.setText("");
+                    document.setText("");
                 } else {
-                    if (Integer.parseInt(year.getText()) < 0) {
-                        JOptionPane.showMessageDialog(null, "El año debe ser mayor al año cero.", "Error", JOptionPane.ERROR_MESSAGE);
+                    if (yearValue > 2023) {
+                        JOptionPane.showMessageDialog(null, "El año debe ser menor al año actual.", "Error", JOptionPane.ERROR_MESSAGE);
+                    } else if (yearValue < 1970) {
+                        JOptionPane.showMessageDialog(null, "El año debe ser mayor a 1970.", "Error", JOptionPane.ERROR_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(null, "Documento en uso", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Ingrese un año válido.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
 

@@ -1,13 +1,19 @@
+//Mateo Seijo 309095
+//Bruno Acosta 313080
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package interfaces;
 
+import domain.Interview;
 import domain.Position;
 import domain.Postulant;
 import domain.SystemClass;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.DefaultListModel;
@@ -18,11 +24,12 @@ import javax.swing.JOptionPane;
  * @author bacosta
  */
 public class QueryPosition extends javax.swing.JFrame implements Observer {
-  DefaultListModel modelPosition = new DefaultListModel();
-  DefaultListModel modelPostulant = new DefaultListModel();
-  private SystemClass system;
-  
-  /**
+
+    DefaultListModel modelPosition = new DefaultListModel();
+    DefaultListModel modelPostulant = new DefaultListModel();
+    private SystemClass system;
+
+    /**
      * Creates new form QuerryPosition
      */
     public QueryPosition(SystemClass sys) {
@@ -34,11 +41,13 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
         setPositionList();
         setPostulantList();
     }
-    public void update(Observable o,Object ob){
-        
-       setPositionList();
-       setPostulantList();
+
+    public void update(Observable o, Object ob) {
+
+        setPositionList();
+        setPostulantList();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,7 +78,7 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
         jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Consulta por posición");
+        jLabel1.setText("Consulta por puesto");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(100, 20, 210, 22);
 
@@ -158,10 +167,16 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
 
     private void consultarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarBtnActionPerformed
         // TODO add your handling code here:
-         if(Integer.parseInt(level.getValue().toString())>=1 && Integer.parseInt(level.getValue().toString())<=10){
-            setPostulantList();
-        }else{
-         JOptionPane.showMessageDialog(null, "El nivel del tema debe estar entre 1 y 10.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (!positions.isSelectionEmpty()) {
+
+            if (Integer.parseInt(level.getValue().toString()) >= 1 && Integer.parseInt(level.getValue().toString()) <= 10) {
+                setPostulantList();
+            } else {
+                JOptionPane.showMessageDialog(null, "El nivel del tema debe estar entre 1 y 10.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar la posicion a consultar", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_consultarBtnActionPerformed
 
@@ -171,50 +186,63 @@ public class QueryPosition extends javax.swing.JFrame implements Observer {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        if (!positions.isSelectionEmpty()){
-        ArrayList<Postulant> arrayList = new ArrayList<Postulant>();
-        int size = modelPostulant.getSize();
-        for (int i = 0; i < size; i++) {
-            Postulant item = (Postulant) modelPostulant.getElementAt(i);
-            arrayList.add(item);
-        }
-        
-        this.system.exportPositionQuery(positions.getSelectedValue(), arrayList);
-        }else{
-              JOptionPane.showMessageDialog(null, "Debe de seleccionar la posicion para poder exportar.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (!positions.isSelectionEmpty()) {
+            ArrayList<Postulant> arrayList = new ArrayList<Postulant>();
+            int size = modelPostulant.getSize();
+            for (int i = 0; i < size; i++) {
+                Postulant item = (Postulant) modelPostulant.getElementAt(i);
+                arrayList.add(item);
+            }
+
+            this.system.exportPositionQuery(positions.getSelectedValue(), arrayList);
+            JOptionPane.showMessageDialog(null, "Se exporto el archivo correctamente.", "Okay", JOptionPane.OK_OPTION);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe de seleccionar la posicion para poder exportar.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    
-    private void setPositionList(){
+    private void setPositionList() {
         modelPosition.clear();
         for (Position p : this.system.getPositions()) {
             modelPosition.addElement(p);
         }
-        if (modelPosition.isEmpty()){
+        if (modelPosition.isEmpty()) {
             consultarBtn.setEnabled(false);
         }
     }
-    private void setPostulantList(){
-        if (consultarBtn.isEnabled()){
-        if(positions.isSelectionEmpty()){
-            JOptionPane.showMessageDialog(null, "Debe seleccionar la posicion a consultar", "Error", JOptionPane.ERROR_MESSAGE);
-        }else{
-            modelPostulant.clear();
-            for (Postulant e : this.system.getPostulantsRiseAllTopicLevel(positions.getSelectedValue(), (Integer)level.getValue())) {
-                modelPostulant.addElement(e);
+
+    private void setPostulantList() {
+        if (consultarBtn.isEnabled()) {
+            if (positions.isSelectionEmpty()) {
+                //   JOptionPane.showMessageDialog(null, "Debe seleccionar la posicion a consultar", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                modelPostulant.clear();
+
+                ArrayList<Postulant> postulantListAux = new ArrayList();
+                for (Postulant e : this.system.getPostulantsRiseAllTopicLevel(positions.getSelectedValue(), (Integer) level.getValue())) {
+                    //modelPostulant.addElement(e); 
+                    postulantListAux.add(e);
+                }
+
+                ArrayList<Postulant> postulantListAuxDos = this.system.orderPostulantByInterview(postulantListAux);
+
+                for (Postulant e : postulantListAuxDos) {
+                    modelPostulant.addElement(e);
+                }
+
+                if (modelPostulant.isEmpty()) {
+                    jButton3.setEnabled(false);
+                    modelPostulant.addElement(new Postulant("No hay resultados para su busqueda"));
+                } else {
+                    jButton3.setEnabled(true);
+                }
+
             }
-            if(modelPostulant.isEmpty()){
-                jButton3.setEnabled(false);
-                modelPostulant.addElement(new Postulant("No hay resultados para su busqueda"));
-            }else{
-                jButton3.setEnabled(true);
-            }
-            
-        }}
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton consultarBtn;
