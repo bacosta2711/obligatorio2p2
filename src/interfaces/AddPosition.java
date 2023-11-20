@@ -6,7 +6,6 @@
  */
 package interfaces;
 
-import domain.Position;
 import domain.SystemClass;
 import domain.Topic;
 import java.util.ArrayList;

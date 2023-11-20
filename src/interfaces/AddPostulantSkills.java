@@ -17,7 +17,6 @@ import java.util.Observer;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
 
 /**
