@@ -37,6 +37,10 @@ public class Interview implements Serializable {
         return Objects.equals(observation, interview.observation);
     }
 
+    public static int getAutoid() {
+        return autoid;
+    }
+
     public int getId() {
         return id;
     }

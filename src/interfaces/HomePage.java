@@ -7,6 +7,7 @@
  */
 package interfaces;
 
+import domain.Interview;
 import domain.Postulant;
 import domain.SystemClass;
 import java.awt.Component;
@@ -346,6 +347,7 @@ public class HomePage extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         if (!file.isVisible()) {
+            this.system.setLastId(Interview.getAutoid());
             this.system.writeFile(this.system);
         }
     }//GEN-LAST:event_formWindowClosing
