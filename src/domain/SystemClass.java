@@ -3,11 +3,9 @@
 package domain;
 
 import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,7 +24,7 @@ public class SystemClass extends Observable implements Serializable {
     private ArrayList<Postulant> postulants;
     private ArrayList<Interviewer> interviewers;
 
-    //private PropertyChangeSupport handler;
+    
     public SystemClass() {
         //  this.handler = new PropertyChangeSupport(this);
         this.interviewers = new ArrayList<Interviewer>();

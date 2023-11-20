@@ -9,8 +9,6 @@ package interfaces;
 import domain.Postulant;
 import domain.SystemClass;
 import java.awt.Component;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.DefaultListModel;
