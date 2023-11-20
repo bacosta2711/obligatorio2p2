@@ -13,11 +13,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Observable;
 
 public class SystemClass extends Observable implements Serializable {
 
+    private int lastId;
     private ArrayList<Interview> interviews;
     private ArrayList<Topic> topics;
     private ArrayList<Position> positions;
@@ -32,6 +34,14 @@ public class SystemClass extends Observable implements Serializable {
         this.positions = new ArrayList<Position>();
         this.postulants = new ArrayList<Postulant>();
         this.topics = new ArrayList<Topic>();
+    }
+
+    public int getLastId() {
+        return lastId;
+    }
+
+    public void setLastId(int lastId) {
+        this.lastId = lastId;
     }
 
     public ArrayList<Interview> getInterviews() {
@@ -150,9 +160,24 @@ public class SystemClass extends Observable implements Serializable {
 
     public void removePostulant(Postulant postulant) {
 
+        Iterator<Interview> iterador = this.getInterviews().iterator();
+        while (iterador.hasNext()) {
+            Interview elemento = iterador.next();
+            if (elemento.getPostulant().getDocument().equals(postulant.getDocument())) {
+                iterador.remove();
+            }
+        }
+
         //Remove de las interviews
         ArrayList<Postulant> previousData = this.getPostulants();
         this.getPostulants().remove(postulant);
+        for (Interview i : this.getInterviews()) {
+            if (i.getPostulant().equals(postulant)) {
+                System.out.println("Tiene");
+
+            }
+        }
+
         setChanged();
         notifyObservers();
 
@@ -310,7 +335,11 @@ public class SystemClass extends Observable implements Serializable {
     }
 
     public void setAutoId() {
-        Interview.setAutoid(this.getInterviews().size() + 1);
+        if (this.getLastId() != 0) {
+            Interview.setAutoid(this.getLastId());
+        } else {
+            Interview.setAutoid(1);
+        }
     }
 
 }
