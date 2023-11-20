@@ -7,13 +7,10 @@
  */
 package interfaces;
 
-import domain.Interview;
 import domain.Position;
 import domain.Postulant;
 import domain.SystemClass;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.DefaultListModel;

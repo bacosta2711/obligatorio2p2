@@ -10,13 +10,10 @@ package interfaces;
 import domain.Interview;
 import domain.Postulant;
 import domain.SystemClass;
-import java.awt.Component;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 
 /**
  *
